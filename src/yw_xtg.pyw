@@ -26,16 +26,20 @@ def run(sourcePath):
     converter.ui = UiTk('Export XTG from yWriter @release')
     kwargs = dict(
         suffix='',
-        HEADING_1='Überschrift 1',
-        HEADING_2='Überschrift 1',
-        HEADING_3='Überschrift 3',
-        TEXT_BODY='Textkörper',
-        FIRST_LINE_INDENT='Textkörper Einzug',
-        EMPHASIZE='Betont',
-        STRONG_EMPHASIZE='Stark betont',
-        ACRONYM='Versalien',
-        FIGURE='Mediäval-Ziffern',
+        HEADING_1='@Überschrift 1:',
+        HEADING_2='@Überschrift 1:',
+        HEADING_3='@Überschrift 3:',
+        TEXT_BODY='@Textkörper:',
         SCENE_DIVIDER='',
+        textBody='@Textkörper Einzug:',
+        italic='<@Betont>',
+        italic0='<@$>',
+        bold='<@Stark betont>',
+        bold0='<@$>',
+        acronym='<y095.0>',
+        acronym0='<y$>',
+        figure='<f"Adobe Garamond Small Caps & Old">',
+        figure0='<f$>',
     )
     converter.run(sourcePath, **kwargs)
     converter.ui.start()

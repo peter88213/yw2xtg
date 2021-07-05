@@ -23,33 +23,38 @@ class XtgFile(FileExport):
         self.HEADING_2 = kwargs['HEADING_2']
         self.HEADING_3 = kwargs['HEADING_3']
         self.TEXT_BODY = kwargs['TEXT_BODY']
-        self.FIRST_LINE_INDENT = kwargs['FIRST_LINE_INDENT']
-        self.EMPHASIZE = kwargs['EMPHASIZE']
-        self.STRONG_EMPHASIZE = kwargs['STRONG_EMPHASIZE']
-        self.ACRONYM = kwargs['ACRONYM']
-        self.FIGURE = kwargs['FIGURE']
         self.SCENE_DIVIDER = kwargs['SCENE_DIVIDER']
 
+        self.tagTextBody = kwargs['textBody']
+        self.tagItalic = kwargs['italic']
+        self.tagItalic0 = kwargs['italic0']
+        self.tagBold = kwargs['bold']
+        self.tagBold0 = kwargs['bold0']
+        self.tagAcronym = kwargs['acronym']
+        self.tagAcronym0 = kwargs['acronym0']
+        self.tagFigure = kwargs['figure']
+        self.tagFigure0 = kwargs['figure0']
+
         self.fileHeader = '<v11.10><e9>\n'
-        self.partTemplate = '@' + self.HEADING_1 + ':${Title}\n'
-        self.chapterTemplate = '@' + self.HEADING_2 + ':${Title}\n'
-        self.sceneTemplate = '@' + self.TEXT_BODY + ':$SceneContent\n'
-        self.sceneDivider = '@' + self.HEADING_3 + ':' + self.SCENE_DIVIDER + '\n'
+        self.partTemplate = self.HEADING_1 + '${Title}\n'
+        self.chapterTemplate = self.HEADING_2 + '${Title}\n'
+        self.sceneTemplate = self.TEXT_BODY + '$SceneContent\n'
+        self.sceneDivider = self.HEADING_3 + self.SCENE_DIVIDER + '\n'
 
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
         def assign_acronym(i):
-            return('<@' + self.ACRONYM + '>' + i.group() + '<@$>')
+            return(self.tagAcronym + i.group() + self.tagAcronym0)
 
         def assign_figure(i):
-            return('<@' + self.FIGURE + '>' + i.group() + '<@$>')
+            return(self.tagFigure + i.group() + self.tagFigure0)
 
         XTG_REPLACEMENTS = [
-            ['[i]', '<@' + self.EMPHASIZE + '>'],
-            ['[/i]', '<@$>'],
-            ['[b]', '<@' + self.STRONG_EMPHASIZE + '>'],
-            ['[/b]', '<@$>'],
+            ['[i]', self.tagItalic],
+            ['[/i]', self.tagItalic0],
+            ['[b]', self.tagBold],
+            ['[/b]', self.tagBold0],
             ['  ', ' '],
         ]
 
@@ -74,24 +79,24 @@ class XtgFile(FileExport):
 
         text = re.sub('\/\*.+?\*\/', '', text)
 
-        # Assign acronyms "ACRONYM" style.
-
-        matchstr = re.compile('[A-ZÄ-Ü]{2,}')
-        text = matchstr.sub(assign_acronym, text)
-
         # Replace digit-separating blanks.
 
         text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
-        # Assign figures "FIGURE" style.
+        # Assign figures "figure" style.
 
         matchstr = re.compile('\d+')
         text = matchstr.sub(assign_figure, text)
 
-        # Assign the second paragraph "FIRST_LINE_INDENT" style.
+        # Assign acronyms "acronym" style.
+
+        matchstr = re.compile('[A-ZÄ-Ü]{2,}')
+        text = matchstr.sub(assign_acronym, text)
+
+        # Assign the second paragraph "textBody" style.
 
         t = text.split('\n', 1)
 
-        text = ('\n@' + self.FIRST_LINE_INDENT + ':').join(t)
+        text = ('\n' + self.tagTextBody).join(t)
 
         return(text)
