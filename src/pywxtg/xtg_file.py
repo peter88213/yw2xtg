@@ -40,12 +40,6 @@ class XtgFile(FileExport):
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
-        def assign_acronym(i):
-            return(self.tagAcronym + i.group() + self.tagAcronym0)
-
-        def assign_figure(i):
-            return(self.tagFigure + i.group() + self.tagFigure0)
-
         XTG_REPLACEMENTS = [
             ['[i]', self.tagItalic],
             ['[/i]', self.tagItalic0],
@@ -81,13 +75,12 @@ class XtgFile(FileExport):
 
         # Assign figures "figure" style.
 
-        matchstr = re.compile('\d+')
-        text = matchstr.sub(assign_figure, text)
+        text = re.sub('(\d+)', self.tagFigure + '\\1' + self.tagFigure0, text)
 
         # Assign acronyms "acronym" style.
 
-        matchstr = re.compile('[A-ZÄ-Ü]{2,}')
-        text = matchstr.sub(assign_acronym, text)
+        text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
+                      '\\1' + self.tagAcronym0, text)
 
         # Assign the second paragraph "textBody" style.
 
