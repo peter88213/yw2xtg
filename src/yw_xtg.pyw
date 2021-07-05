@@ -21,16 +21,22 @@ class Exporter(YwCnvUi):
     EXPORT_TARGET_CLASSES = [XtgFile]
 
 
+SCENE_DIVIDER = ''
+
+
 def run(sourcePath):
     converter = Exporter()
     converter.ui = UiTk('Export XTG from yWriter @release')
     kwargs = dict(
         suffix='',
-        HEADING_1='@Überschrift 1:',
-        HEADING_2='@Überschrift 1:',
-        HEADING_3='@Überschrift 3:',
-        TEXT_BODY='@Textkörper:',
-        SCENE_DIVIDER='',
+
+        fileHeader='<v11.10><e9>\n',
+        partTemplate='@Überschrift 1:${Title}\n',
+        chapterTemplate='@Überschrift 1:${Title}\n',
+        firstSceneTemplate='@Textkörper:$SceneContent\n',
+        sceneTemplate='@Textkörper:$SceneContent\n',
+        sceneDivider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
+
         textBody='@Textkörper Einzug:',
         italic='<@Betont>',
         italic0='<@$>',

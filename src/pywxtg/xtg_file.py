@@ -19,11 +19,13 @@ class XtgFile(FileExport):
 
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
-        self.HEADING_1 = kwargs['HEADING_1']
-        self.HEADING_2 = kwargs['HEADING_2']
-        self.HEADING_3 = kwargs['HEADING_3']
-        self.TEXT_BODY = kwargs['TEXT_BODY']
-        self.SCENE_DIVIDER = kwargs['SCENE_DIVIDER']
+
+        self.fileHeader = kwargs['fileHeader']
+        self.partTemplate = kwargs['partTemplate']
+        self.chapterTemplate = kwargs['chapterTemplate']
+        self.firstSceneTemplate = kwargs['firstSceneTemplate']
+        self.sceneTemplate = kwargs['sceneTemplate']
+        self.sceneDivider = kwargs['sceneDivider']
 
         self.tagTextBody = kwargs['textBody']
         self.tagItalic = kwargs['italic']
@@ -34,12 +36,6 @@ class XtgFile(FileExport):
         self.tagAcronym0 = kwargs['acronym0']
         self.tagFigure = kwargs['figure']
         self.tagFigure0 = kwargs['figure0']
-
-        self.fileHeader = '<v11.10><e9>\n'
-        self.partTemplate = self.HEADING_1 + '${Title}\n'
-        self.chapterTemplate = self.HEADING_2 + '${Title}\n'
-        self.sceneTemplate = self.TEXT_BODY + '$SceneContent\n'
-        self.sceneDivider = self.HEADING_3 + self.SCENE_DIVIDER + '\n'
 
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.

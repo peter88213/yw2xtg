@@ -7,9 +7,9 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import os
-
 import sys
+
+import os
 import webbrowser
 
 
@@ -548,7 +548,69 @@ class YwCnvUi(YwCnv):
         """Open the converted file for editing and exit the converter script."""
         webbrowser.open(self.newFile)
         sys.exit(0)
+from tkinter import *
+from tkinter import messagebox
 
+
+
+class UiTk(Ui):
+    """UI subclass implementing a Tkinter facade."""
+
+    def __init__(self, title):
+        """Extend the Ui constructor. """
+        Ui.__init__(self, title)
+
+        self.root = Tk()
+        self.root.title(title)
+
+        self.appInfo = Label(self.root, text='')
+        self.successInfo = Label(self.root)
+        self.successInfo.config(height=1, width=60)
+        self.processInfo = Label(self.root, text='')
+        self.root.quitButton = Button(text="Quit", command=quit)
+        self.root.quitButton.config(height=1, width=10)
+
+        self.rowCount = 1
+        self.appInfo.grid(row=self.rowCount, column=1, padx=5, pady=5)
+        self.rowCount += 1
+        self.successInfo.grid(row=self.rowCount, column=1, padx=10, pady=10)
+        self.rowCount += 1
+        self.processInfo.grid(row=self.rowCount, column=1, pady=10)
+        self.rowCount += 1
+        self.root.quitButton.grid(row=self.rowCount, column=1, pady=10)
+
+    def ask_yes_no(self, text):
+        """Override the Ui method."""
+        return messagebox.askyesno('WARNING', text)
+
+    def set_info_what(self, message):
+        """What's the converter going to do?"""
+
+        self.infoWhatText = message
+        self.appInfo.config(text=message)
+
+    def set_info_how(self, message):
+        """How's the converter doing?"""
+
+        self.infoHowText = message
+        self.processInfo.config(text=message)
+
+        if message.startswith('SUCCESS'):
+            self.successInfo.config(bg='green')
+
+        else:
+            self.successInfo.config(bg='red')
+
+    def start(self):
+        """Start the Tk main loop."""
+        self.root.mainloop()
+
+    def show_open_button(self, open_cmd):
+        """Add an 'Open' button to the main window."""
+        self.root.openButton = Button(text="Open", command=open_cmd)
+        self.root.openButton.config(height=1, width=10)
+        self.rowCount += 1
+        self.root.openButton.grid(row=self.rowCount, column=1, pady=10)
 
 
 from urllib.parse import quote
@@ -713,7 +775,7 @@ class Novel():
         else:
             suffix = ''
 
-        if filePath.lower().endswith(suffix + self.EXTENSION):
+        if filePath.lower().endswith((suffix + self.EXTENSION).lower()):
             self._filePath = filePath
             head, tail = os.path.split(os.path.realpath(filePath))
             self.projectPath = quote(head.replace('\\', '/'), '/:')
@@ -3475,281 +3537,129 @@ class XtgFile(FileExport):
     EXTENSION = '.XTG'
     SUFFIX = ''
 
-    SCENE_DIVIDER = '* * *'
-
-    fileHeader = '''**${Title}**  
-  
-*${AuthorName}*  
-  
-'''
-
-    partTemplate = '\n# ${Title}\n\n'
-
-    chapterTemplate = '\n## ${Title}\n\n'
-
-    sceneTemplate = '<!---${Title}--->${SceneContent}\n\n'
-
-    sceneDivider = '\n\n' + SCENE_DIVIDER + '\n\n'
-
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
+
+        self.fileHeader = kwargs['fileHeader']
+        self.partTemplate = kwargs['partTemplate']
+        self.chapterTemplate = kwargs['chapterTemplate']
+        self.firstSceneTemplate = kwargs['firstSceneTemplate']
+        self.sceneTemplate = kwargs['sceneTemplate']
+        self.sceneDivider = kwargs['sceneDivider']
+
+        self.tagTextBody = kwargs['textBody']
+        self.tagItalic = kwargs['italic']
+        self.tagItalic0 = kwargs['italic0']
+        self.tagBold = kwargs['bold']
+        self.tagBold0 = kwargs['bold0']
+        self.tagAcronym = kwargs['acronym']
+        self.tagAcronym0 = kwargs['acronym0']
+        self.tagFigure = kwargs['figure']
+        self.tagFigure0 = kwargs['figure0']
 
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
+        def assign_acronym(i):
+            return(self.tagAcronym + i.group() + self.tagAcronym0)
 
-        MD_REPLACEMENTS = [
-            ['[i]', '*'],
-            ['[/i]', '*'],
-            ['[b]', '**'],
-            ['[/b]', '**'],
-            ['/*', '<!---'],
-            ['*/', '--->'],
+        def assign_figure(i):
+            return(self.tagFigure + i.group() + self.tagFigure0)
+
+        XTG_REPLACEMENTS = [
+            ['[i]', self.tagItalic],
+            ['[/i]', self.tagItalic0],
+            ['[b]', self.tagBold],
+            ['[/b]', self.tagBold0],
             ['  ', ' '],
         ]
 
-        if not self.markdownMode:
-            MD_REPLACEMENTS[:0] = [['\n', '\n\n']]
-
         try:
 
-            for r in MD_REPLACEMENTS:
+            for r in XTG_REPLACEMENTS:
                 text = text.replace(r[0], r[1])
-
-            # Remove highlighting, alignment,
-            # strikethrough, and underline tags.
-
-            text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
 
         except AttributeError:
             text = ''
 
+        # Encode non-breaking spaces.
+
+        text = text.replace('\xa0', '<\\!p>')
+
+        # Remove highlighting, alignment,
+        # strikethrough, and underline tags.
+
+        text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
+
+        # Remove comments.
+
+        text = re.sub('\/\*.+?\*\/', '', text)
+
+        # Replace digit-separating blanks.
+
+        text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
+
+        # Assign figures "figure" style.
+
+        matchstr = re.compile('\d+')
+        text = matchstr.sub(assign_figure, text)
+
+        # Assign acronyms "acronym" style.
+
+        matchstr = re.compile('[A-ZÄ-Ü]{2,}')
+        text = matchstr.sub(assign_acronym, text)
+
+        # Assign the second paragraph "textBody" style.
+
+        t = text.split('\n', 1)
+
+        text = ('\n' + self.tagTextBody).join(t)
+
         return(text)
 
 
-class XtgConverter(YwCnvUi):
+class Exporter(YwCnvUi):
     """A converter class for XPress tagged file export."""
     EXPORT_SOURCE_CLASSES = [Yw7File]
     EXPORT_TARGET_CLASSES = [XtgFile]
-from tkinter import *
-from tkinter import messagebox
 
 
-
-class UiTk(Ui):
-    """UI subclass implementing a Tkinter facade."""
-
-    def __init__(self, title):
-        """Extend the Ui constructor. """
-        Ui.__init__(self, title)
-
-        self.root = Tk()
-        self.root.title(title)
-
-        self.appInfo = Label(self.root, text='')
-        self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=60)
-        self.processInfo = Label(self.root, text='')
-        self.root.quitButton = Button(text="Quit", command=quit)
-        self.root.quitButton.config(height=1, width=10)
-
-        self.rowCount = 1
-        self.appInfo.grid(row=self.rowCount, column=1, padx=5, pady=5)
-        self.rowCount += 1
-        self.successInfo.grid(row=self.rowCount, column=1, padx=10, pady=10)
-        self.rowCount += 1
-        self.processInfo.grid(row=self.rowCount, column=1, pady=10)
-        self.rowCount += 1
-        self.root.quitButton.grid(row=self.rowCount, column=1, pady=10)
-
-    def ask_yes_no(self, text):
-        """Override the Ui method."""
-        return messagebox.askyesno('WARNING', text)
-
-    def set_info_what(self, message):
-        """What's the converter going to do?"""
-
-        self.infoWhatText = message
-        self.appInfo.config(text=message)
-
-    def set_info_how(self, message):
-        """How's the converter doing?"""
-
-        self.infoHowText = message
-        self.processInfo.config(text=message)
-
-        if message.startswith('SUCCESS'):
-            self.successInfo.config(bg='green')
-
-        else:
-            self.successInfo.config(bg='red')
-
-    def start(self):
-        """Start the Tk main loop."""
-        self.root.mainloop()
-
-    def show_open_button(self, open_cmd):
-        """Add an 'Open' button to the main window."""
-        self.root.openButton = Button(text="Open", command=open_cmd)
-        self.root.openButton.config(height=1, width=10)
-        self.rowCount += 1
-        self.root.openButton.grid(row=self.rowCount, column=1, pady=10)
-
-from tkinter import *
-from tkinter import messagebox
-from tkinter import filedialog
-from tkinter import ttk
-
-SCT_DESCRIPTION = 'Comments at the beginning of a scene are scene titles.'
-MDM_DESCRIPTION = 'The scenes in the yWriter project are Markdown formatted.'
-
-
-class MyGui(UiTk):
-    """Extend the Tkinter GUI, 
-    and link it to the application.
-    """
-
-    def __init__(self, title, description=None):
-        """Make the converter object visible to the user interface 
-        in order to make method calls possible.
-        Add the widgets needed to invoke the converter manually.
-        """
-        self.converter = None
-        self.infoWhatText = ''
-        self.infoHowText = ''
-        # UiTk.__init__(self, title)
-
-        self.root = Tk()
-        self.root.title(title)
-
-        self.header = Label(self.root, text='Options')
-        self.appInfo = Label(self.root, text='')
-        self.appInfo.config(height=2, width=60)
-
-        self.successInfo = Label(self.root)
-        self.successInfo.config(height=1, width=50)
-
-        self.processInfo = Label(self.root, text='')
-
-        self.SceneTitles = BooleanVar()
-        self.SceneTitles.set(False)
-        self.root.SceneTitlesCheckbox = ttk.Checkbutton(
-            text=SCT_DESCRIPTION, variable=self.SceneTitles, onvalue=False, offvalue=True)
-
-        self.markdownMode = BooleanVar()
-        self.root.markdownModeCheckbox = ttk.Checkbutton(
-            text=MDM_DESCRIPTION, variable=self.markdownMode, onvalue=True, offvalue=False)
-
-        self.root.selectButton = Button(
-            text="Select file", command=self.select_file)
-        self.root.selectButton.config(height=1, width=10)
-
-        self.root.runButton = Button(text='Convert', command=self.convert_file)
-        self.root.runButton.config(height=1, width=10)
-        self.root.runButton.config(state='disabled')
-
-        self.root.quitButton = Button(text='Quit', command=quit)
-        self.root.quitButton.config(height=1, width=10)
-
-        self.header.grid(row=1, column=1, sticky=W, padx=20, columnspan=3)
-        self.root.SceneTitlesCheckbox.grid(
-            row=2, column=1, sticky=W, padx=20, columnspan=3)
-        self.root.markdownModeCheckbox.grid(
-            row=3, column=1, sticky=W, padx=20, columnspan=3)
-        self.appInfo.grid(row=5, column=1, pady=10, columnspan=3)
-
-        self.root.selectButton.grid(
-            row=6, column=1, pady=10)
-        self.root.runButton.grid(row=6, column=2, pady=10)
-        self.root.quitButton.grid(row=6, column=3, pady=10)
-
-        self.successInfo.grid(row=7, column=1, columnspan=3)
-        self.processInfo.grid(row=8, column=1, columnspan=3, pady=10)
-
-        self.sourcePath = None
-        self.set_info_what('No file selected')
-        self.startDir = os.getcwd()
-
-    def start(self):
-        """Start the user interface.
-        Note: This can not be done in the __init__() method.
-        """
-        self.root.mainloop()
-
-    def select_file(self):
-        """Open a file dialog in order to set the sourcePath property.
-        """
-        self.processInfo.config(text='')
-        self.successInfo.config(
-            bg=self.root.cget("background"))
-
-        if self.sourcePath is not None:
-            self.startDir = os.path.dirname(self.sourcePath)
-
-        file = filedialog.askopenfile(initialdir=self.startDir)
-
-        if file:
-            self.sourcePath = file.name
-
-        if self.sourcePath:
-            self.set_info_what(
-                'File: ' + os.path.normpath(self.sourcePath))
-            self.root.runButton.config(state='normal')
-
-        else:
-            self.set_info_what('No file selected')
-            self.root.runButton.config(state='disabled')
-
-    def convert_file(self):
-        """Call the converter's conversion method, if a source file is selected.
-        """
-        self.processInfo.config(text='')
-        self.successInfo.config(
-            bg=self.root.cget("background"))
-
-        if self.sourcePath:
-            kwargs = {'suffix': '', 'markdownMode': self.markdownMode.get(),
-                      'noSceneTitles': self.SceneTitles.get()}
-            self.converter.run(self.sourcePath, **kwargs)
+SCENE_DIVIDER = ''
 
 
 def run(sourcePath):
+    converter = Exporter()
+    converter.ui = UiTk('Export XTG from yWriter @release')
+    kwargs = dict(
+        suffix='',
 
-    ui = MyGui('XPress converter for yWriter projects @release')
-    # instantiate a user interface object
+        fileHeader='<v11.10><e9>\n',
+        partTemplate='@Überschrift 1:${Title}\n',
+        chapterTemplate='@Überschrift 1:${Title}\n',
+        firstSceneTemplate='@Textkörper:$SceneContent\n',
+        sceneTemplate='@Textkörper:$SceneContent\n',
+        sceneDivider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
 
-    if sourcePath is not None:
-
-        if os.path.isfile(sourcePath):
-            ui.sourcePath = sourcePath
-            ui.set_info_what(
-                'File: ' + os.path.normpath(sourcePath))
-            ui.root.runButton.config(state='normal')
-
-        else:
-            sourcePath = None
-
-    converter = XtgConverter()
-    # instantiate a converter object
-
-    # Create a bidirectional association between the
-    # user interface object and the converter object.
-
-    converter.ui = ui
-    # make the user interface's methods visible to the converter
-
-    ui.converter = converter
-    # make the converter's methods visible to the user interface
-
-    ui.start()
+        textBody='@Textkörper Einzug:',
+        italic='<@Betont>',
+        italic0='<@$>',
+        bold='<@Stark betont>',
+        bold0='<@$>',
+        acronym='<y095.0>',
+        acronym0='<y$>',
+        figure='<f"Adobe Garamond Small Caps & Old">',
+        figure0='<f$>',
+    )
+    converter.run(sourcePath, **kwargs)
+    converter.ui.start()
 
 
 if __name__ == '__main__':
 
     try:
-        sourcePath = sys.argv[1].replace('\\', '/')
+        sourcePath = sys.argv[1]
 
     except:
-        sourcePath = None
+        sourcePath = ''
 
     run(sourcePath)
