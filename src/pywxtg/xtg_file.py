@@ -69,15 +69,20 @@ class XtgFile(FileExport):
 
         text = re.sub('\/\*.+?\*\/', '', text)
 
-        # Replace digit-separating blanks.
+        # Adjust digit-separating blanks.
 
         text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
-        # Assign figures "figure" style.
+        # Adjust digit-separating points.
+
+        text = re.sub('(\d+)\.', '\\1.<\\![>', text)
+        text = text.replace('<\\![> ', ' ')
+
+        # Assign "figure" style.
 
         text = re.sub('(\d+)', self.tagFigure + '\\1' + self.tagFigure0, text)
 
-        # Assign acronyms "acronym" style.
+        # Assign "acronym" style.
 
         text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
                       '\\1' + self.tagAcronym0, text)
@@ -85,7 +90,6 @@ class XtgFile(FileExport):
         # Assign the second paragraph "textBody" style.
 
         t = text.split('\n', 1)
-
         text = ('\n' + self.tagTextBody).join(t)
 
         return(text)
