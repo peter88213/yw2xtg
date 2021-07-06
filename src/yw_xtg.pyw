@@ -65,9 +65,9 @@ def set_defaults(iniPath):
             sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
 
             textBody='@First line indent:',
-            italic='<@Emphasize>',
+            italic='<@Emphasis>',
             italic0='<@$>',
-            bold='<@Strong emphasize>',
+            bold='<@Small caps>',
             bold0='<@$>',
             acronym='<y095.0>',
             acronym0='<y$>',

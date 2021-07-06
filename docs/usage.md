@@ -12,43 +12,72 @@ You can either
 - launch the program on the command line passing the yWriter project file as an argument, or
 - launch the program by dragging a yWriter project file and dropping it on the program/link icon.
 
+## General
+
+### About XTG
+
+The XTG file format uses the *XPress Tags* language, the knowledge of which is assumed. There is a comprehensive [online documentation](https://www.quark.com/documentation/quarkxpress/2019/english/A%20Guide%20to%20XPress%20Tags%202019/) for this. 
+
+### yWriter text markup
+
+Bold and italics are supported. Other highlighting such as underline and strikethrough are lost.
+
+
+## Configuration
+
+Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
+and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
+
+If a file is missing, or the configuration file is corrupted, *yw2xtg* asks for permission
+to use default values. 
+
+### Configuration file
+
+This is an exapmle configuration file containing the default values mentioned above:
+
+```
+[STYLES]
+textbody = @First line indent:
+italic = <@Emphasis>
+italic0 = <@$>
+bold = <@Small caps>
+bold0 = <@$>
+acronym = <y095.0>
+acronym0 = <y$>
+figure = 
+figure0 = 
+```
+
+- **textbody**: The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
+- **italic**: The opening tag to replace yWriter's *italic* formatting.
+- **italic0**: The closing tag to replace yWriter's *italic* formatting.
+- **bold**: The opening tag to replace yWriter's *bold* formatting.
+- **bold0**: The closing tag to replace yWriter's *bold* formatting.
+- **acronym**: The opening tag to format sequences of uppercase characters (usually 0.5 to 1 pt smaller).
+- **acronym0**: The closing tag to format sequences of uppercase characters.
+- **figure**: The opening tag to format figures (e.g. switch the font to get "osf" text figures).
+- **figure0**: The closing tag to format figures.
+
+You can define styles in *fileHeader.XTG*, but it is preferable to use the names of styles that already exist in the QX book project instead.
 
 ## List of templates
 
 ### Project level templates
 
-- **html_header.html** 
-
-- **character_template.html** (applied to characters)
-- **location_template.html** (applied to locations)
-- **item_template.html** (applied to items)
-
-- **html_footer.html** 
+- **fileHeader.XTG** 
 
 ### Chapter level templates
 
-- **part_template.html** (chapter header; applied to chapters marked "section beginning")
-- **chapter_template.html** (chapter header; applied to all "used" and "normal" chapters unless a "part template" exists)
-- **unused_chapter_template.html** (chapter header; applied to chapters marked "unused" or "do not export")
-- **notes_chapter_template.html** (chapter header; applied to chapters marked "notes")
-- **todo_chapter_template.html** (chapter header; applied to chapters marked "todo")
-
-- **chapter_end_template.html** (chapter footer; applied to all "used" and "normal" chapters)
-- **unused_chapter_end_template.html** (chapter footer; applied to chapters marked "unused" or "do not export")
-- **notes_chapter_end_template.html** (chapter footer; applied to chapters marked "notes")
-- **todo_chapter_end_template.html** (chapter footer; applied to chapters marked "todo")
+- **partTemplate.XTG** (chapter header; applied to chapters marked "section beginning")
+- **chapterTemplate.XTG** (chapter header; applied to all "used" and "normal" chapters unless a "part template" exists)
 
 
 ### Scene level templates
 
-- **scene_template.html** (applied to "used" scenes within "normal" chapters)
-- **first_scene_template.html** (applied  to scenes at the beginning of the chapter)
-- **unused_scene_template.html** (applied to "unused" scenes)
-- **notes_scene_template.html** (applied to scenes marked "notes")
-- **todo_scene_template.html** (applied to scenes marked "todo")
-- **scene_divider.html** (lead scenes, beginning from the second in chapter)
-
-
+- **firstSceneTemplate.XTG** (applied  to scenes at the beginning of the chapter)
+- **sceneTemplate.XTG** (applied to "used" scenes within "normal" chapters)
+- **sceneDivider.XTG** (scene divider placed between scenes)
+- **appendedSceneTemplate.XTG** (applied to scenes to be appended to the previous scene)
 
 
 ## Placeholders

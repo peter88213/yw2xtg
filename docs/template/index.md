@@ -13,12 +13,13 @@ The result is an XTG file ready for import into a Quark Xpress book project.
 
 [Changelog](changelog)
 
-## Usage, Markdown reference
+## Usage
 
 See the [instructions for use](usage)
 
 ## Credits
 
+- User *Hunter_71* presented the number to English conversion algorithm on [stack overflow](https://stackoverflow.com/a/51849443).
 - User *Aristide* presented the integer to roman numeral conversion on [stack overflow](https://stackoverflow.com/a/47713392).
 
 ## License

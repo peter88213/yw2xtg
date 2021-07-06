@@ -7,18 +7,19 @@ The result is an XTG file ready for import into a Quark Xpress book project.
 
 ## Download and install
 
-[Download the latest release (version 0.1.3)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.1.3.zip)
+[Download the latest release (version 0.2.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.2.0.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.1.3.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw2xtg_v0.2.0.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 
-## Usage, Markdown reference
+## Usage
 
 See the [instructions for use](usage)
 
 ## Credits
 
+- User *Hunter_71* presented the number to English conversion algorithm on [stack overflow](https://stackoverflow.com/a/51849443).
 - User *Aristide* presented the integer to roman numeral conversion on [stack overflow](https://stackoverflow.com/a/47713392).
 
 ## License
