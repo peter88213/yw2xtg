@@ -1,15 +1,7 @@
-[Project homepage](https://peter88213.github.io/yw2md)
-
----
-
-The yw2md Python script converts yWriter 7 projects to Markdown 
-and creates new yWriter 7 projects from Markdown formatted text documents.
-
-There are two variants, which are distinguished by the file extension: 
-_yw2md.pyw_  has a graphical user interface, and  _yw2md.py_  is for the command line. 
+[Project homepage](https://peter88213.github.io/yw2xtg)
 
 
-# 1. The GUI variant yw2md.pyw
+The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 project and fills XTG templates.
 
 ## Usage
 
@@ -17,129 +9,125 @@ It is recommended to create a link on the desktop.
 
 You can either
 
-- launch the program by double-clicking on the program/link icon, or
-- launch the program by dragging a source file and dropping it on the program/link icon.
-
-### Options
-
-#### Comments at the beginning of the scene are scene titles
-
-_When checked:_
-
-- When converting from yw7 to md, prefix scene titles as comments.
-- When converting from md to yw, convert comments at scene start to scene titles.
+- launch the program on the command line passing the yWriter project file as an argument, or
+- launch the program by dragging a yWriter project file and dropping it on the program/link icon.
 
 
-_When unchecked:_
+## List of templates
 
-- When converting from yw7 to md, do not prefix scene titles as comments.
-- When converting from md to yw, do not convert comments at scene start to scene titles.
+### Project level templates
 
+- **html_header.html** 
 
-#### The scenes in the yWriter project are Markdown formatted
+- **character_template.html** (applied to characters)
+- **location_template.html** (applied to locations)
+- **item_template.html** (applied to items)
 
-_When checked:_
+- **html_footer.html** 
 
-- When converting scenes from yw7 to md, do not double the linefeeds.
-- When converting scenes from md to yw, use Markdown.
+### Chapter level templates
 
+- **part_template.html** (chapter header; applied to chapters marked "section beginning")
+- **chapter_template.html** (chapter header; applied to all "used" and "normal" chapters unless a "part template" exists)
+- **unused_chapter_template.html** (chapter header; applied to chapters marked "unused" or "do not export")
+- **notes_chapter_template.html** (chapter header; applied to chapters marked "notes")
+- **todo_chapter_template.html** (chapter header; applied to chapters marked "todo")
 
-_When unchecked:_ 
-
-- When converting scenes from yw7 to md, double the linefeeds.
-- When converting scenes from md to yw, use yWriter's genuine bold/italic markup.
-
-
-### Select file
-
-If no file is selected, you first have to select a file. Click on the  __Select file__ 
-button and choose a yWriter or Markdown file with the file picker dialog.
-
-You can change the selection at any time.
+- **chapter_end_template.html** (chapter footer; applied to all "used" and "normal" chapters)
+- **unused_chapter_end_template.html** (chapter footer; applied to chapters marked "unused" or "do not export")
+- **notes_chapter_end_template.html** (chapter footer; applied to chapters marked "notes")
+- **todo_chapter_end_template.html** (chapter footer; applied to chapters marked "todo")
 
 
-#### Convert
+### Scene level templates
 
-Start file conversion by clicking on the  __Convert__  button. The result will be indicated.
-
-
-# 2. The command line variant yw2md.py
-
-This script is meant to be launched from the command line. However, 
-if you prefer to use the mouse, you can create a link on the Windows 
-desktop, and launch yw2md by dragging the source file and dropping 
-it to the link icon. For optional arguments, edit the link's properties.
+- **scene_template.html** (applied to "used" scenes within "normal" chapters)
+- **first_scene_template.html** (applied  to scenes at the beginning of the chapter)
+- **unused_scene_template.html** (applied to "unused" scenes)
+- **notes_scene_template.html** (applied to scenes marked "notes")
+- **todo_scene_template.html** (applied to scenes marked "todo")
+- **scene_divider.html** (lead scenes, beginning from the second in chapter)
 
 
-## Usage
-usage: `yw2md.py [-h][--silent][--md] Sourcefile`
-
-#### positional arguments:
-
-`Sourcefile` 
-
-The path of the source file for the conversion. 
-
-- If it's a yWriter project file with extension 'yw6' or 'yw7', 
-a new Markdown formatted text document will be created.
-- Otherwise, the source file will be considered a Markdown formatted file 
-to be converted to a new yWriter 7 project. 
-- Existing yWriter projects are not overwritten.
-- Headings are considered chapter titles. 
-- Scenes within chapters are separated by `* * *`. 
-- In exported md documents, the scene title is prefixed as a comment by default.
-- In generated yWriter projects, comments at scene start are converted to scene titles by default.
 
 
-#### optional arguments:
+## Placeholders
 
-`-h, --help`  show this help message and exit
+### Syntax
 
-`--silent`  suppress error messages and the request to confirm overwriting
+There are two options:
 
-`--md`  the scenes in the yWriter project are Markdown formatted
+1. $Placeholder
+2. ${Placeholder}
 
-- When converting scenes from yw7 to md, do not double the linefeeds.
-- When converting scenes from md to yw, use Markdown.
 
-`--notitles`  do not associate comments at the beginning of the scene with scene titles
+### "HTML header" placeholders
 
-- When converting from yw7 to md, do not prefix scene titles as comments.
-- When converting from md to yw, do not convert comments at scene start to scene titles.
+- **$Title** - Project title
+- **$Desc** - Project description, html-formatted
+- **$AuthorName** - Author's name
 
----
 
-# Markdown reference
+- **$FieldTitle1** - Rating names: field 1
+- **$FieldTitle2** - Rating names: field 2
+- **$FieldTitle3** - Rating names: field 3
+- **$FieldTitle4** - Rating names: field 4
 
-By default,  _yw2md_  converts a Markdown subset according to the following specificatiions:
+### "Chapter template" placeholders
 
-### Paragraphs
+- **$ID** - Chapter ID,
+- **$ChapterNumber** - Chapter number (in sort order),
+- **$ChNumberEnglish** - Chapter number written out in English (capitalized),
+- **$ChNumberRoman** - Chapter number in Roman numbers (uppercase),
 
-Paragraphs in Markdown are separated by a blank line.
-Single blank lines in yWriter scenes are Markdown-encoded by three blank lines.
+- **$Title** - Chapter title
+- **$Desc** - Chapter description, html-formatted
 
-### Headings
+### "Scene template" placeholders
 
-#### Level 1 heading used for parts (chapters marked as  beginning of a new section in yWriter)
-`# One hash character at the start of the line`
+- **$ID** - Scene ID,
+- **$SceneNumber** - Scene number (in sort order),
 
-#### Level 2 heading used for chapters
-`## Two hash characters at the start of the line`
+- **$Title** - Scene title
+- **$Desc** - Scene description, html-formatted
 
-### Emphasis
+- **$WordCount** - Scene word count
+- **$WordsTotal** - Accumulated word count including the current scene
+- **$LetterCount** - Scene letter count
+- **$LettersTotal** - Accumulated letter count including the current scene
 
-#### Italic 
-`*single asterisks*`
+- **$Status** - Scene status (Outline, Draft etc.)
+- **$SceneContent** - Scene content, html-formatted
 
-__Note__ : A `*` surrounded with spaces will be treated as a literal asterisk.
+- **$FieldTitle1** - Rating names: field 1
+- **$FieldTitle2** - Rating names: field 2
+- **$FieldTitle3** - Rating names: field 3
+- **$FieldTitle4** - Rating names: field 4
+- **$Field1** - Scene rating: field 1
+- **$Field2** - Scene rating: field 2
+- **$Field3** - Scene rating: field 3
+- **$Field4** - Scene rating: field 4
 
-#### Bold 
-`**double asterisks**`
+- **$Date** - Specific scene date
+- **$Time** - Specific scene time
+- **$Day** - Time scene begins: day
+- **$Hour** - Time scene begins: hour
+- **$Minute** - Time scene begins: minute
+- **$LastsDays** - Amount of time scene lasts: days
+- **$LastsHours** - Amount of time scene lasts: hours
+- **$LastsMinutes** - Amount of time scene lasts: minutes
 
-### Comments
+- **$ReactionScene** - A(ction) or R(eaction)
+- **$Goal** - The scene protagonist's goal, html-formatted
+- **$Conflict** - The scene conflict, html-formatted
+- **$Outcome** - The scene outcome, html-formatted
+- **$Tags** - Comma-separated list of scene tags
 
-- Comments at the start of a scene are condsidered scene titles by default.
-- All other comments are converted between Markdown comments and yWriter comments.
+- **$Characters** - Comma-separated list of characters assigned to the scene
+- **$Viewpoint** - Viewpoint character
+- **$Locations** - Comma-separated list of locations assigned to the scene
+- **$Items** - Comma-separated list of items assigned to the scene
 
-`<!---A HTML comment with one additional hyphen--->`
+- **$Notes** - Scene notes, html-formatted
+
 

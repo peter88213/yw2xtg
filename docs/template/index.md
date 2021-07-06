@@ -1,5 +1,5 @@
-The yw2md Python script converts yWriter 7 projects to Markdown 
-and creates new yWriter 7 projects from Markdown formatted text documents.
+The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 project and fills XTG templates.
+The result is an XTG file ready for import into a Quark Xpress book project.
 
 ## Requirements
 
@@ -7,9 +7,9 @@ and creates new yWriter 7 projects from Markdown formatted text documents.
 
 ## Download and install
 
-[Download the latest release (version 0.99.0)](https://raw.githubusercontent.com/peter88213/yw2md/master/dist/yw2md_v0.99.0.zip)
+[Download the latest release (version 0.99.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.99.0.zip)
 
-- Unzip the downloaded zipfile "yw2md_v0.99.0.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw2xtg_v0.99.0.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 
@@ -19,9 +19,9 @@ See the [instructions for use](usage)
 
 ## Credits
 
-- Frederik Lundh published the [xml pretty print algorithm](http://effbot.org/zone/element-lib.htm#prettyprint).
+- User *Aristide* presented the integer to roman numeral conversion on [stack overflow](https://stackoverflow.com/a/47713392).
 
 ## License
 
-yw2md is distributed under the [MIT
+yw2xtg is distributed under the [MIT
 License](http://www.opensource.org/licenses/mit-license.php).

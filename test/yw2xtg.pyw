@@ -8,8 +8,9 @@ For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import sys
-
 import os
+from configparser import ConfigParser
+
 import webbrowser
 
 
@@ -3545,6 +3546,7 @@ class XtgFile(FileExport):
         self.chapterTemplate = kwargs['chapterTemplate']
         self.firstSceneTemplate = kwargs['firstSceneTemplate']
         self.sceneTemplate = kwargs['sceneTemplate']
+        self.appendedSceneTemplate = kwargs['appendedSceneTemplate']
         self.sceneDivider = kwargs['sceneDivider']
 
         self.tagTextBody = kwargs['textBody']
@@ -3560,12 +3562,6 @@ class XtgFile(FileExport):
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
-        def assign_acronym(i):
-            return(self.tagAcronym + i.group() + self.tagAcronym0)
-
-        def assign_figure(i):
-            return(self.tagFigure + i.group() + self.tagFigure0)
-
         XTG_REPLACEMENTS = [
             ['[i]', self.tagItalic],
             ['[/i]', self.tagItalic0],
@@ -3595,27 +3591,32 @@ class XtgFile(FileExport):
 
         text = re.sub('\/\*.+?\*\/', '', text)
 
-        # Replace digit-separating blanks.
+        # Adjust digit-separating blanks.
 
         text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
-        # Assign figures "figure" style.
+        # Adjust digit-separating points.
 
-        matchstr = re.compile('\d+')
-        text = matchstr.sub(assign_figure, text)
+        text = re.sub('(\d+)\.', '\\1.<\\![>', text)
+        text = text.replace('<\\![> ', ' ')
 
-        # Assign acronyms "acronym" style.
+        # Assign "figure" style.
 
-        matchstr = re.compile('[A-ZÄ-Ü]{2,}')
-        text = matchstr.sub(assign_acronym, text)
+        text = re.sub('(\d+)', self.tagFigure + '\\1' + self.tagFigure0, text)
+
+        # Assign "acronym" style.
+
+        text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
+                      '\\1' + self.tagAcronym0, text)
 
         # Assign the second paragraph "textBody" style.
 
         t = text.split('\n', 1)
-
         text = ('\n' + self.tagTextBody).join(t)
 
         return(text)
+
+from tkinter import messagebox
 
 
 class Exporter(YwCnvUi):
@@ -3626,31 +3627,101 @@ class Exporter(YwCnvUi):
 
 SCENE_DIVIDER = ''
 
+STYLES = ['textBody',
+          'italic',
+          'italic0',
+          'bold',
+          'bold0',
+          'acronym',
+          'acronym0',
+          'figure',
+          'figure0',
+          ]
+
+TEMPLATES = ['fileHeader',
+             'partTemplate',
+             'chapterTemplate',
+             'firstSceneTemplate',
+             'sceneTemplate',
+             'appendedSceneTemplate',
+             'sceneDivider',
+             ]
+
+
+def set_defaults(iniPath):
+
+    if messagebox.askyesno(
+            'WARNING', 'No valid initialization data found at "' + os.path.normpath(iniPath) + '".\nUse default settings?'):
+
+        return dict(
+            suffix='',
+
+            fileHeader='<v11.10><e9>\n',
+            partTemplate='@Heading 1:${Title}\n',
+            chapterTemplate='@Heading 1:${Title}\n',
+            firstSceneTemplate='@Text body:$SceneContent\n',
+            sceneTemplate='@Text body:$SceneContent\n',
+            appendedSceneTemplate='$SceneContent\n',
+            sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
+
+            textBody='@First line indent:',
+            italic='<@Emphasize>',
+            italic0='<@$>',
+            bold='<@Strong emphasize>',
+            bold0='<@$>',
+            acronym='<y095.0>',
+            acronym0='<y$>',
+            figure='',
+            figure0='',
+        )
+
+    else:
+        return None
+
 
 def run(sourcePath):
     converter = Exporter()
     converter.ui = UiTk('Export XTG from yWriter @release')
-    kwargs = dict(
-        suffix='',
 
-        fileHeader='<v11.10><e9>\n',
-        partTemplate='@Überschrift 1:${Title}\n',
-        chapterTemplate='@Überschrift 1:${Title}\n',
-        firstSceneTemplate='@Textkörper:$SceneContent\n',
-        sceneTemplate='@Textkörper:$SceneContent\n',
-        sceneDivider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
+    #--- Try to get persistent configuration data
 
-        textBody='@Textkörper Einzug:',
-        italic='<@Betont>',
-        italic0='<@$>',
-        bold='<@Stark betont>',
-        bold0='<@$>',
-        acronym='<y095.0>',
-        acronym0='<y$>',
-        figure='<f"Adobe Garamond Small Caps & Old">',
-        figure0='<f$>',
-    )
-    converter.run(sourcePath, **kwargs)
+    try:
+        iniPath = os.path.dirname(sourcePath)
+
+        if iniPath == '':
+            iniPath = './yw2xtg'
+
+        else:
+            iniPath += '/yw2xtg'
+
+        iniFile = iniPath + '/yw2xtg.ini'
+        config = ConfigParser()
+
+        if os.path.isfile(iniFile):
+
+            config.read(iniFile)
+            kwargs = {'suffix': ''}
+
+            for style in STYLES:
+                kwargs[style] = config.get('STYLES', style)
+
+            for template in TEMPLATES:
+
+                with open(iniPath + '/' + template + '.XTG', 'r', encoding='utf-8') as f:
+                    kwargs[template] = f.read()
+
+        else:
+            kwargs = set_defaults(iniPath)
+
+    except:
+        kwargs = set_defaults(iniPath)
+
+    if kwargs is not None:
+        converter.run(sourcePath, **kwargs)
+
+    else:
+        converter.ui.set_info_how('ERROR: Action canceled by user.')
+
     converter.ui.start()
 
 
@@ -3660,6 +3731,6 @@ if __name__ == '__main__':
         sourcePath = sys.argv[1]
 
     except:
-        sourcePath = ''
+        sourcePath = None
 
     run(sourcePath)

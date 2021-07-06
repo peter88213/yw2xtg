@@ -8,11 +8,15 @@ For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import sys
+import os
+from configparser import ConfigParser
 
 from pywriter.converter.yw_cnv_ui import YwCnvUi
 from pywriter.ui.ui_tk import UiTk
 from pywriter.yw.yw7_file import Yw7File
 from pywxtg.xtg_file import XtgFile
+
+from tkinter import messagebox
 
 
 class Exporter(YwCnvUi):
@@ -23,31 +27,101 @@ class Exporter(YwCnvUi):
 
 SCENE_DIVIDER = ''
 
+STYLES = ['textBody',
+          'italic',
+          'italic0',
+          'bold',
+          'bold0',
+          'acronym',
+          'acronym0',
+          'figure',
+          'figure0',
+          ]
+
+TEMPLATES = ['fileHeader',
+             'partTemplate',
+             'chapterTemplate',
+             'firstSceneTemplate',
+             'sceneTemplate',
+             'appendedSceneTemplate',
+             'sceneDivider',
+             ]
+
+
+def set_defaults(iniPath):
+
+    if messagebox.askyesno(
+            'WARNING', 'No valid initialization data found at "' + os.path.normpath(iniPath) + '".\nUse default settings?'):
+
+        return dict(
+            suffix='',
+
+            fileHeader='<v11.10><e9>\n',
+            partTemplate='@Heading 1:${Title}\n',
+            chapterTemplate='@Heading 1:${Title}\n',
+            firstSceneTemplate='@Text body:$SceneContent\n',
+            sceneTemplate='@Text body:$SceneContent\n',
+            appendedSceneTemplate='$SceneContent\n',
+            sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
+
+            textBody='@First line indent:',
+            italic='<@Emphasize>',
+            italic0='<@$>',
+            bold='<@Strong emphasize>',
+            bold0='<@$>',
+            acronym='<y095.0>',
+            acronym0='<y$>',
+            figure='',
+            figure0='',
+        )
+
+    else:
+        return None
+
 
 def run(sourcePath):
     converter = Exporter()
     converter.ui = UiTk('Export XTG from yWriter @release')
-    kwargs = dict(
-        suffix='',
 
-        fileHeader='<v11.10><e9>\n',
-        partTemplate='@Überschrift 1:${Title}\n',
-        chapterTemplate='@Überschrift 1:${Title}\n',
-        firstSceneTemplate='@Textkörper:$SceneContent\n',
-        sceneTemplate='@Textkörper:$SceneContent\n',
-        sceneDivider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
+    #--- Try to get persistent configuration data
 
-        textBody='@Textkörper Einzug:',
-        italic='<@Betont>',
-        italic0='<@$>',
-        bold='<@Stark betont>',
-        bold0='<@$>',
-        acronym='<y095.0>',
-        acronym0='<y$>',
-        figure='<f"Adobe Garamond Small Caps & Old">',
-        figure0='<f$>',
-    )
-    converter.run(sourcePath, **kwargs)
+    try:
+        iniPath = os.path.dirname(sourcePath)
+
+        if iniPath == '':
+            iniPath = './yw2xtg'
+
+        else:
+            iniPath += '/yw2xtg'
+
+        iniFile = iniPath + '/yw2xtg.ini'
+        config = ConfigParser()
+
+        if os.path.isfile(iniFile):
+
+            config.read(iniFile)
+            kwargs = {'suffix': ''}
+
+            for style in STYLES:
+                kwargs[style] = config.get('STYLES', style)
+
+            for template in TEMPLATES:
+
+                with open(iniPath + '/' + template + '.XTG', 'r', encoding='utf-8') as f:
+                    kwargs[template] = f.read()
+
+        else:
+            kwargs = set_defaults(iniPath)
+
+    except:
+        kwargs = set_defaults(iniPath)
+
+    if kwargs is not None:
+        converter.run(sourcePath, **kwargs)
+
+    else:
+        converter.ui.set_info_how('ERROR: Action canceled by user.')
+
     converter.ui.start()
 
 
@@ -57,6 +131,6 @@ if __name__ == '__main__':
         sourcePath = sys.argv[1]
 
     except:
-        sourcePath = ''
+        sourcePath = None
 
     run(sourcePath)

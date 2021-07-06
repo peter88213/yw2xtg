@@ -25,6 +25,7 @@ class XtgFile(FileExport):
         self.chapterTemplate = kwargs['chapterTemplate']
         self.firstSceneTemplate = kwargs['firstSceneTemplate']
         self.sceneTemplate = kwargs['sceneTemplate']
+        self.appendedSceneTemplate = kwargs['appendedSceneTemplate']
         self.sceneDivider = kwargs['sceneDivider']
 
         self.tagTextBody = kwargs['textBody']
