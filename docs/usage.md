@@ -48,15 +48,15 @@ figure =
 figure0 = 
 ```
 
-- **textbody**: The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
-- **italic**: The opening tag to replace yWriter's *italic* formatting.
-- **italic0**: The closing tag to replace yWriter's *italic* formatting.
-- **bold**: The opening tag to replace yWriter's *bold* formatting.
-- **bold0**: The closing tag to replace yWriter's *bold* formatting.
-- **acronym**: The opening tag to format sequences of uppercase characters (usually 0.5 to 1 pt smaller).
-- **acronym0**: The closing tag to format sequences of uppercase characters.
-- **figure**: The opening tag to format figures (e.g. switch the font to get "osf" text figures).
-- **figure0**: The closing tag to format figures.
+- **textbody** - The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
+- **italic** - The opening tag to replace yWriter's *italic* formatting.
+- **italic0** - The closing tag to replace yWriter's *italic* formatting.
+- **bold** - The opening tag to replace yWriter's *bold* formatting.
+- **bold0** - The closing tag to replace yWriter's *bold* formatting.
+- **acronym** - The opening tag to format sequences of uppercase characters (usually 0.5 to 1 pt smaller).
+- **acronym0** - The closing tag to format sequences of uppercase characters.
+- **figure** - The opening tag to format figures (e.g. switch the font to get "osf" text figures).
+- **figure0** - The closing tag to format figures.
 
 You can define styles in *fileHeader.XTG*, but it is preferable to use the names of styles that already exist in the QX book project instead.
 
@@ -64,20 +64,20 @@ You can define styles in *fileHeader.XTG*, but it is preferable to use the names
 
 ### Project level templates
 
-- **fileHeader.XTG** 
+- **fileHeader.XTG** - This template must contain at least the version code and encoding indication.
 
 ### Chapter level templates
 
-- **partTemplate.XTG** (chapter header; applied to chapters marked "section beginning")
-- **chapterTemplate.XTG** (chapter header; applied to all "used" and "normal" chapters unless a "part template" exists)
+- **partTemplate.XTG** - Chapter header; applied to chapters marked "section beginning".
+- **chapterTemplate.XTG** - Chapter header; applied to all "used" and "normal" chapters unless a "part template" exists.
 
 
 ### Scene level templates
 
-- **firstSceneTemplate.XTG** (applied  to scenes at the beginning of the chapter)
-- **sceneTemplate.XTG** (applied to "used" scenes within "normal" chapters)
-- **sceneDivider.XTG** (scene divider placed between scenes)
-- **appendedSceneTemplate.XTG** (applied to scenes to be appended to the previous scene)
+- **firstSceneTemplate.XTG** - Applied  to scenes at the beginning of the chapter.
+- **sceneTemplate.XTG** - Applied to "used" scenes within "normal" chapters.
+- **sceneDivider.XTG** - Scene divider placed between scenes.
+- **appendedSceneTemplate.XTG** - Applied to scenes to be appended to the previous scene.
 
 
 ## Placeholders
