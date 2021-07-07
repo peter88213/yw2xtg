@@ -19,7 +19,7 @@
 		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
 		
 		<copy todir="${build}/${release-name}/sample/yw2xtg"> 
-			<fileset dir="${test}/data" />
+			<fileset dir="${test}/sample/yw2xtg" />
 		</copy>
 	</target>
 
