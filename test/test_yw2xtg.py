@@ -21,11 +21,13 @@ TEST_EXEC_PATH = TEST_PATH + '/yw7/'
 TEMPLATES = 'yw2xtg/'
 
 # To be placed in TEST_DATA_PATH:
+REFERENCE_YW7 = TEST_DATA_PATH + 'normal.yw7'
+REFERENCE_XTG_TEMPLATES = TEST_DATA_PATH + 'normal.XTG'
+REFERENCE_XTG_DEFAULTS = TEST_DATA_PATH + 'defaults.XTG'
 
 # Test data
-YW7 = 'normal.yw7'
-XTG_FILE = 'normal.XTG'
-XTG_FILE_DEFAULTS = 'defaults.XTG'
+TEST_YW7 = TEST_EXEC_PATH + 'yw7 Sample Project.yw7'
+TEST_XTG = TEST_EXEC_PATH + 'yw7 Sample Project.XTG'
 
 
 def read_file(inputFile):
@@ -49,11 +51,11 @@ def copy_file(inputFile, outputFile):
 def remove_all_testfiles():
 
     try:
-        os.remove(TEST_EXEC_PATH + YW7)
+        os.remove(TEST_YW7)
     except:
         pass
     try:
-        os.remove(TEST_EXEC_PATH + XTG_FILE)
+        os.remove(TEST_XTG)
     except:
         pass
 
@@ -79,7 +81,7 @@ class NormalOperation(unittest.TestCase):
             pass
 
         remove_all_testfiles()
-        copy_file(TEST_DATA_PATH + YW7, TEST_EXEC_PATH + YW7)
+        copy_file(REFERENCE_YW7, TEST_YW7)
 
     def test_templates(self):
 
@@ -89,18 +91,18 @@ class NormalOperation(unittest.TestCase):
 
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg.run(TEST_EXEC_PATH + YW7, True)
+        yw2xtg.run(TEST_YW7, True)
 
-        self.assertEqual(read_file(TEST_EXEC_PATH + XTG_FILE),
-                         read_file(TEST_DATA_PATH + XTG_FILE))
+        self.assertEqual(read_file(TEST_XTG),
+                         read_file(REFERENCE_XTG_TEMPLATES))
 
     def test_defaults(self):
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg.run(TEST_EXEC_PATH + YW7, True)
+        yw2xtg.run(TEST_YW7, True)
 
-        self.assertEqual(read_file(TEST_EXEC_PATH + XTG_FILE),
-                         read_file(TEST_DATA_PATH + XTG_FILE_DEFAULTS))
+        self.assertEqual(read_file(TEST_XTG),
+                         read_file(REFERENCE_XTG_DEFAULTS))
 
     def tearDown(self):
         remove_all_testfiles()
