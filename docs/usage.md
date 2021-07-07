@@ -45,8 +45,8 @@ italic = <@Emphasis>
 italic0 = <@$>
 bold = <@Small caps>
 bold0 = <@$>
-acronym = <y095.0>
-acronym0 = <y$>
+acronym = 
+acronym0 = 
 figure = 
 figure0 = 
 ```
@@ -56,7 +56,7 @@ figure0 =
 - **italic0** - The closing tag to replace yWriter's *italic* formatting.
 - **bold** - The opening tag to replace yWriter's *bold* formatting.
 - **bold0** - The closing tag to replace yWriter's *bold* formatting.
-- **acronym** - The opening tag to format sequences of uppercase characters (usually 0.5 to 1 pt smaller).
+- **acronym** - The opening tag to format sequences of uppercase characters (e.g. set a slightly smaller font size).
 - **acronym0** - The closing tag to format sequences of uppercase characters.
 - **figure** - The opening tag to format figures (e.g. switch the font to get "osf" text figures).
 - **figure0** - The closing tag to format figures.
