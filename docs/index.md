@@ -6,9 +6,9 @@ The yw2xtg Python script exports [yWriter](http://spacejock.com/yWriter7.html) p
 
 ## Download and install
 
-[Download the latest release (version 0.4.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.4.0.zip)
+[Download the latest release (version 0.4.1)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.4.1.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.4.0.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw2xtg_v0.4.1.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 

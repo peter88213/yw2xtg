@@ -10,13 +10,13 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import sys
 import os
 from configparser import ConfigParser
+import argparse
 
 from pywriter.converter.yw_cnv_ui import YwCnvUi
 from pywriter.ui.ui_tk import UiTk
+from pywriter.ui.ui import Ui
 from pywriter.yw.yw7_file import Yw7File
 from pywxtg.xtg_file import XtgFile
-
-from tkinter import messagebox
 
 
 class Exporter(YwCnvUi):
@@ -52,10 +52,9 @@ OPTIONS = ['adjust_digits',
            ]
 
 
-def set_defaults(iniPath):
+def set_defaults(iniPath, ui):
 
-    if messagebox.askyesno(
-            'WARNING', 'No valid initialization data found at "' + os.path.normpath(iniPath) + '".\nUse default settings?'):
+    if ui.ask_yes_no('No valid initialization data found at "' + os.path.normpath(iniPath) + '".\nUse default settings?'):
 
         return dict(
             suffix='',
@@ -102,9 +101,14 @@ def decode_option(option):
     return option
 
 
-def run(sourcePath):
+def run(sourcePath, silentMode):
     converter = Exporter()
-    converter.ui = UiTk('Export XTG from yWriter @release')
+
+    if silentMode:
+        converter.ui = Ui('Export XTG from yWriter @release')
+
+    else:
+        converter.ui = UiTk('Export XTG from yWriter @release')
 
     #--- Try to get persistent configuration data
 
@@ -137,10 +141,10 @@ def run(sourcePath):
                     kwargs[template] = f.read()
 
         else:
-            kwargs = set_defaults(iniPath)
+            kwargs = set_defaults(iniPath, converter.ui)
 
     except:
-        kwargs = set_defaults(iniPath)
+        kwargs = set_defaults(iniPath, converter.ui)
 
     if kwargs is not None:
         converter.run(sourcePath, **kwargs)
@@ -152,11 +156,27 @@ def run(sourcePath):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='XPress tagged text export from yWriter projects',
+        epilog='')
+    parser.add_argument('sourcePath', metavar='Sourcefile',
+                        help='The path of the yWriter project file.')
 
-    try:
-        sourcePath = sys.argv[1]
+    parser.add_argument('--silent',
+                        action="store_true",
+                        help='suppress error messages and the request to confirm overwriting or using defaults')
+    args = parser.parse_args()
 
-    except:
+    if args.silent:
+        silentMode = True
+
+    else:
+        silentMode = False
+
+    if os.path.isfile(args.sourcePath):
+        sourcePath = args.sourcePath
+
+    else:
         sourcePath = None
 
-    run(sourcePath)
+    run(sourcePath, silentMode)
