@@ -54,8 +54,8 @@ def run(sourcePath):
         italic0='<@$>',
         bold='<@Stark betont>',
         bold0='<@$>',
-        acronym='<y095.0>',
-        acronym0='<y$>',
+        acronym='<t4z9>',
+        acronym0='<tz$>',
         figure='<f"Adobe Garamond Small Caps & Old">',
         figure0='<f$>',
     )
