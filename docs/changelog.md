@@ -4,6 +4,10 @@
 
 ## Changelog
 
+### v0.2.1 Modify default values
+
+Based on PyWriter v3.12.6.
+
 ### v0.2.0 Beta test release 
 
 Based on PyWriter v3.12.6.
