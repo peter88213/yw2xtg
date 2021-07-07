@@ -22,6 +22,9 @@ The XTG file format uses the *XPress Tags* language, the knowledge of which is a
 
 Bold and italics are supported. Other highlighting such as underline and strikethrough are lost.
 
+### Quotation marks and punctuation
+
+It is assumed that quotation marks and punctuation marks are already set correctly; this is best done in advance with a word processor, e.g. via yWriter's "proof read" function. 
 
 ## Configuration
 
