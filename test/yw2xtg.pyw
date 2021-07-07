@@ -3759,8 +3759,8 @@ def set_defaults(iniPath):
             italic0='<@$>',
             bold='<@Small caps>',
             bold0='<@$>',
-            acronym='<y095.0>',
-            acronym0='<y$>',
+            acronym='',
+            acronym0='',
             figure='',
             figure0='',
         )

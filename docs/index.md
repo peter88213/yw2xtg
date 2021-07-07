@@ -7,9 +7,9 @@ The result is an XTG file ready for import into a Quark Xpress book project.
 
 ## Download and install
 
-[Download the latest release (version 0.2.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.2.0.zip)
+[Download the latest release (version 0.2.1)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.2.1.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.2.0.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw2xtg_v0.2.1.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 
