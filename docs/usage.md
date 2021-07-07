@@ -49,7 +49,14 @@ acronym =
 acronym0 = 
 figure = 
 figure0 = 
+
+[OPTIONS]
+adjust_digits = yes
+space_points = yes
+
 ```
+
+#### Style tags
 
 - **textbody** - The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
 - **italic** - The opening tag to replace yWriter's *italic* formatting.
@@ -60,6 +67,11 @@ figure0 =
 - **acronym0** - The closing tag to format sequences of uppercase characters.
 - **figure** - The opening tag to format figures (e.g. switch the font to get "osf" text figures).
 - **figure0** - The closing tag to format figures.
+
+#### Options
+
+- **adjust_digits** - Replace regular spaces between digits with thin spaces.
+- **space_points** - Insert a thin space after each point that separates digits.
 
 You can define styles in *fileHeader.XTG*, but it is preferable to use the names of styles that already exist in the QX book project instead.
 

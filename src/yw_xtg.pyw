@@ -47,6 +47,10 @@ TEMPLATES = ['fileHeader',
              'sceneDivider',
              ]
 
+OPTIONS = ['adjust_digits',
+           'space_points',
+           ]
+
 
 def set_defaults(iniPath):
 
@@ -73,10 +77,29 @@ def set_defaults(iniPath):
             acronym0='',
             figure='',
             figure0='',
+
+            adjust_digits=True,
+            space_points=True,
         )
 
     else:
         return None
+
+
+def decode_option(option):
+    """Return a boolean value, if necessary."""
+
+    try:
+        if option.lower() == 'yes':
+            option = True
+
+        elif option.lower() == 'no':
+            option = False
+
+    except:
+        pass
+
+    return option
 
 
 def run(sourcePath):
@@ -104,6 +127,9 @@ def run(sourcePath):
 
             for style in STYLES:
                 kwargs[style] = config.get('STYLES', style)
+
+            for option in OPTIONS:
+                kwargs[option] = decode_option(config.get('OPTIONS', option))
 
             for template in TEMPLATES:
 

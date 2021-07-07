@@ -38,10 +38,22 @@ class XtgFile(FileExport):
         self.tagFigure = kwargs['figure']
         self.tagFigure0 = kwargs['figure0']
 
+        self.adjust_digits = kwargs['adjust_digits']
+        self.space_points = kwargs['space_points']
+
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
+        if text is None:
+            return ''
+
         XTG_REPLACEMENTS = [
+            #--- Escape XPress Tags code-specific characters.
+            ['@', '┌┐@>'],
+            ['<', '┌┐<>'],
+            ['\\', '┌┐\\>'],
+            ['┌┐', '<\\'],
+            #--- Replace yWriter tags with XPress tags.
             ['[i]', self.tagItalic],
             ['[/i]', self.tagItalic0],
             ['[b]', self.tagBold],
@@ -55,45 +67,47 @@ class XtgFile(FileExport):
                 text = text.replace(r[0], r[1])
 
         except AttributeError:
-            text = ''
+            return ''
 
-        # Encode non-breaking spaces.
+        #--- Encode non-breaking spaces.
 
         text = text.replace('\xa0', '<\\!p>')
 
-        # Remove highlighting, alignment,
+        #--- Remove highlighting, alignment,
         # strikethrough, and underline tags.
 
         text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
 
-        # Remove comments.
+        #--- Remove comments.
 
         text = re.sub('\/\*.+?\*\/', '', text)
 
-        # Adjust digit-separating blanks.
+        #--- Adjust digit-separating blanks.
 
-        text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
+        if self.adjust_digits:
+            text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
-        # Adjust digit-separating points.
+        #--- Space digit-separating points.
 
-        text = re.sub('(\d+)\.', '\\1.<\\![>', text)
-        text = text.replace('<\\![> ', ' ')
+        if self.space_points:
+            text = re.sub('(\d+)\.', '\\1.<\\![>', text)
+            text = text.replace('<\\![> ', ' ')
 
-        # Assign "figure" style.
+        #--- Assign "figure" style.
 
         text = re.sub('(\d+)', self.tagFigure + '\\1' + self.tagFigure0, text)
 
-        # Assign "acronym" style.
+        #--- Assign "acronym" style.
 
         text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
                       '\\1' + self.tagAcronym0, text)
 
-        # Assign the second paragraph "textBody" style.
+        #--- Assign the second paragraph "textBody" style.
 
         t = text.split('\n', 1)
         text = ('\n' + self.tagTextBody).join(t)
 
-        return(text)
+        return text
 
     def get_chapterMapping(self, chId, chapterNumber):
         """Return a mapping dictionary for a chapter section. 

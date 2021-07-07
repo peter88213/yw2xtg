@@ -31,7 +31,7 @@ def run(sourcePath):
     iniFile = iniPath + '/yw2xtg.ini'
     config = ConfigParser()
 
-    ts = {
+    templates = {
         iniPath + '/fileHeader.' + EXTENSION: '<v11.10><e9>\n',
         iniPath + '/partTemplate.' + EXTENSION: '@Überschrift 1:${Title}\n',
         iniPath + '/chapterTemplate.' + EXTENSION: '@Überschrift 1:${Title}\n',
@@ -41,14 +41,11 @@ def run(sourcePath):
         iniPath + '/sceneDivider.' + EXTENSION: '@Überschrift 3:' + SCENE_DIVIDER + '\n',
     }
 
-    if not config.has_section('TEMPLATES'):
-        config.add_section('TEMPLATES')
+    for template in templates:
+        with open(template, 'w', encoding='utf-8') as f:
+            f.write(templates[template])
 
-    for t in ts:
-        with open(t, 'w', encoding='utf-8') as f:
-            f.write(ts[t])
-
-    ss = dict(
+    styles = dict(
         textBody='@Textkörper Einzug:',
         italic='<@Betont>',
         italic0='<@$>',
@@ -62,8 +59,19 @@ def run(sourcePath):
     if not config.has_section('STYLES'):
         config.add_section('STYLES')
 
-    for s in ss:
-        config.set('STYLES', s, ss[s])
+    for style in styles:
+        config.set('STYLES', style, styles[style])
+
+    options = dict(
+        adjust_digits='yes',
+        space_points='yes',
+    )
+
+    if not config.has_section('OPTIONS'):
+        config.add_section('OPTIONS')
+
+    for option in options:
+        config.set('OPTIONS', option, options[option])
 
     with open(iniFile, 'w') as f:
         config.write(f)
