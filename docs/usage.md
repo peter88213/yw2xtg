@@ -87,7 +87,7 @@ per_chapter = no
 
 - **adjust_digits** - Replace regular spaces between digits with thin spaces.
 - **space_points** - Insert a thin space after each point that separates digits.
-- **per_chapter** - Generate one XTG file per chapter. The file names consist of the chapter's number and title.
+- **per_chapter** - Generate one XTG file per chapter. The file names consist of the chapter's number and title. the files are written to the XTG_Chapters subdirectory.
 
 You can define styles in *fileHeader.XTG*, but it is preferable to use the names of styles that already exist in the QX book project instead.
 

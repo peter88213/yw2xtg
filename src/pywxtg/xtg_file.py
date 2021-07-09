@@ -4,7 +4,7 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import sys
+import shutil
 import os
 import re
 from string import Template
@@ -19,6 +19,7 @@ class XtgFile(FileExport):
     DESCRIPTION = 'XPress tagged file'
     EXTENSION = '.XTG'
     SUFFIX = ''
+    XTG_OUT = 'XTG_Chapters'
 
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
@@ -214,10 +215,19 @@ class XtgFile(FileExport):
         if not self.per_chapter:
             return FileExport.get_chapters(self)
 
-        projectDir = os.path.dirname(self.filePath)
+        # Create a directory for the output. Delete contents, if exist.
 
-        if projectDir == '':
-            projectDir = '.'
+        xtgDir = os.path.dirname(self.filePath)
+
+        if xtgDir == '':
+            xtgDir = '.'
+
+        xtgDir += '/' + self.XTG_OUT
+
+        if os.path.isdir(xtgDir):
+            shutil.rmtree(xtgDir)
+
+        os.makedirs(xtgDir)
 
         chapterNumber = 0
         sceneNumber = 0
@@ -339,17 +349,17 @@ class XtgFile(FileExport):
 
             text = self.fileHeader + ''.join(lines)
 
-            filePath = projectDir + '/' + \
+            xtgPath = xtgDir + '/' + \
                 str(dispNumber).zfill(4) + '_' + \
                 self.chapters[chId].title + self.EXTENSION
 
             try:
-                with open(filePath, 'w', encoding='utf-8') as f:
+                with open(xtgPath, 'w', encoding='utf-8') as f:
                     f.write(text)
 
             except:
                 return('ERROR: Cannot write "' +
-                       os.path.normpath(filePath) + '".')
+                       os.path.normpath(xtgPath) + '".')
 
         return 'SUCCESS: All chapters written.'
 

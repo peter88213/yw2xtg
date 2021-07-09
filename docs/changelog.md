@@ -8,6 +8,7 @@
 
 Move the "ope file per chapter" option from the command line arguments 
 to the configuration file.
+The chapter files are written to the XTG_chapters subdirectory.
 
 **Note:**
 

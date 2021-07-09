@@ -180,10 +180,5 @@ if __name__ == '__main__':
     else:
         silentMode = False
 
-    if os.path.isfile(args.sourcePath):
-        sourcePath = args.sourcePath
-
-    else:
-        sourcePath = None
-
+    sourcePath = args.sourcePath
     run(sourcePath, silentMode)

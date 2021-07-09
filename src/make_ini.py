@@ -65,6 +65,7 @@ def run(sourcePath):
     options = dict(
         adjust_digits='yes',
         space_points='yes',
+        per_chapter='yes',
     )
 
     if not config.has_section('OPTIONS'):
