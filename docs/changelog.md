@@ -6,8 +6,7 @@
 
 ### v0.6.0 Create chapter files
 
-Per default, one file per chapter is created.
-Generating a single file now is optional.
+Optionally, one file per chapter is created.
 
 Based on PyWriter v3.12.7
 
