@@ -14,7 +14,7 @@ You can either
 - launch the program via a batch file.
 
 
-usage: `yw2xtg.pyw [--silent] Sourcefile`
+usage: `yw2xtg.pyw [--chapters][--silent] Sourcefile`
 
 #### positional arguments:
 
@@ -24,7 +24,9 @@ The path of the yWriter project file.
 
 #### optional arguments:
 
-`--silent`  suppress error messages and the request to confirm overwriting or using defaults
+`--chapters`  generate one file per chapter
+
+`--silent`  suppress error messages and the request to confirm the use of default values
 
 ## General
 

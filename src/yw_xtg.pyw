@@ -7,7 +7,6 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
-import sys
 import os
 from configparser import ConfigParser
 import argparse
@@ -23,6 +22,10 @@ class Exporter(YwCnvUi):
     """A converter class for XPress tagged file export."""
     EXPORT_SOURCE_CLASSES = [Yw7File]
     EXPORT_TARGET_CLASSES = [XtgFile]
+
+    def confirm_overwrite(self, filePath):
+        """Override the superclass method."""
+        return True
 
 
 SCENE_DIVIDER = ''
@@ -101,7 +104,7 @@ def decode_option(option):
     return option
 
 
-def run(sourcePath, silentMode):
+def run(sourcePath, onePerChapter=False, silentMode=True, ):
     converter = Exporter()
 
     if silentMode:
@@ -147,6 +150,7 @@ def run(sourcePath, silentMode):
         kwargs = set_defaults(iniPath, converter.ui)
 
     if kwargs is not None:
+        kwargs['onePerChapter'] = onePerChapter
         converter.run(sourcePath, **kwargs)
 
     else:
@@ -162,10 +166,20 @@ if __name__ == '__main__':
     parser.add_argument('sourcePath', metavar='Sourcefile',
                         help='The path of the yWriter project file.')
 
+    parser.add_argument('--chapters',
+                        action="store_true",
+                        help='generate one file per chapter')
+
     parser.add_argument('--silent',
                         action="store_true",
-                        help='suppress error messages and the request to confirm overwriting or using defaults')
+                        help='suppress error messages and the request to confirm the use of default values')
     args = parser.parse_args()
+
+    if args.chapters:
+        onePerChapter = True
+
+    else:
+        onePerChapter = False
 
     if args.silent:
         silentMode = True
@@ -179,4 +193,4 @@ if __name__ == '__main__':
     else:
         sourcePath = None
 
-    run(sourcePath, silentMode)
+    run(sourcePath, onePerChapter, silentMode)

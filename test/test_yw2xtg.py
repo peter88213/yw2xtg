@@ -91,7 +91,7 @@ class NormalOperation(unittest.TestCase):
 
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg.run(TEST_YW7, True)
+        yw2xtg.run(TEST_YW7, onePerChapter=False, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_TEMPLATES))
@@ -99,7 +99,7 @@ class NormalOperation(unittest.TestCase):
     def test_defaults(self):
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg.run(TEST_YW7, True)
+        yw2xtg.run(TEST_YW7, onePerChapter=False, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_DEFAULTS))

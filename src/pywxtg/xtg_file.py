@@ -4,7 +4,10 @@ Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
+import sys
+import os
 import re
+from string import Template
 
 from pywriter.file.file_export import FileExport
 
@@ -19,6 +22,8 @@ class XtgFile(FileExport):
 
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
+
+        self.onePerChapter = kwargs['onePerChapter']
 
         self.fileHeader = kwargs['fileHeader']
         self.partTemplate = kwargs['partTemplate']
@@ -198,3 +203,165 @@ class XtgFile(FileExport):
             chapterMapping['Title'] = ''
 
         return chapterMapping
+
+    def get_chapters(self):
+        """Process the chapters and nested scenes.
+        Return a list of strings, or a message, depending on 
+        the onePerChapter variable.
+        Extend the superclass method for the 'document per chapter'
+        option.
+        """
+
+        if not self.onePerChapter:
+            return FileExport.get_chapters(self)
+
+        projectDir = os.path.dirname(self.filePath)
+
+        if projectDir == '':
+            projectDir = '.'
+
+        chapterNumber = 0
+        sceneNumber = 0
+        wordsTotal = 0
+        lettersTotal = 0
+
+        for chId in self.srtChapters:
+            lines = []
+
+            dispNumber = 0
+
+            if not self.chapterFilter.accept(self, chId):
+                continue
+
+            # The order counts; be aware that "Todo" and "Notes" chapters are
+            # always unused.
+
+            # Has the chapter only scenes not to be exported?
+
+            sceneCount = 0
+            notExportCount = 0
+            doNotExport = False
+            template = None
+
+            for scId in self.chapters[chId].srtScenes:
+                sceneCount += 1
+
+                if self.scenes[scId].doNotExport:
+                    notExportCount += 1
+
+            if sceneCount > 0 and notExportCount == sceneCount:
+                doNotExport = True
+
+            if self.chapters[chId].chType == 2:
+                # Chapter is "ToDo" type (implies "unused").
+
+                if self.todoChapterTemplate != '':
+                    template = Template(self.todoChapterTemplate)
+
+            elif self.chapters[chId].chType == 1:
+                # Chapter is "Notes" type (implies "unused").
+
+                if self.notesChapterTemplate != '':
+                    template = Template(self.notesChapterTemplate)
+
+            elif self.chapters[chId].isUnused:
+                # Chapter is "really" unused.
+
+                if self.unusedChapterTemplate != '':
+                    template = Template(self.unusedChapterTemplate)
+
+            elif self.chapters[chId].oldType == 1:
+                # Chapter is "Info" type (old file format).
+
+                if self.notesChapterTemplate != '':
+                    template = Template(self.notesChapterTemplate)
+
+            elif doNotExport:
+
+                if self.notExportedChapterTemplate != '':
+                    template = Template(self.notExportedChapterTemplate)
+
+            elif self.chapters[chId].chLevel == 1 and self.partTemplate != '':
+                template = Template(self.partTemplate)
+
+            else:
+                template = Template(self.chapterTemplate)
+                chapterNumber += 1
+                dispNumber = chapterNumber
+
+            if template is not None:
+                lines.append(template.safe_substitute(
+                    self.get_chapterMapping(chId, dispNumber)))
+
+            # Process scenes.
+
+            sceneLines, sceneNumber, wordsTotal, lettersTotal = self.get_scenes(
+                chId, sceneNumber, wordsTotal, lettersTotal, doNotExport)
+            lines.extend(sceneLines)
+
+            # Process chapter ending.
+
+            template = None
+
+            if self.chapters[chId].chType == 2:
+
+                if self.todoChapterEndTemplate != '':
+                    template = Template(self.todoChapterEndTemplate)
+
+            elif self.chapters[chId].chType == 1:
+
+                if self.notesChapterEndTemplate != '':
+                    template = Template(self.notesChapterEndTemplate)
+
+            elif self.chapters[chId].isUnused:
+
+                if self.unusedChapterEndTemplate != '':
+                    template = Template(self.unusedChapterEndTemplate)
+
+            elif self.chapters[chId].oldType == 1:
+
+                if self.notesChapterEndTemplate != '':
+                    template = Template(self.notesChapterEndTemplate)
+
+            elif doNotExport:
+
+                if self.notExportedChapterEndTemplate != '':
+                    template = Template(self.notExportedChapterEndTemplate)
+
+            elif self.chapterEndTemplate != '':
+                template = Template(self.chapterEndTemplate)
+
+            if template is not None:
+                lines.append(template.safe_substitute(
+                    self.get_chapterMapping(chId, dispNumber)))
+
+            if lines == []:
+                continue
+
+            text = self.fileHeader + ''.join(lines)
+
+            filePath = projectDir + '/' + \
+                str(dispNumber).zfill(4) + '_' + \
+                self.chapters[chId].title + self.EXTENSION
+
+            try:
+                with open(filePath, 'w', encoding='utf-8') as f:
+                    f.write(text)
+
+            except:
+                return('ERROR: Cannot write "' +
+                       os.path.normpath(filePath) + '".')
+
+        return 'SUCCESS: All chapters written.'
+
+    def write(self):
+        """Create a template-based output file. 
+        Return a message string starting with 'SUCCESS' or 'ERROR'.
+        Extend the superclass method for the 'document per chapter'
+        option.
+        """
+        if self.onePerChapter:
+            return self.get_chapters()
+
+        else:
+            return FileExport.write(self)

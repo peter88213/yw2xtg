@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.6.0 Create chapter files
+
+Per default, one file per chapter is created.
+Generating a single file now is optional.
+
+Based on PyWriter v3.12.7
+
 ### v0.4.1 Implement a silent mode
 
 Based on PyWriter v3.12.6.
