@@ -14,7 +14,7 @@ You can either
 - launch the program via a batch file.
 
 
-usage: `yw2xtg.pyw [--chapters][--silent] Sourcefile`
+usage: `yw2xtg.pyw [--silent] Sourcefile`
 
 #### positional arguments:
 
