@@ -52,6 +52,7 @@ TEMPLATES = ['fileHeader',
 
 OPTIONS = ['adjust_digits',
            'space_points',
+           'per_chapter',
            ]
 
 
@@ -82,6 +83,7 @@ def set_defaults(iniPath, ui):
 
             adjust_digits=True,
             space_points=True,
+            per_chapter=False
         )
 
     else:
@@ -104,7 +106,7 @@ def decode_option(option):
     return option
 
 
-def run(sourcePath, onePerChapter=False, silentMode=True, ):
+def run(sourcePath, silentMode=True, ):
     converter = Exporter()
 
     if silentMode:
@@ -150,7 +152,6 @@ def run(sourcePath, onePerChapter=False, silentMode=True, ):
         kwargs = set_defaults(iniPath, converter.ui)
 
     if kwargs is not None:
-        kwargs['onePerChapter'] = onePerChapter
         converter.run(sourcePath, **kwargs)
 
     else:
@@ -163,23 +164,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='XPress tagged text export from yWriter projects',
         epilog='')
+
     parser.add_argument('sourcePath', metavar='Sourcefile',
                         help='The path of the yWriter project file.')
-
-    parser.add_argument('--chapters',
-                        action="store_true",
-                        help='generate one file per chapter')
 
     parser.add_argument('--silent',
                         action="store_true",
                         help='suppress error messages and the request to confirm the use of default values')
+
     args = parser.parse_args()
-
-    if args.chapters:
-        onePerChapter = True
-
-    else:
-        onePerChapter = False
 
     if args.silent:
         silentMode = True
@@ -193,4 +186,4 @@ if __name__ == '__main__':
     else:
         sourcePath = None
 
-    run(sourcePath, onePerChapter, silentMode)
+    run(sourcePath, silentMode)

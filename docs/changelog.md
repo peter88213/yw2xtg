@@ -4,6 +4,18 @@
 
 ## Changelog
 
+### v0.8.0 Extend configuration
+
+Move the "ope file per chapter" option from the command line arguments 
+to the configuration file.
+
+**Note:**
+
+When updating from v0.6, the per_chapter line must be added to existing 
+configuration files.
+
+Based on PyWriter v3.12.7
+
 ### v0.6.0 Create chapter files
 
 Optionally, one file per chapter is created.

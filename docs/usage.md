@@ -24,8 +24,6 @@ The path of the yWriter project file.
 
 #### optional arguments:
 
-`--chapters`  generate one file per chapter
-
 `--silent`  suppress error messages and the request to confirm the use of default values
 
 ## General
@@ -69,6 +67,7 @@ figure0 =
 [OPTIONS]
 adjust_digits = yes
 space_points = yes
+per_chapter = no
 
 ```
 
@@ -88,6 +87,7 @@ space_points = yes
 
 - **adjust_digits** - Replace regular spaces between digits with thin spaces.
 - **space_points** - Insert a thin space after each point that separates digits.
+- **per_chapter** - Generate one XTG file per chapter. The file names consist of the chapter's number and title.
 
 You can define styles in *fileHeader.XTG*, but it is preferable to use the names of styles that already exist in the QX book project instead.
 

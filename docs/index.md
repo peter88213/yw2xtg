@@ -7,9 +7,9 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Download and install
 
-[Download the latest release (version 0.6.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.6.0.zip)
+[Download the latest release (version 0.7.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.7.0.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.6.0.zip" into a new folder and open "README.md" for usage instructions.
+- Unzip the downloaded zipfile "yw2xtg_v0.7.0.zip" into a new folder and open "README.md" for usage instructions.
 
 [Changelog](changelog)
 

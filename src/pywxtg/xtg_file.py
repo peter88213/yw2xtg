@@ -23,8 +23,6 @@ class XtgFile(FileExport):
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
 
-        self.onePerChapter = kwargs['onePerChapter']
-
         self.fileHeader = kwargs['fileHeader']
         self.partTemplate = kwargs['partTemplate']
         self.chapterTemplate = kwargs['chapterTemplate']
@@ -45,6 +43,7 @@ class XtgFile(FileExport):
 
         self.adjust_digits = kwargs['adjust_digits']
         self.space_points = kwargs['space_points']
+        self.per_chapter = kwargs['per_chapter']
 
     def convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
@@ -207,12 +206,12 @@ class XtgFile(FileExport):
     def get_chapters(self):
         """Process the chapters and nested scenes.
         Return a list of strings, or a message, depending on 
-        the onePerChapter variable.
+        the per_chapter variable.
         Extend the superclass method for the 'document per chapter'
         option.
         """
 
-        if not self.onePerChapter:
+        if not self.per_chapter:
             return FileExport.get_chapters(self)
 
         projectDir = os.path.dirname(self.filePath)
@@ -360,7 +359,7 @@ class XtgFile(FileExport):
         Extend the superclass method for the 'document per chapter'
         option.
         """
-        if self.onePerChapter:
+        if self.per_chapter:
             return self.get_chapters()
 
         else:
