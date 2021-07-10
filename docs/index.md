@@ -10,7 +10,7 @@ Optionally, one XTG file per chapter can be generated.
 [Download the latest release (version 0.8.1)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.8.1.zip)
 
 - Unzip the downloaded zipfile "yw2xtg_v0.8.1.zip" into a new folder.
-- Move into this new folder and launch **install.bat**. this installs the script for the local user and creates a shortcut on the desktop.
+- Move into this new folder and launch **install.bat**. This installs the script for the local user and creates a shortcut on the desktop.
 - Open "README.md" for usage instructions.
 
 [Changelog](changelog)
