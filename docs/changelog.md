@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.8.1 Include installation script
+
+**install.bat** installs the script for the local user and creates a 
+shortcut on the desktop.
+
+Based on PyWriter v3.12.7
+
 ### v0.8.0 Extend configuration
 
 Move the "ope file per chapter" option from the command line arguments 

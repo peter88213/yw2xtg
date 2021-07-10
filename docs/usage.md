@@ -5,14 +5,16 @@ The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 pro
 
 ## Instructions for use
 
-It is recommended to create a link on the desktop.
+### Intended usage
 
-You can either
+The included installation script creates a link on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the program/link icon. 
 
-- launch the program by dragging a yWriter project file and dropping it on the program/link icon, or
+### Command line usage
+
+Alternatively, you can
+
 - launch the program on the command line passing the yWriter project file as an argument, or
 - launch the program via a batch file.
-
 
 usage: `yw2xtg.pyw [--silent] Sourcefile`
 

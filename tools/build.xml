@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="yw2xtg" basedir=".">
-	<property name="release" value="0.8.0" />
+	<property name="release" value="0.8.1" />
 	<property name="src" location="../src" />
 	<property name="test" location="../test" />
 	<property name="build" location="../build" />
@@ -16,11 +16,7 @@
 		<exec executable="python" failonerror="true">
 		    <arg value="${src}/build_yw2xtg.py"/>
 		</exec>
-		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />
-		
-		<copy todir="${build}/${release-name}/sample"> 
-			<fileset dir="../sample" />
-		</copy>
+		<fixcrlf encoding="utf-8" eol="lf" srcdir="${test}" includes="**/*.py" />	
 	</target>
 
 	<target name="test" description="inline all library modules">
@@ -33,15 +29,21 @@
 		
 		<mkdir dir="${build}" />
 		<mkdir dir="${dist}" />
-		<mkdir dir="${build}/yw2xtg_v${release}" />
+		<mkdir dir="${build}/${release-name}" />
 
-		<copy file="${test}/yw2xtg.pyw" todir="${build}/yw2xtg_v${release}" />
-		<replace encoding="utf-8" file="${build}/yw2xtg_v${release}/yw2xtg.pyw" token="@release" value="${release}" />
+		<copy todir="${build}/${release-name}/sample"> 
+			<fileset dir="../sample" />
+		</copy>
+		
+		<copy file="./install.bat" todir="${build}/${release-name}" />
 
-		<copy file="../LICENSE" todir="${build}/yw2xtg_v${release}" />
-		<copy file="${docs}/usage.md" tofile="${build}/yw2xtg_v${release}/README.md" />
+		<copy file="${test}/yw2xtg.pyw" todir="${build}/${release-name}" />
+		<replace encoding="utf-8" file="${build}/${release-name}/yw2xtg.pyw" token="@release" value="${release}" />
 
-		<zip destfile="${dist}/yw2xtg_v${release}.zip" basedir="${build}/yw2xtg_v${release}" />
+		<copy file="../LICENSE" todir="${build}/${release-name}" />
+		<copy file="${docs}/usage.md" tofile="${build}/${release-name}/README.md" />
+
+		<zip destfile="${dist}/${release-name}.zip" basedir="${build}/${release-name}" />
 
 		<copy file="${docs}/template/index.md" overwrite="True" todir="${docs}" />
 		<replace encoding="utf-8" file="${docs}/index.md" token="0.99.0" value="${release}" />
