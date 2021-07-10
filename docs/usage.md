@@ -7,7 +7,7 @@ The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 pro
 
 ### Intended usage
 
-The included installation script creates a link on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the program/link icon. 
+The included installation script creates a shortcut on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the shortcut icon. 
 
 ### Command line usage
 
@@ -193,3 +193,8 @@ There are two options:
 - **$Notes** - Scene notes, html-formatted
 
 
+## Installation path
+
+The **install.bat** installation script installs *yw2xtg.pyw* in the user profile. This is the installation path: 
+
+`c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg`
