@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v0.8.2 Use backup configuration
+
+If there is no configuration data in the project file, 
+data stored in the installation folder is used prior to 
+the script's default configuration data.
+
+Based on PyWriter v3.12.7
+
 ### v0.8.1 Include installation script
 
 **install.bat** installs the script for the local user and creates a 

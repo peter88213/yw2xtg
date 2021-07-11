@@ -118,6 +118,7 @@ def run(sourcePath, silentMode=True, ):
     #--- Try to get persistent configuration data
 
     try:
+        config = ConfigParser()
         iniPath = os.path.dirname(sourcePath)
 
         if iniPath == '':
@@ -127,7 +128,11 @@ def run(sourcePath, silentMode=True, ):
             iniPath += '/yw2xtg'
 
         iniFile = iniPath + '/yw2xtg.ini'
-        config = ConfigParser()
+
+        if not os.path.isfile(iniFile):
+            iniPath = os.getenv('APPDATA').replace(
+                '\\', '/') + '/pyWriter/yw2xtg/config'
+            iniFile = iniPath + '/yw2xtg.ini'
 
         if os.path.isfile(iniFile):
 

@@ -47,8 +47,11 @@ It is assumed that quotation marks and punctuation marks are already set correct
 Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
 and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
 
+If there is no configuration data in the project file, data stored in `c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg\config` is used prior to the script's default configuration data.
+
 If a file is missing, or the configuration file is corrupted, *yw2xtg* asks for permission
 to use default values. 
+
 
 ### Configuration file
 
