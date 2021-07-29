@@ -90,22 +90,6 @@ def set_defaults(iniPath, ui):
         return None
 
 
-def decode_option(option):
-    """Return a boolean value, if necessary."""
-
-    try:
-        if option.lower() == 'yes':
-            option = True
-
-        elif option.lower() == 'no':
-            option = False
-
-    except:
-        pass
-
-    return option
-
-
 def run(sourcePath, silentMode=True, ):
     converter = Exporter()
 
@@ -143,7 +127,7 @@ def run(sourcePath, silentMode=True, ):
                 kwargs[style] = config.get('STYLES', style)
 
             for option in OPTIONS:
-                kwargs[option] = decode_option(config.get('OPTIONS', option))
+                kwargs[option] = config.getboolean('OPTIONS', option)
 
             for template in TEMPLATES:
 
