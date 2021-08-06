@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.8.3 No automatic shortcut creation
+
+- Due to sporadic security warnings, the automatic shortcut creation during installation is removed. The user is now guided to create the application shortcut manually. 
+- Refactor: Use standard function for reading boolean values from the INI file.
+
+Based on PyWriter v3.16.0
+
 ### v0.8.2 Use backup configuration
 
 If there is no configuration data in the project file, 
