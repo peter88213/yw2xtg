@@ -7,7 +7,7 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Download and install
 
-[Download the latest release (version 0.8.3)](https://raw.githubusercontent.com/peter88213/yw2xtg/master/dist/yw2xtg_v0.8.3.zip)
+[Download the latest release (version 0.8.3)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v0.8.3.zip)
 
 - Unzip the downloaded zipfile "yw2xtg_v0.8.3.zip" into a new folder.
 - Move into this new folder and launch **install.bat**. This installs the script for the local user.
