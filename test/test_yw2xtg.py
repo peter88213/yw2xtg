@@ -5,6 +5,7 @@ Test suite for yw2xtg.pyw.
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
+from shutil import copyfile
 import os
 import unittest
 import yw2xtg
@@ -40,14 +41,6 @@ def read_file(inputFile):
             return f.read()
 
 
-def copy_file(inputFile, outputFile):
-    with open(inputFile, 'rb') as f:
-        myData = f.read()
-    with open(outputFile, 'wb') as f:
-        f.write(myData)
-    return()
-
-
 def remove_all_testfiles():
 
     try:
@@ -81,13 +74,13 @@ class NormalOperation(unittest.TestCase):
             pass
 
         remove_all_testfiles()
-        copy_file(REFERENCE_YW7, TEST_YW7)
+        copyfile(REFERENCE_YW7, TEST_YW7)
 
     def test_templates(self):
 
         for f in os.listdir(TEST_DATA_PATH + TEMPLATES):
-            copy_file(TEST_DATA_PATH + TEMPLATES + f,
-                      TEST_EXEC_PATH + TEMPLATES + f)
+            copyfile(TEST_DATA_PATH + TEMPLATES + f,
+                     TEST_EXEC_PATH + TEMPLATES + f)
 
         os.chdir(TEST_EXEC_PATH)
 
@@ -97,6 +90,8 @@ class NormalOperation(unittest.TestCase):
                          read_file(REFERENCE_XTG_TEMPLATES))
 
     def test_defaults(self):
+        copyfile(TEST_DATA_PATH + TEMPLATES + 'yw2xtg.ini',
+                 TEST_EXEC_PATH + TEMPLATES + 'yw2xtg.ini')
         os.chdir(TEST_EXEC_PATH)
 
         yw2xtg.run(TEST_YW7, silentMode=True)
