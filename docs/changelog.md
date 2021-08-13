@@ -4,6 +4,14 @@
 
 ## Changelog
 
+### v0.8.4 Bugfix release
+
+This release is strongly recommended.
+Fix a regression from PyWriter v3.12.5. causing a crash if a scene has an 
+hour, but no minute set.
+
+Based on PyWriter v3.16.4
+
 ### v0.8.3 No automatic shortcut creation
 
 - Due to sporadic security warnings, the automatic shortcut creation during installation is removed. The user is now guided to create the application shortcut manually. 
