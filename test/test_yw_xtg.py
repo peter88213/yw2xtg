@@ -90,8 +90,6 @@ class NormalOperation(unittest.TestCase):
                          read_file(REFERENCE_XTG_TEMPLATES))
 
     def test_defaults(self):
-        copyfile(TEST_DATA_PATH + TEMPLATES + 'yw2xtg.ini',
-                 TEST_EXEC_PATH + TEMPLATES + 'yw2xtg.ini')
         os.chdir(TEST_EXEC_PATH)
 
         yw_xtg.run(TEST_YW7, silentMode=True)

@@ -4,6 +4,20 @@
 
 ## Changelog
 
+### v0.8.5 Optional release
+
+Define the priority of the configurations if there are several.
+
+Configuration and template sources:
+
+1. `yw2xtg` subdirectory in the yWriter project directory.
+2. `~\AppData\Roaming\PyWriter\yw2xtg\config`
+3. Default values.
+
+If a template file or a configuration entry is missing, *yw2xtg* uses the lower priority source as a fallback. 
+
+Based on PyWriter v3.18.0
+
 ### v0.8.4 Bugfix release
 
 This release is strongly recommended.

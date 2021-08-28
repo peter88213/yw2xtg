@@ -8,145 +8,81 @@ For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
-from configparser import ConfigParser
 import argparse
 
-from pywriter.converter.yw_cnv_ui import YwCnvUi
 from pywriter.ui.ui_tk import UiTk
 from pywriter.ui.ui import Ui
-from pywriter.yw.yw7_file import Yw7File
-from pywxtg.xtg_file import XtgFile
+from pywxtg.xtg_config import XtgConfig
+from pywxtg.xtg_exporter import XtgExporter
 
 
-class Exporter(YwCnvUi):
-    """A converter class for XPress tagged file export."""
-    EXPORT_SOURCE_CLASSES = [Yw7File]
-    EXPORT_TARGET_CLASSES = [XtgFile]
-
-    def confirm_overwrite(self, filePath):
-        """Override the superclass method."""
-        return True
-
+SUFFIX = ''
+APPNAME = 'yw2xtg'
 
 SCENE_DIVIDER = ''
 
-STYLES = ['textBody',
-          'italic',
-          'italic0',
-          'bold',
-          'bold0',
-          'acronym',
-          'acronym0',
-          'figure',
-          'figure0',
-          ]
+STYLES = dict(textBody='@First line indent:',
+              italic='<@Emphasis>',
+              italic0='<@$>',
+              bold='<@Small caps>',
+              bold0='<@$>',
+              acronym='',
+              acronym0='',
+              figure='',
+              figure0='',
 
-TEMPLATES = ['fileHeader',
-             'partTemplate',
-             'chapterTemplate',
-             'firstSceneTemplate',
-             'sceneTemplate',
-             'appendedSceneTemplate',
-             'sceneDivider',
-             ]
+              )
 
-OPTIONS = ['adjust_digits',
-           'space_points',
-           'per_chapter',
-           ]
+TEMPLATES = dict(fileHeader='<v11.10><e9>\n',
+                 partTemplate='@Heading 1:${Title}\n',
+                 chapterTemplate='@Heading 1:${Title}\n',
+                 firstSceneTemplate='@Text body:$SceneContent\n',
+                 sceneTemplate='@Text body:$SceneContent\n',
+                 appendedSceneTemplate='$SceneContent\n',
+                 sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
+                 )
 
-
-def set_defaults(iniPath, ui):
-
-    if ui.ask_yes_no('No valid initialization data found at "' + os.path.normpath(iniPath) + '".\nUse default settings?'):
-
-        return dict(
-            suffix='',
-
-            fileHeader='<v11.10><e9>\n',
-            partTemplate='@Heading 1:${Title}\n',
-            chapterTemplate='@Heading 1:${Title}\n',
-            firstSceneTemplate='@Text body:$SceneContent\n',
-            sceneTemplate='@Text body:$SceneContent\n',
-            appendedSceneTemplate='$SceneContent\n',
-            sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
-
-            textBody='@First line indent:',
-            italic='<@Emphasis>',
-            italic0='<@$>',
-            bold='<@Small caps>',
-            bold0='<@$>',
-            acronym='',
-            acronym0='',
-            figure='',
-            figure0='',
-
-            adjust_digits=True,
-            space_points=True,
-            per_chapter=False
-        )
-
-    else:
-        return None
+OPTIONS = dict(adjust_digits=True,
+               space_points=True,
+               per_chapter=False,
+               )
 
 
-def run(sourcePath, silentMode=True, ):
-    converter = Exporter()
+def run(sourcePath, silentMode=True, installDir=''):
 
     if silentMode:
-        converter.ui = Ui('Export XTG from yWriter @release')
+        ui = Ui('')
 
     else:
-        converter.ui = UiTk('Export XTG from yWriter @release')
+        ui = UiTk('Export XTG from yWriter @release')
 
     #--- Try to get persistent configuration data
 
-    try:
-        config = ConfigParser()
-        iniPath = os.path.dirname(sourcePath)
+    sourceDir = os.path.dirname(sourcePath)
 
-        if iniPath == '':
-            iniPath = './yw2xtg'
-
-        else:
-            iniPath += '/yw2xtg'
-
-        iniFile = iniPath + '/yw2xtg.ini'
-
-        if not os.path.isfile(iniFile):
-            iniPath = os.getenv('APPDATA').replace(
-                '\\', '/') + '/pyWriter/yw2xtg/config'
-            iniFile = iniPath + '/yw2xtg.ini'
-
-        if os.path.isfile(iniFile):
-
-            config.read(iniFile)
-            kwargs = {'suffix': ''}
-
-            for style in STYLES:
-                kwargs[style] = config.get('STYLES', style)
-
-            for option in OPTIONS:
-                kwargs[option] = config.getboolean('OPTIONS', option)
-
-            for template in TEMPLATES:
-
-                with open(iniPath + '/' + template + '.XTG', 'r', encoding='utf-8') as f:
-                    kwargs[template] = f.read()
-
-        else:
-            kwargs = set_defaults(iniPath, converter.ui)
-
-    except:
-        kwargs = set_defaults(iniPath, converter.ui)
-
-    if kwargs is not None:
-        converter.run(sourcePath, **kwargs)
+    if sourceDir == '':
+        sourceDir = './' + APPNAME + '/'
 
     else:
-        converter.ui.set_info_how('ERROR: Action canceled by user.')
+        sourceDir += '/' + APPNAME + '/'
 
-    converter.ui.start()
+    iniFileName = APPNAME + '.ini'
+    iniFiles = [installDir + iniFileName, sourceDir + iniFileName]
+
+    configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
+
+    for iniFile in iniFiles:
+        configuration.read(iniFile)
+
+    kwargs = {'suffix': SUFFIX}
+    kwargs.update(configuration.settings)
+    kwargs.update(configuration.options)
+    kwargs.update(configuration.templates)
+
+    converter = XtgExporter()
+    converter.ui = ui
+    converter.run(sourcePath, **kwargs)
+    ui.start()
 
 
 if __name__ == '__main__':
@@ -162,12 +98,5 @@ if __name__ == '__main__':
                         help='suppress error messages and the request to confirm the use of default values')
 
     args = parser.parse_args()
-
-    if args.silent:
-        silentMode = True
-
-    else:
-        silentMode = False
-
-    sourcePath = args.sourcePath
-    run(sourcePath, silentMode)
+    installDir = os.getenv('APPDATA').replace('\\', '/') + '/pyWriter/' + APPNAME + '/config/'
+    run(args.sourcePath, args.silent, installDir)

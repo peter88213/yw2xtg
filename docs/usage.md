@@ -7,7 +7,7 @@ The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 pro
 
 ### Intended usage
 
-The included installation script creates a shortcut on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the shortcut icon. 
+The included installation script prompts you to create a shortcut on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the shortcut icon. 
 
 ### Command line usage
 
@@ -44,13 +44,12 @@ It is assumed that quotation marks and punctuation marks are already set correct
 
 ## Configuration
 
-Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
+- Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
 and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
 
-If there is no configuration data in the project file, data stored in `c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg\config` is used prior to the script's default configuration data.
+- If there is no configuration data in the project file, data stored in `c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg\config` is used prior to the script's default configuration data.
 
-If a file is missing, or the configuration file is corrupted, *yw2xtg* asks for permission
-to use default values. 
+- If a template file or a configuration entry is missing, *yw2xtg* uses the lower priority source as a fallback. 
 
 
 ### Configuration file
