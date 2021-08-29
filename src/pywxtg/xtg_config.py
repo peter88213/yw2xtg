@@ -35,7 +35,6 @@ class XtgConfig(Configuration):
         Settings and options that can not be read in, remain unchanged.
         """
         Configuration.read(self, iniFile)
-
         iniPath = os.path.dirname(iniFile)
 
         for template in self.templates:
@@ -47,3 +46,14 @@ class XtgConfig(Configuration):
 
             except:
                 pass
+
+    def write(self, iniFile):
+        """Save the configuration to iniFile.
+        """
+        Configuration.write(self, iniFile)
+        iniPath = os.path.dirname(iniFile)
+
+        for template in self.templates:
+
+            with open(iniPath + '/' + template + '.XTG', 'w', encoding='utf-8') as f:
+                f.write(self.templates[template])
