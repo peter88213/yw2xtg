@@ -14,7 +14,7 @@ import inliner
 
 SRC = '../src/'
 BUILD = '../test/'
-SOURCE_FILE_GUI = 'yw_xtg.pyw'
+SOURCE_FILE_GUI = 'yw2xtg_.pyw'
 TARGET_FILE_GUI = BUILD + 'yw2xtg.pyw'
 
 

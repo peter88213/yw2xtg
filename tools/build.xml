@@ -37,7 +37,7 @@
 		
 		<copy file="./install.bat" todir="${build}/${release-name}" />
 
-		<copy file="${test}/yw2xtg.pyw" todir="${build}/${release-name}" />
+		<copy file="${test}/yw2xtg.pyw" tofile="${build}/${release-name}/yw2xtg.pyw" />
 		<replace encoding="utf-8" file="${build}/${release-name}/yw2xtg.pyw" token="@release" value="${release}" />
 
 		<copy file="../LICENSE" todir="${build}/${release-name}" />

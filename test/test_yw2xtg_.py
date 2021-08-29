@@ -8,7 +8,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 from shutil import copyfile
 import os
 import unittest
-import yw_xtg
+import yw2xtg_
 
 
 # Test environment
@@ -84,7 +84,7 @@ class NormalOperation(unittest.TestCase):
 
         os.chdir(TEST_EXEC_PATH)
 
-        yw_xtg.run(TEST_YW7, silentMode=True)
+        yw2xtg_.run(TEST_YW7, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_TEMPLATES))
@@ -92,7 +92,7 @@ class NormalOperation(unittest.TestCase):
     def test_defaults(self):
         os.chdir(TEST_EXEC_PATH)
 
-        yw_xtg.run(TEST_YW7, silentMode=True)
+        yw2xtg_.run(TEST_YW7, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_DEFAULTS))
