@@ -18,6 +18,8 @@
 	</target>
 
 	<target name="test" description="execute unit tests">
+		<copy file="${test}/test_yw2xtg_.py" tofile="${test}/test_yw2xtg.py" />
+		<replace encoding="utf-8" file="${test}/test_yw2xtg.py" token="yw2xtg_" value="yw2xtg" />
 		<exec executable="python" failonerror="true">
 		    <arg value="${test}/test_yw2xtg.py"/>
 		</exec>
@@ -53,6 +55,7 @@
 	<target name="clean" description="clean up">
 		
 		<delete file="${test}/yw2xtg.pyw" />
+		<delete file="${test}/test_yw2xtg.py" />
 		
 	</target>
 
