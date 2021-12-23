@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.8.6 Enable non-Windows operation 
+
+- Catch an exception that is thrown when evaluating a Windows environment variable under a non-Windows OS.
+
+Based on PyWriter v3.28.1
+
 ### v0.8.5 Optional release
 
 Define the priority of the configurations if there are several.
