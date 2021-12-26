@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.8.7 Support non-Windows OS
+
+- Move installation and configuration to another location (see instructions for use).
+
+Based on PyWriter v3.28.1
+
 ### v0.8.6 Enable non-Windows operation 
 
 - Catch an exception that is thrown when evaluating a Windows environment variable under a non-Windows OS.

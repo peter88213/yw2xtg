@@ -47,7 +47,7 @@ It is assumed that quotation marks and punctuation marks are already set correct
 - Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
 and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
 
-- If there is no configuration data in the project file, data stored in `c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg\config` is used prior to the script's default configuration data.
+- If there is no configuration data in the project file, data stored in `c:\Users\<user name>\.pywriter\yw2xtg\config` is used prior to the script's default configuration data.
 
 - If a template file or a configuration entry is missing, *yw2xtg* uses the lower priority source as a fallback. 
 
@@ -197,6 +197,6 @@ There are two options:
 
 ## Installation path
 
-The **install.bat** installation script installs *yw2xtg.pyw* in the user profile. This is the installation path: 
+The **install.bat** installation script installs *yw2xtg.pyw* in the user profile. This is the installation path on Windows: 
 
-`c:\Users\<user name>\AppData\Roaming\PyWriter\yw2xtg`
+`c:\Users\<user name>\.pywriter\yw2xtg`
