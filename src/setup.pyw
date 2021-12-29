@@ -15,7 +15,6 @@ from string import Template
 
 try:
     from tkinter import *
-    from tkinter import messagebox
 
 except ModuleNotFoundError:
     print('The tkinter module is missing. Please install the tk support package for your python3 version.')
@@ -127,16 +126,19 @@ def install(pywriterPath):
 
     # Install configuration files, if needed.
 
-    with os.scandir(SAMPLE_PATH) as files:
+    try:
+        with os.scandir(SAMPLE_PATH) as files:
 
-        for file in files:
+            for file in files:
 
-            if not os.path.isfile(cnfDir + file.name):
-                copyfile(SAMPLE_PATH + file.name, cnfDir + file.name)
-                output('Copying "' + file.name + '"')
+                if not os.path.isfile(cnfDir + file.name):
+                    copyfile(SAMPLE_PATH + file.name, cnfDir + file.name)
+                    output('Copying "' + file.name + '"')
 
-            else:
-                output('Keeping "' + file.name + '"')
+                else:
+                    output('Keeping "' + file.name + '"')
+    except:
+        pass
 
     # Display a success message.
 
