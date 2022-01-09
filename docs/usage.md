@@ -197,6 +197,6 @@ There are two options:
 
 ## Installation path
 
-The **install.bat** installation script installs *yw2xtg.pyw* in the user profile. This is the installation path on Windows: 
+The setup script installs *yw2xtg.pyw* in the user profile. This is the installation path on Windows: 
 
 `c:\Users\<user name>\.pywriter\yw2xtg`
