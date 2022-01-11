@@ -22,7 +22,8 @@ APPNAME = 'yw2xtg'
 
 SCENE_DIVIDER = ''
 
-STYLES = dict(textBody='@First line indent:',
+STYLES = dict(first_paragraph='@Text body:',
+              other_paragraph='@First line indent:',
               italic='<@Emphasis>',
               italic0='<@$>',
               bold='<@Small caps>',
@@ -34,13 +35,13 @@ STYLES = dict(textBody='@First line indent:',
 
               )
 
-TEMPLATES = dict(fileHeader='<v11.10><e9>\n',
-                 partTemplate='@Heading 1:${Title}\n',
-                 chapterTemplate='@Heading 1:${Title}\n',
-                 firstSceneTemplate='@Text body:$SceneContent\n',
-                 sceneTemplate='@Text body:$SceneContent\n',
-                 appendedSceneTemplate='$SceneContent\n',
-                 sceneDivider='@Heading 3:' + SCENE_DIVIDER + '\n',
+TEMPLATES = dict(file_header='<v11.10><e9>\n',
+                 part_template='@Heading 1:${Title}\n',
+                 chapter_template='@Heading 1:${Title}\n',
+                 first_scene_template='@Text body:$SceneContent\n',
+                 scene_template='@Text body:$SceneContent\n',
+                 appended_scene_template='$SceneContent\n',
+                 scene_divider='@Heading 3:' + SCENE_DIVIDER + '\n',
                  )
 
 OPTIONS = dict(adjust_digits=True,

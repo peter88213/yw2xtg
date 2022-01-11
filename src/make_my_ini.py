@@ -16,25 +16,25 @@ from yw2xtg_ import APPNAME
 SCENE_DIVIDER = ''
 
 
-TEMPLATES = dict(fileHeader='<v11.10><e9>\n',
-                 partTemplate='@Überschrift 1:${Title}\n',
-                 chapterTemplate='@Überschrift 1:${Title}\n',
-                 firstSceneTemplate='@Textkörper:$SceneContent\n',
-                 sceneTemplate='@Textkörper:$SceneContent\n',
-                 appendedSceneTemplate='$SceneContent\n',
-                 sceneDivider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
+TEMPLATES = dict(file_header='<v11.10><e9>\n',
+                 part_template='@Überschrift 1:${Title}\n',
+                 chapter_template='@Überschrift 1:${Title}\n',
+                 first_scene_template='@Textkörper:$SceneContent\n',
+                 scene_template='@Textkörper:$SceneContent\n',
+                 appended_scene_template='$SceneContent\n',
+                 scene_divider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
                  )
-STYLES = dict(
-    textBody='@Textkörper Einzug:',
-    italic='<@Betont>',
-    italic0='<@$>',
-    bold='<@Stark betont>',
-    bold0='<@$>',
-    acronym='<t4z9>',
-    acronym0='<tz$>',
-    figure='<f"Adobe Garamond Small Caps & Old">',
-    figure0='<f$>',
-)
+STYLES = dict(first_paragraph='@Textkörper:',
+              other_paragraph='@Textkörper Einzug:',
+              italic='<@Betont>',
+              italic0='<@$>',
+              bold='<@Stark betont>',
+              bold0='<@$>',
+              acronym='<t4z9>',
+              acronym0='<tz$>',
+              figure='<f"Adobe Garamond Small Caps & Old">',
+              figure0='<f$>',
+              )
 OPTIONS = dict(
     adjust_digits='Yes',
     space_points='Yes',

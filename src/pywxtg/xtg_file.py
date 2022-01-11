@@ -24,15 +24,16 @@ class XtgFile(FileExport):
     def __init__(self, filePath, **kwargs):
         FileExport.__init__(self, filePath)
 
-        self.fileHeader = kwargs['fileHeader']
-        self.partTemplate = kwargs['partTemplate']
-        self.chapterTemplate = kwargs['chapterTemplate']
-        self.firstSceneTemplate = kwargs['firstSceneTemplate']
-        self.sceneTemplate = kwargs['sceneTemplate']
-        self.appendedSceneTemplate = kwargs['appendedSceneTemplate']
-        self.sceneDivider = kwargs['sceneDivider']
+        self.fileHeader = kwargs['file_header']
+        self.partTemplate = kwargs['part_template']
+        self.chapterTemplate = kwargs['chapter_template']
+        self.firstSceneTemplate = kwargs['first_scene_template']
+        self.sceneTemplate = kwargs['scene_template']
+        self.appendedSceneTemplate = kwargs['appended_scene_template']
+        self.sceneDivider = kwargs['scene_divider']
 
-        self.tagTextBody = kwargs['textBody']
+        self.tagFirstParagraph = kwargs['first_paragraph']
+        self.tagOtherParagraph = kwargs['other_paragraph']
         self.tagItalic = kwargs['italic']
         self.tagItalic0 = kwargs['italic0']
         self.tagBold = kwargs['bold']
@@ -53,17 +54,21 @@ class XtgFile(FileExport):
             return ''
 
         XTG_REPLACEMENTS = [
-            #--- Escape XPress Tags code-specific characters.
+            # Escape XPress Tags code-specific characters.
             ['@', '┌┐@>'],
             ['<', '┌┐<>'],
             ['\\', '┌┐\\>'],
             ['┌┐', '<\\'],
-            #--- Replace yWriter tags with XPress tags.
+            # Replace yWriter tags with XPress tags.
             ['[i]', self.tagItalic],
             ['[/i]', self.tagItalic0],
             ['[b]', self.tagBold],
             ['[/b]', self.tagBold0],
             ['  ', ' '],
+            # Format paragraphs.
+            ['\n \n', '\r \r' + self.tagFirstParagraph],
+            ['\n', '\n' + self.tagOtherParagraph],
+            ['\r', '\n'],
         ]
 
         try:
@@ -106,11 +111,6 @@ class XtgFile(FileExport):
 
         text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
                       '\\1' + self.tagAcronym0, text)
-
-        #--- Assign the second paragraph "textBody" style.
-
-        t = text.split('\n', 1)
-        text = ('\n' + self.tagTextBody).join(t)
 
         return text
 

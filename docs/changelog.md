@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v0.10.0 Do not indent paragraphs after blank lines.
+
+Please note: The entries in the yw2xtg configuration file have changed.
+If you use a custom configuration, do update it manually.
+
+Based on PyWriter v3.32.2
+
 ### v0.8.7 Support non-Windows OS
 
 - Move installation and configuration to another location (see instructions for use).
