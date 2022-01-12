@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v0.12.1 Optional update
+
+Refactor the code.
+
+Based on PyWriter v3.32.2
+
 ### v0.12.0 Indent paragraphs that begin with "> "
 
 Based on PyWriter v3.32.2
