@@ -18,7 +18,7 @@ Combining relentless action with non-stop laughs, Hal Spacejock explodes onto th
 		<FieldTitle2><![CDATA[Tension]]></FieldTitle2>
 		<FieldTitle3><![CDATA[Humour]]></FieldTitle3>
 		<FieldTitle4><![CDATA[Quality]]></FieldTitle4>
-		<LastFullBackup>2021-07-07</LastFullBackup>
+		<LastFullBackup>2022-01-12</LastFullBackup>
 		<WordTarget>0</WordTarget>
 		<WordTargetStartDate>2007-07-28</WordTargetStartDate>
 		<WordTargetEndDate>2007-08-27</WordTargetEndDate>
@@ -35,7 +35,7 @@ Combining relentless action with non-stop laughs, Hal Spacejock explodes onto th
 		<LaTeXHeaderFile><![CDATA[]]></LaTeXHeaderFile>
 		<MRUSpecificDate>1899-12-30</MRUSpecificDate>
 		<MRUSpecificTime>00:00:00</MRUSpecificTime>
-		<LastViewedScID>1</LastViewedScID>
+		<LastViewedScID>2</LastViewedScID>
 		<DeadlineDate1>2004-09-01</DeadlineDate1>
 		<DeadlineDate2>2004-12-14</DeadlineDate2>
 		<DeadlineDate3>2004-12-20</DeadlineDate3>
@@ -254,7 +254,7 @@ A flock of pigeons burst from the basket, leaving a tumbling cloud of feathers w
 “It’s part of a popular series,” said the Navcom.
 “What are the others? Interstellar navigation for nutters? Moon landings for morons?”
 “Shall I add those titles to your basket?”
- 
+
 . . .
 ]]></SceneContent>
 	</SCENE>
@@ -268,14 +268,18 @@ Jerling catches up on a few minor business matters. He reluctantly approves the 
 He examines the Seraph file. There's a shipment of robot parts ordered and paid for, but the source planet (Seraph IV) is in the middle of war games and the massed ships of the Seraph Space Corps have already shot down three unarmed freighters by mistake. The parts are needed urgently by Jerling's assembly line, they're putting together a last-minute order of robots for the Emperor's summer palace. Late delivery isn't an option.
 Carina explains that they can't risk their own ships, they wouldn't be covered by insurance and anyway, none of their pilots will fly into the danger zone. They tried to hire a freelancer but none of them wanted the job either - they were all warned off by a Spacers Guild bulletin. Jerling asks why they didn't try non-Guild pilots, Carina explains that they could only locate one and he turned it down because he was convinced it was a stolen goods racket. Jerling is annoyed that his staff hid the problem from him. Carina explains that they didn't want to worry him.  Jerling says they should have come to him before, this is important, if they lose preferred supplier status his business is at risk, and worse still the Hinchfigs will gain on him.
 Jerling asks Carina to call the idiot, the one who thought it was stolen goods. Before the assistant makes the call, she discovers that there's a message from the 'idiot' already - he wants the job. Carina tries to pursuade Jerling that others can deal with the issue but Jerling's fired up and won't let go, it's his pet project.]]></Desc>
+		<Fields>
+			<Field_UseExporterTags>0</Field_UseExporterTags>
+		</Fields>
+
 		<BelongsToChID>2</BelongsToChID>
 		<Field1>4</Field1>
 		<Field2>1</Field2>
 		<Field3>2</Field3>
 		<Field4>2</Field4>
 		<Status>4</Status>
-		<WordCount>63</WordCount>
-		<LetterCount>385</LetterCount>
+		<WordCount>196</WordCount>
+		<LetterCount>1152</LetterCount>
 		<Characters>
 			<CharID>2</CharID>
 			<CharID>7</CharID>
@@ -286,8 +290,13 @@ Jerling asks Carina to call the idiot, the one who thought it was stolen goods. 
 		</Locations>
 		<Items>
 		</Items>
-		<SceneContent><![CDATA[On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
-. . .]]></SceneContent>
+		<SceneContent><![CDATA[> On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+
+On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+
+. . .
+]]></SceneContent>
 	</SCENE>
 
 	<SCENE>
@@ -319,7 +328,7 @@ Hal says he doesn't need help, Jerling explains that the landing is at night, wi
 “Negative, we can’t afford the search fees.” The Navcom hesitated. “Incidentally, it’s your move.”
 “How can you think of a bloody chess game at a time like this?”
 “You’re only saying that because you’re losing.”
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -350,7 +359,7 @@ Hal prepares the ship for takeoff, but ground control won't let him leave. The P
 		<SceneContent><![CDATA[“No sign of Jerling’s pilot,” said Hal, who was standing in the Black Gull’s airlock peering through a scratched, yellowed porthole. He cupped his hands to the plastic and squinted, but it made little difference. “There could be an army out there and I wouldn’t know it.”
 “Why don’t you open the door?” asked the Navcom.
 “No thanks. Vurdi’s robot might be hanging around.”
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -380,7 +389,7 @@ Hal drives off, oblivious to the flames starting to flicker around the fallen ro
 		</Items>
 		<SceneContent><![CDATA[Hal emerged from the Black Gull’s airlock, blinking in the sudden light. On the far side of the landing field the sun was setting behind the Lamira spaceport’s administration block, which shimmered in the late afternoon heat. Clustered around the spaceport buildings were the ‘A’ list - modern, powerful ships fitted with every comfort. Parked close to the amenities, their crews could dine at one of several restaurants, enjoy the heated swimming pool and browse the shopping arcade at their leisure.
 Hal’s ship was somewhat further down the alphabet, and was therefore sitting in a disused corner of the field about as far from the amenities as the nearest moon. The area around the _Black Gull_ was little more than a graveyard for derelicts, and most of the landing pads nearby were occupied by graffiti-splashed wrecks with jagged gaps in their crumpled hulls. Some of the ships seemed familiar, and when Hal looked closer he realised the rusted hulks were Rigel-class freighters like his own. One or two were actually in better shape.
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -412,7 +421,7 @@ Sitting at the console, Clunk uses the Black Gull's simulation mode to practice 
 There was a brief pause. “Owned by Redge Muller. Incubots specialises in robot programming and advanced pilot training.”
 Clunk looked relieved. “So that’s what Mr. Jerling has in store for me. When I questioned him on the subject he was rather evasive.”
 “Humans tell lies about the most trivial matters.”
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -440,7 +449,7 @@ Hal decides to call his brand new best buddy Clunk, thinking the robot can ask J
 		</Items>
 		<SceneContent><![CDATA[Hal left the maintenance vehicle in the spaceport’s outer carpark and walked to the admin block. An information kiosk directed him to an elevator, where he pressed the button marked ‘Portmaster’.
 Hal watched the floor numbers changing as he dropped further and further underground. He’d expected the Portmaster to have a spacious office with a view of the whole landing field, but instead he seemed to have an office in the basement. Below the basement, amended Hal, eying the elevator’s control panel. He’d passed that already.
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -514,7 +523,7 @@ There was a crackling sound. “Help! Fire!” said a voice over the noise.
 “Not yet, Mr Spacejock, but it soon will be. Would you like me to move it out of the way?”
 “You keep your hands off the controls. I’ll be there in a tick.”
 “You’ll have to hurry, the fire’s right up to the refuelling cluster. If that explodes—”
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -544,7 +553,7 @@ Clunk's battery starts to run low. He continues. As the fire extinguisher begins
 “Deploying.” There was a whining sound outside the hull, which stopped with a sharp crack.
 “What was that?”
 “The reel just fell off,” said the Navcom.
- 
+
 . . .]]></SceneContent>
 	</SCENE>
 
@@ -1563,12 +1572,12 @@ Clunk's batteries are failing, and he can't hang on much longer.]]></Desc>
 		<Items>
 		</Items>
 		<SceneContent><![CDATA[[b]IMPORTANT[/b]
- 
+
 Uninstalling yWriter5 will uninstall (delete) this sample project.
 Reinstalling yWriter5 will overwrite this sample project.
- 
+
 Therefore, rather than modifying this project with your own content, [b]please create a new project for your own work[/b]. ([i]Project - Create Empty Project[/i], or [i]Project - New Project Wizard[/i])
- 
+
 Any new projects created with yWriter5 will not be deleted, overwritten or modified when you uninstall or reinstall the software.]]></SceneContent>
 	</SCENE>
 
@@ -2015,6 +2024,12 @@ Any new projects created with yWriter5 will not be deleted, overwritten or modif
 		<Date>2021-07-07</Date>
 		<Count>1221</Count>
 		<TotalCount>1285</TotalCount>
+	</WC>
+
+	<WC>
+		<Date>2022-01-12</Date>
+		<Count>1354</Count>
+		<TotalCount>1418</TotalCount>
 	</WC>
 
 	</WCLog>

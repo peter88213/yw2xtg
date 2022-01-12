@@ -25,6 +25,7 @@ TEMPLATES = dict(file_header='<v11.10><e9>\n',
                  scene_divider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
                  )
 STYLES = dict(first_paragraph='@Textkörper:',
+              indented_paragraph='@Textkörper Einrückung:',
               other_paragraph='@Textkörper Einzug:',
               italic='<@Betont>',
               italic0='<@$>',

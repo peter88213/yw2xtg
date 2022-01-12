@@ -15,12 +15,17 @@
 @Textkörper Einzug:“It’s part of a popular series,” said the Navcom.
 @Textkörper Einzug:“What are the others? Interstellar navigation for nutters? Moon landings for morons?”
 @Textkörper Einzug:“Shall I add those titles to your basket?”
- 
+
 @Textkörper:. . .
 @Textkörper Einzug:
 @Überschrift 1:Chapter 2
+@Textkörper Einrückung:On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+
 @Textkörper:On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
-@Textkörper Einzug:. . .
+@Textkörper Einzug:On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+
+@Textkörper:. . .
+@Textkörper Einzug:
 @Überschrift 3:
 @Textkörper:Hal was pacing the Black Gull’s flight deck, ready to put his fist through the nearest wall. “What do you mean, you can’t call Jerling back? What do you mean you didn’t save his details?”
 @Textkörper Einzug:“I erased the record after you turned the job down.”
@@ -28,18 +33,18 @@
 @Textkörper Einzug:“Negative, we can’t afford the search fees.” The Navcom hesitated. “Incidentally, it’s your move.”
 @Textkörper Einzug:“How can you think of a bloody chess game at a time like this?”
 @Textkörper Einzug:“You’re only saying that because you’re losing.”
- 
+
 @Textkörper:. . .
 @Überschrift 1:Chapter 3
 @Textkörper:“No sign of Jerling’s pilot,” said Hal, who was standing in the Black Gull’s airlock peering through a scratched, yellowed porthole. He cupped his hands to the plastic and squinted, but it made little difference. “There could be an army out there and I wouldn’t know it.”
 @Textkörper Einzug:“Why don’t you open the door?” asked the Navcom.
 @Textkörper Einzug:“No thanks. Vurdi’s robot might be hanging around.”
- 
+
 @Textkörper:. . .
 @Überschrift 1:Chapter 4
 @Textkörper:Hal emerged from the Black Gull’s airlock, blinking in the sudden light. On the far side of the landing field the sun was setting behind the Lamira spaceport’s administration block, which shimmered in the late afternoon heat. Clustered around the spaceport buildings were the ‘A’ list - modern, powerful ships fitted with every comfort. Parked close to the amenities, their crews could dine at one of several restaurants, enjoy the heated swimming pool and browse the shopping arcade at their leisure.
 @Textkörper Einzug:Hal’s ship was somewhat further down the alphabet, and was therefore sitting in a disused corner of the field about as far from the amenities as the nearest moon. The area around the _Black Gull_ was little more than a graveyard for derelicts, and most of the landing pads nearby were occupied by graffiti-splashed wrecks with jagged gaps in their crumpled hulls. Some of the ships seemed familiar, and when Hal looked closer he realised the rusted hulks were Rigel-class freighters like his own. One or two were actually in better shape.
- 
+
 @Textkörper:. . .
 @Überschrift 3:
 @Textkörper:Clunk dropped the last chess piece into the small wooden box and looked around the flight deck. Despite his best efforts with the mop, it didn’t look particularly clean, but compared to its previous state it was as sterile as a hospital ward. After a moment’s hesitation, he sat in the pilot’s chair. “Navcom, do you have a business directory?”
@@ -48,12 +53,12 @@
 @Textkörper Einzug:There was a brief pause. “Owned by Redge Muller. Incubots specialises in robot programming and advanced pilot training.”
 @Textkörper Einzug:Clunk looked relieved. “So that’s what Mr. Jerling has in store for me. When I questioned him on the subject he was rather evasive.”
 @Textkörper Einzug:“Humans tell lies about the most trivial matters.”
- 
+
 @Textkörper:. . .
 @Überschrift 3:
 @Textkörper:Hal left the maintenance vehicle in the spaceport’s outer carpark and walked to the admin block. An information kiosk directed him to an elevator, where he pressed the button marked ‘Portmaster’.
 @Textkörper Einzug:Hal watched the floor numbers changing as he dropped further and further underground. He’d expected the Portmaster to have a spacious office with a view of the whole landing field, but instead he seemed to have an office in the basement. Below the basement, amended Hal, eying the elevator’s control panel. He’d passed that already.
- 
+
 @Textkörper:. . .
 @Überschrift 3:
 @Textkörper:“Simulation suspended, incoming message.”
@@ -79,14 +84,14 @@
 @Textkörper Einzug:“Not yet, Mr Spacejock, but it soon will be. Would you like me to move it out of the way?”
 @Textkörper Einzug:“You keep your hands off the controls. I’ll be there in a tick.”
 @Textkörper Einzug:“You’ll have to hurry, the fire’s right up to the refuelling cluster. If that explodes—”
- 
+
 @Textkörper:. . .
 @Überschrift 3:
 @Textkörper:“Deploy fire hose!” shouted Clunk.
 @Textkörper Einzug:“Deploying.” There was a whining sound outside the hull, which stopped with a sharp crack.
 @Textkörper Einzug:“What was that?”
 @Textkörper Einzug:“The reel just fell off,” said the Navcom.
- 
+
 @Textkörper:. . .
 @Überschrift 1:Chapter 6
 @Textkörper: 

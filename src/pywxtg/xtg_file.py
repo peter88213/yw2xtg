@@ -33,6 +33,7 @@ class XtgFile(FileExport):
         self.sceneDivider = kwargs['scene_divider']
 
         self.tagFirstParagraph = kwargs['first_paragraph']
+        self.tagIndentedParagraph = kwargs['indented_paragraph']
         self.tagOtherParagraph = kwargs['other_paragraph']
         self.tagItalic = kwargs['italic']
         self.tagItalic0 = kwargs['italic0']
@@ -66,7 +67,8 @@ class XtgFile(FileExport):
             ['[/b]', self.tagBold0],
             ['  ', ' '],
             # Format paragraphs.
-            ['\n \n', '\r \r' + self.tagFirstParagraph],
+            ['\n > ', '\r' + self.tagIndentedParagraph],
+            ['\n\n', '\r\r' + self.tagFirstParagraph],
             ['\n', '\n' + self.tagOtherParagraph],
             ['\r', '\n'],
         ]
@@ -112,6 +114,12 @@ class XtgFile(FileExport):
         text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
                       '\\1' + self.tagAcronym0, text)
 
+        return text
+
+    def postprocess(self, text):
+        """Fix the tags of indented scene opening paragraphs.
+        """
+        text = re.sub('\n\@.+?:\> ', '\n' + self.tagIndentedParagraph, text)
         return text
 
     def get_chapterMapping(self, chId, chapterNumber):
@@ -348,10 +356,8 @@ class XtgFile(FileExport):
                 continue
 
             text = self.fileHeader + ''.join(lines)
-
-            xtgPath = xtgDir + '/' + \
-                str(dispNumber).zfill(4) + '_' + \
-                self.chapters[chId].title + self.EXTENSION
+            text = self.postprocess(text)
+            xtgPath = xtgDir + '/' + str(dispNumber).zfill(4) + '_' + self.chapters[chId].title + self.EXTENSION
 
             try:
                 with open(xtgPath, 'w', encoding='utf-8') as f:
@@ -362,6 +368,17 @@ class XtgFile(FileExport):
                        os.path.normpath(xtgPath) + '".')
 
         return 'SUCCESS: All chapters written.'
+
+    def get_text(self):
+        """Assemble the whole text applying the templates.
+        Return a string to be written to the output file.
+        Override the superclass.
+        """
+        lines = self.get_fileHeader()
+        lines.extend(self.get_chapters())
+        text = ''.join(lines)
+        text = self.postprocess(text)
+        return text
 
     def write(self):
         """Create a template-based output file. 

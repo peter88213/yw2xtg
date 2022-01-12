@@ -4,7 +4,11 @@
 
 ## Changelog
 
-### v0.10.0 Do not indent paragraphs after blank lines.
+### v0.12.0 Indent paragraphs that begin with "> "
+
+Based on PyWriter v3.32.2
+
+### v0.10.0 Do not indent paragraphs after blank lines
 
 Please note: The entries in the yw2xtg configuration file have changed.
 If you use a custom configuration, do update it manually.

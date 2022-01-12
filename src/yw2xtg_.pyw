@@ -23,6 +23,7 @@ APPNAME = 'yw2xtg'
 SCENE_DIVIDER = ''
 
 STYLES = dict(first_paragraph='@Text body:',
+              indented_paragraph='@Text body indent:',
               other_paragraph='@First line indent:',
               italic='<@Emphasis>',
               italic0='<@$>',
