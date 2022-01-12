@@ -278,8 +278,8 @@ Jerling asks Carina to call the idiot, the one who thought it was stolen goods. 
 		<Field3>2</Field3>
 		<Field4>2</Field4>
 		<Status>4</Status>
-		<WordCount>196</WordCount>
-		<LetterCount>1152</LetterCount>
+		<WordCount>312</WordCount>
+		<LetterCount>1844</LetterCount>
 		<Characters>
 			<CharID>2</CharID>
 			<CharID>7</CharID>
@@ -293,6 +293,8 @@ Jerling asks Carina to call the idiot, the one who thought it was stolen goods. 
 		<SceneContent><![CDATA[> On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
 
 On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
+> stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
 On planet Forg, a small crowd had gathered outside the local sky hockey stadium. South Forgberg was not a prosperous area - the semi-detached houses were modest and the residents faced a constant struggle to live within their means. It was unusual to see building work or renovations, so the extensive refurbishment to the decrepit old stadium had been a talking point for months.
 
 . . .
@@ -2028,8 +2030,8 @@ Any new projects created with yWriter5 will not be deleted, overwritten or modif
 
 	<WC>
 		<Date>2022-01-12</Date>
-		<Count>1354</Count>
-		<TotalCount>1418</TotalCount>
+		<Count>1470</Count>
+		<TotalCount>1534</TotalCount>
 	</WC>
 
 	</WCLog>

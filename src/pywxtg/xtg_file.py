@@ -1,4 +1,4 @@
-"""Class for XPress tagged file processing. 
+"""Provide a class for XPress tagged file processing. 
 
 Copyright (c) 2021 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
@@ -13,7 +13,7 @@ from pywriter.file.file_export import FileExport
 
 
 class XtgFile(FileExport):
-    """XPress tagged file representation
+    """XPress tagged file representation.
     """
 
     DESCRIPTION = 'XPress tagged file'
@@ -67,7 +67,6 @@ class XtgFile(FileExport):
             ['[/b]', self.tagBold0],
             ['  ', ' '],
             # Format paragraphs.
-            ['\n > ', '\r' + self.tagIndentedParagraph],
             ['\n\n', '\r\r' + self.tagFirstParagraph],
             ['\n', '\n' + self.tagOtherParagraph],
             ['\r', '\n'],
@@ -117,7 +116,8 @@ class XtgFile(FileExport):
         return text
 
     def postprocess(self, text):
-        """Fix the tags of indented scene opening paragraphs.
+        """Fix the tags of indented paragraphs.
+        This is done here to include the scene openings.  
         """
         text = re.sub('\n\@.+?:\> ', '\n' + self.tagIndentedParagraph, text)
         return text
