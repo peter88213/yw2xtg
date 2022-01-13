@@ -4,6 +4,16 @@
 
 ## Changelog
 
+### Planned features
+
+See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
+
+### v0.12.2 Optional update
+
+Refactor the code.
+
+Based on PyWriter v3.32.2
+
 ### v0.12.1 Optional update
 
 Refactor the code.

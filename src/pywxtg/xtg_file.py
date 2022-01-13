@@ -115,13 +115,6 @@ class XtgFile(FileExport):
 
         return text
 
-    def postprocess(self, text):
-        """Fix the tags of indented paragraphs.
-        This is done here to include the scene openings.  
-        """
-        text = re.sub('\n\@.+?:\> ', '\n' + self.tagIndentedParagraph, text)
-        return text
-
     def get_chapterMapping(self, chId, chapterNumber):
         """Return a mapping dictionary for a chapter section. 
         """
@@ -377,7 +370,11 @@ class XtgFile(FileExport):
         lines = self.get_fileHeader()
         lines.extend(self.get_chapters())
         text = ''.join(lines)
-        text = self.postprocess(text)
+
+        # Fix the tags of indented paragraphs.
+        # This is done here to include the scene openings.
+
+        text = re.sub('\n\@.+?:\> ', '\n' + self.tagIndentedParagraph, text)
         return text
 
     def write(self):
