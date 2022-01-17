@@ -1,6 +1,6 @@
 """Provide a class for XPress tagged file processing. 
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -22,7 +22,7 @@ class XtgFile(FileExport):
     XTG_OUT = 'XTG_Chapters'
 
     def __init__(self, filePath, **kwargs):
-        FileExport.__init__(self, filePath)
+        super().__init__(filePath)
 
         self.fileHeader = kwargs['file_header']
         self.partTemplate = kwargs['part_template']
@@ -188,8 +188,7 @@ class XtgFile(FileExport):
 
             return ''
 
-        chapterMapping = FileExport.get_chapterMapping(
-            self, chId, chapterNumber)
+        chapterMapping = super().get_chapterMapping(chId, chapterNumber)
 
         if chapterNumber:
             chapterMapping['ChNumberEnglish'] = number_to_english(
@@ -214,7 +213,7 @@ class XtgFile(FileExport):
         """
 
         if not self.per_chapter:
-            return FileExport.get_chapters(self)
+            return super().get_chapters()
 
         # Create a directory for the output. Delete contents, if exist.
 
@@ -387,4 +386,4 @@ class XtgFile(FileExport):
             return self.get_chapters()
 
         else:
-            return FileExport.write(self)
+            return super().write()

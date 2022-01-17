@@ -1,6 +1,6 @@
 """Provide a Configuration class for reading and writing INI files.
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -34,7 +34,7 @@ class XtgConfig(Configuration):
         """Read a configuration file.
         Settings and options that can not be read in, remain unchanged.
         """
-        Configuration.read(self, iniFile)
+        super().read(iniFile)
         iniPath = os.path.dirname(iniFile)
 
         for template in self.templates:
@@ -50,7 +50,7 @@ class XtgConfig(Configuration):
     def write(self, iniFile):
         """Save the configuration to iniFile.
         """
-        Configuration.write(self, iniFile)
+        super().write(iniFile)
         iniPath = os.path.dirname(iniFile)
 
         for template in self.templates:
