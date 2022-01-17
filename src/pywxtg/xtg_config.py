@@ -1,4 +1,4 @@
-"""Provide a Configuration class for reading and writing INI files.
+"""Provide a configuration class for reading and writing INI files.
 
 Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
@@ -20,6 +20,8 @@ class XtgConfig(Configuration):
         self.set(settings, options, templates)
 
     def set(self, settings=None, options=None, templates=None):
+        """Override the superclass method.
+        """
 
         if settings is not None:
             self.settings = settings.copy()
@@ -33,6 +35,7 @@ class XtgConfig(Configuration):
     def read(self, iniFile):
         """Read a configuration file.
         Settings and options that can not be read in, remain unchanged.
+        Extend the superclass.
         """
         super().read(iniFile)
         iniPath = os.path.dirname(iniFile)
