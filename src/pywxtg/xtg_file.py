@@ -106,12 +106,11 @@ class XtgFile(FileExport):
 
         #--- Assign "figure" style.
 
-        text = re.sub('(\d+)', self.tagFigure + '\\1' + self.tagFigure0, text)
+        text = re.sub('(\d+)', f'{self.tagFigure}\\1{self.tagFigure0}', text)
 
         #--- Assign "acronym" style.
 
-        text = re.sub('([A-ZÄ-Ü]{2,})', self.tagAcronym +
-                      '\\1' + self.tagAcronym0, text)
+        text = re.sub('([A-ZÄ-Ü]{2,})', f'{self.tagAcronym}\\1{self.tagAcronym0}', text)
 
         return text
 
@@ -222,7 +221,7 @@ class XtgFile(FileExport):
         if xtgDir == '':
             xtgDir = '.'
 
-        xtgDir += '/' + self.XTG_OUT
+        xtgDir = f'{xtgDir}/{self.XTG_OUT}'
 
         if os.path.isdir(xtgDir):
             shutil.rmtree(xtgDir)
@@ -299,8 +298,7 @@ class XtgFile(FileExport):
                 dispNumber = chapterNumber
 
             if template is not None:
-                lines.append(template.safe_substitute(
-                    self.get_chapterMapping(chId, dispNumber)))
+                lines.append(template.safe_substitute(self.get_chapterMapping(chId, dispNumber)))
 
             # Process scenes.
 
@@ -341,25 +339,23 @@ class XtgFile(FileExport):
                 template = Template(self.chapterEndTemplate)
 
             if template is not None:
-                lines.append(template.safe_substitute(
-                    self.get_chapterMapping(chId, dispNumber)))
+                lines.append(template.safe_substitute(self.get_chapterMapping(chId, dispNumber)))
 
             if lines == []:
                 continue
 
             text = self.fileHeader + ''.join(lines)
             text = self.postprocess(text)
-            xtgPath = xtgDir + '/' + str(dispNumber).zfill(4) + '_' + self.chapters[chId].title + self.EXTENSION
+            xtgPath = f'{xtgDir}/{dispNumber:04}_{self.chapters[chId].title}{self.EXTENSION}'
 
             try:
                 with open(xtgPath, 'w', encoding='utf-8') as f:
                     f.write(text)
 
             except:
-                return('ERROR: Cannot write "' +
-                       os.path.normpath(xtgPath) + '".')
+                return(f'ERROR: Cannot write "{os.path.normpath(xtgPath)}".')
 
-        return 'SUCCESS: All chapters written.'
+        return 'SUCCESS'
 
     def get_text(self):
         """Assemble the whole text applying the templates.
@@ -373,7 +369,7 @@ class XtgFile(FileExport):
         # Fix the tags of indented paragraphs.
         # This is done here to include the scene openings.
 
-        text = re.sub('\n\@.+?:\> ', '\n' + self.tagIndentedParagraph, text)
+        text = re.sub('\n\@.+?:\> ', f'\n{self.tagIndentedParagraph}', text)
         return text
 
     def write(self):

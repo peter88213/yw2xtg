@@ -44,7 +44,7 @@ class XtgConfig(Configuration):
 
             try:
 
-                with open(iniPath + '/' + template + '.XTG', 'r', encoding='utf-8') as f:
+                with open(f'{iniPath}/{template}.XTG', 'r', encoding='utf-8') as f:
                     self.templates[template] = f.read()
 
             except:
@@ -58,5 +58,5 @@ class XtgConfig(Configuration):
 
         for template in self.templates:
 
-            with open(iniPath + '/' + template + '.XTG', 'w', encoding='utf-8') as f:
+            with open(f'{iniPath}/{template}.XTG', 'w', encoding='utf-8') as f:
                 f.write(self.templates[template])

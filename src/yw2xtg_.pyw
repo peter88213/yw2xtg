@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Export yWriter project to XPress tagged text.
 
+Python 3.7+
 Version @release
 
 Copyright (c) 2022 Peter Triesberger
@@ -42,7 +43,7 @@ TEMPLATES = dict(file_header='<v11.10><e9>\n',
                  first_scene_template='@Text body:$SceneContent\n',
                  scene_template='@Text body:$SceneContent\n',
                  appended_scene_template='$SceneContent\n',
-                 scene_divider='@Heading 3:' + SCENE_DIVIDER + '\n',
+                 scene_divider=f'@Heading 3:{SCENE_DIVIDER}\n',
                  )
 
 OPTIONS = dict(adjust_digits=True,
@@ -64,12 +65,12 @@ def run(sourcePath, silentMode=True, installDir=''):
     sourceDir = os.path.dirname(sourcePath)
 
     if sourceDir == '':
-        sourceDir = './' + APPNAME + '/'
+        sourceDir = f'./{APPNAME}/'
 
     else:
-        sourceDir += '/' + APPNAME + '/'
+        sourceDir = f'{sourceDir}/{APPNAME}/'
 
-    iniFileName = APPNAME + '.ini'
+    iniFileName = f'{APPNAME}.ini'
     iniFiles = [installDir + iniFileName, sourceDir + iniFileName]
 
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
@@ -103,7 +104,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     try:
-        installDir = str(Path.home()).replace('\\', '/') + '/.pywriter/' + APPNAME + '/config/'
+        HOME = str(Path.home()).replace('\\', '/')
+        installDir = f'{HOME}/.pywriter/{APPNAME}/config/'
 
     except:
         installDir = ''
