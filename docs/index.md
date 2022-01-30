@@ -3,13 +3,13 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Requirements
 
-- [Python 3](https://www.python.org). Python 3.4 or more recent will work. However, Python 3.7 or above is highly recommended.
+- [Python 3.7+](https://www.python.org).
 
 ## Download and install
 
-[Download the latest release (version 0.12.2)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v0.12.2.zip)
+[Download the latest release (version 0.13.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v0.13.0.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.12.2.zip" into a new folder.
+- Unzip the downloaded zipfile "yw2xtg_v0.13.0.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the script for the local user.
 - Create a shortcut on the desktop when asked.
 - Open "README.md" for usage instructions.

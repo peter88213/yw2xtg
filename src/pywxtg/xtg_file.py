@@ -9,6 +9,7 @@ import os
 import re
 from string import Template
 
+from pywriter.pywriter_globals import ERROR
 from pywriter.file.file_export import FileExport
 
 
@@ -205,10 +206,8 @@ class XtgFile(FileExport):
 
     def get_chapters(self):
         """Process the chapters and nested scenes.
-        Return a list of strings, or a message, depending on 
-        the per_chapter variable.
-        Extend the superclass method for the 'document per chapter'
-        option.
+        Return a list of strings, or a message, depending on the per_chapter variable.
+        Extend the superclass method for the 'document per chapter' option.
         """
 
         if not self.per_chapter:
@@ -353,9 +352,9 @@ class XtgFile(FileExport):
                     f.write(text)
 
             except:
-                return(f'ERROR: Cannot write "{os.path.normpath(xtgPath)}".')
+                return(f'{ERROR}Cannot write "{os.path.normpath(xtgPath)}".')
 
-        return 'SUCCESS'
+        return 'All chapters written.'
 
     def get_text(self):
         """Assemble the whole text applying the templates.
@@ -374,7 +373,7 @@ class XtgFile(FileExport):
 
     def write(self):
         """Create a template-based output file. 
-        Return a message string starting with 'SUCCESS' or 'ERROR'.
+        Return a message beginning with the ERROR constant in case of error.
         Extend the superclass method for the 'document per chapter'
         option.
         """
