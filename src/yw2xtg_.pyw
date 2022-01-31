@@ -71,7 +71,7 @@ def run(sourcePath, silentMode=True, installDir=''):
         sourceDir = f'{sourceDir}/{APPNAME}/'
 
     iniFileName = f'{APPNAME}.ini'
-    iniFiles = [installDir + iniFileName, sourceDir + iniFileName]
+    iniFiles = [f'{installDir}{iniFileName}', f'{sourceDir}{iniFileName}']
 
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
 

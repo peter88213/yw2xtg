@@ -22,7 +22,7 @@ TEMPLATES = dict(file_header='<v11.10><e9>\n',
                  first_scene_template='@Textkörper:$SceneContent\n',
                  scene_template='@Textkörper:$SceneContent\n',
                  appended_scene_template='$SceneContent\n',
-                 scene_divider='@Überschrift 3:' + SCENE_DIVIDER + '\n',
+                 scene_divider=f'@Überschrift 3:{SCENE_DIVIDER}\n',
                  )
 STYLES = dict(first_paragraph='@Textkörper:',
               indented_paragraph='@Textkörper Einrückung:',
@@ -52,7 +52,7 @@ def run(iniFile):
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
     configuration.write(iniFile)
 
-    print(iniFile + ' written.')
+    print(f'{iniFile} written.')
 
 
 if __name__ == '__main__':
@@ -61,6 +61,6 @@ if __name__ == '__main__':
         iniFile = sys.argv[1]
 
     except:
-        iniFile = './yw2xtg/' + APPNAME + '.ini'
+        iniFile = f'./yw2xtg/{APPNAME}.ini'
 
     run(iniFile)

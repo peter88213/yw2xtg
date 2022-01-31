@@ -68,8 +68,8 @@ class XtgFile(FileExport):
             ['[/b]', self.tagBold0],
             ['  ', ' '],
             # Format paragraphs.
-            ['\n\n', '\r\r' + self.tagFirstParagraph],
-            ['\n', '\n' + self.tagOtherParagraph],
+            ['\n\n', f'\r\r{self.tagFirstParagraph}'],
+            ['\n', f'\n{self.tagOtherParagraph}'],
             ['\r', '\n'],
         ]
 
@@ -175,16 +175,16 @@ class XtgFile(FileExport):
                 return TENS[n]
 
             elif n < 100:
-                return number_to_english(n - (n % 10)) + ' ' + number_to_english(n % 10)
+                return f'{number_to_english(n - (n % 10))} {number_to_english(n % 10)}'
 
             elif n < 1000 and n % 100 == 0:
-                return number_to_english(n / 100) + ' hundred'
+                return f'{number_to_english(n / 100)} hundred'
 
             elif n < 1000:
-                return number_to_english(n / 100) + ' hundred ' + number_to_english(n % 100)
+                return f'{number_to_english(n / 100)} hundred {number_to_english(n % 100)}'
 
             elif n < 1000000:
-                return number_to_english(n / 1000) + ' thousand ' + number_to_english(n % 1000)
+                return f'{number_to_english(n / 1000)} thousand {number_to_english(n % 1000)}'
 
             return ''
 
@@ -343,7 +343,7 @@ class XtgFile(FileExport):
             if lines == []:
                 continue
 
-            text = self.fileHeader + ''.join(lines)
+            text = f'{self.fileHeader}{"".join(lines)}'
             text = self.postprocess(text)
             xtgPath = f'{xtgDir}/{dispNumber:04}_{self.chapters[chId].title}{self.EXTENSION}'
 

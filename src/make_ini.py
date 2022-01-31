@@ -26,7 +26,7 @@ def run(iniFile):
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
     configuration.write(iniFile)
 
-    print(iniFile + ' written.')
+    print(f'{iniFile} written.')
 
 
 if __name__ == '__main__':
@@ -35,6 +35,6 @@ if __name__ == '__main__':
         iniFile = sys.argv[1]
 
     except:
-        iniFile = './yw2xtg/' + APPNAME + '.ini'
+        iniFile = f'./yw2xtg/{APPNAME}.ini'
 
     run(iniFile)
