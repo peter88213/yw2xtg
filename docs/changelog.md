@@ -10,8 +10,9 @@ See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/project
 
 ### v1.0.0 Public release
 
+- Change the character style closing tag.
 - Rework the error messaging system.
-- Refactor.
+- Refactor the code.
 
 Based on PyWriter v5.0.0
 
