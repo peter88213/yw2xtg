@@ -12,7 +12,7 @@ import re
 def inline_module(file, package, packagePath, text, processedModules):
 
     with open(file, 'r', encoding='utf-8') as f:
-        print(f'Processing "' + file}"...')
+        print(f'Processing "{file}"...')
         lines = f.readlines()
         inSuppressedComment = False
         inHeader = True
@@ -60,8 +60,7 @@ def inline_module(file, package, packagePath, text, processedModules):
 
                         if not (moduleName in processedModules):
                             processedModules.append(moduleName)
-                            text = inline_module(
-                                moduleName}.py', package, packagePath, text, processedModules)
+                            text = inline_module(f'{moduleName}.py', package, packagePath, text, processedModules)
                     elif line.lstrip().startswith('import'):
                         moduleName = line.replace('import ', '').rstrip()
 
