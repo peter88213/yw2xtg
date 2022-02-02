@@ -65,13 +65,13 @@ def run(sourcePath, silentMode=True, installDir=''):
     sourceDir = os.path.dirname(sourcePath)
 
     if sourceDir == '':
-        sourceDir = f'./{APPNAME}/'
+        sourceDir = f'./'
 
     else:
-        sourceDir = f'{sourceDir}/{APPNAME}/'
+        sourceDir = f'{sourceDir}'
 
     iniFileName = f'{APPNAME}.ini'
-    iniFiles = [f'{installDir}{iniFileName}', f'{sourceDir}{iniFileName}']
+    iniFiles = [f'{installDir}{iniFileName}', f'{sourceDir}/{APPNAME}/{iniFileName}']
 
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
 
