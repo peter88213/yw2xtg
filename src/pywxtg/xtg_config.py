@@ -13,10 +13,11 @@ class XtgConfig(Configuration):
     """
 
     def __init__(self, settings={}, options={}, templates={}):
-        """Override the superclass constructor, redefining sLabel.
+        """Override the superclass constructor, redefining _sLabel.
         """
-        self.sLabel = 'STYLES'
-        self.oLabel = 'OPTIONS'
+        self.templates = None
+        self._sLabel = 'STYLES'
+        self._oLabel = 'OPTIONS'
         self.set(settings, options, templates)
 
     def set(self, settings=None, options=None, templates=None):
