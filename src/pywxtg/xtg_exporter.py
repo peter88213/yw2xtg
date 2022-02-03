@@ -15,6 +15,6 @@ class XtgExporter(YwCnvFf):
     EXPORT_SOURCE_CLASSES = [Yw7File]
     EXPORT_TARGET_CLASSES = [XtgFile]
 
-    def confirm_overwrite(self, filePath):
+    def _confirm_overwrite(self, filePath):
         """Override the superclass method."""
         return True

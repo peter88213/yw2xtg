@@ -25,31 +25,31 @@ class XtgFile(FileExport):
     def __init__(self, filePath, **kwargs):
         super().__init__(filePath)
 
-        self.fileHeader = kwargs['file_header']
-        self.partTemplate = kwargs['part_template']
-        self.chapterTemplate = kwargs['chapter_template']
-        self.firstSceneTemplate = kwargs['first_scene_template']
-        self.sceneTemplate = kwargs['scene_template']
-        self.appendedSceneTemplate = kwargs['appended_scene_template']
-        self.sceneDivider = kwargs['scene_divider']
+        self._fileHeader = kwargs['file_header']
+        self._partTemplate = kwargs['part_template']
+        self._chapterTemplate = kwargs['chapter_template']
+        self._firstSceneTemplate = kwargs['first_scene_template']
+        self._sceneTemplate = kwargs['scene_template']
+        self._appendedSceneTemplate = kwargs['appended_scene_template']
+        self._sceneDivider = kwargs['scene_divider']
 
-        self.tagFirstParagraph = kwargs['first_paragraph']
-        self.tagIndentedParagraph = kwargs['indented_paragraph']
-        self.tagOtherParagraph = kwargs['other_paragraph']
-        self.tagItalic = kwargs['italic']
-        self.tagItalic0 = kwargs['italic0']
-        self.tagBold = kwargs['bold']
-        self.tagBold0 = kwargs['bold0']
-        self.tagAcronym = kwargs['acronym']
-        self.tagAcronym0 = kwargs['acronym0']
-        self.tagFigure = kwargs['figure']
-        self.tagFigure0 = kwargs['figure0']
+        self._tagFirstParagraph = kwargs['first_paragraph']
+        self._tagIndentedParagraph = kwargs['indented_paragraph']
+        self._tagOtherParagraph = kwargs['other_paragraph']
+        self._tagItalic = kwargs['italic']
+        self._tagItalic0 = kwargs['italic0']
+        self._tagBold = kwargs['bold']
+        self._tagBold0 = kwargs['bold0']
+        self._tagAcronym = kwargs['acronym']
+        self._tagAcronym0 = kwargs['acronym0']
+        self._tagFigure = kwargs['figure']
+        self._tagFigure0 = kwargs['figure0']
 
-        self.adjust_digits = kwargs['adjust_digits']
-        self.space_points = kwargs['space_points']
-        self.per_chapter = kwargs['per_chapter']
+        self._adjustDigits = kwargs['adjust_digits']
+        self._spacePoints = kwargs['space_points']
+        self._perChapter = kwargs['per_chapter']
 
-    def convert_from_yw(self, text):
+    def _convert_from_yw(self, text):
         """Convert yw7 markup to Markdown.
         """
         if text is None:
@@ -62,14 +62,14 @@ class XtgFile(FileExport):
             ['\\', '┌┐\\>'],
             ['┌┐', '<\\'],
             # Replace yWriter tags with XPress tags.
-            ['[i]', self.tagItalic],
-            ['[/i]', self.tagItalic0],
-            ['[b]', self.tagBold],
-            ['[/b]', self.tagBold0],
+            ['[i]', self._tagItalic],
+            ['[/i]', self._tagItalic0],
+            ['[b]', self._tagBold],
+            ['[/b]', self._tagBold0],
             ['  ', ' '],
             # Format paragraphs.
-            ['\n\n', f'\r\r{self.tagFirstParagraph}'],
-            ['\n', f'\n{self.tagOtherParagraph}'],
+            ['\n\n', f'\r\r{self._tagFirstParagraph}'],
+            ['\n', f'\n{self._tagOtherParagraph}'],
             ['\r', '\n'],
         ]
 
@@ -96,26 +96,26 @@ class XtgFile(FileExport):
 
         #--- Adjust digit-separating blanks.
 
-        if self.adjust_digits:
+        if self._adjustDigits:
             text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
         #--- Space digit-separating points.
 
-        if self.space_points:
+        if self._spacePoints:
             text = re.sub('(\d+)\.', '\\1.<\\![>', text)
             text = text.replace('<\\![> ', ' ')
 
         #--- Assign "figure" style.
 
-        text = re.sub('(\d+)', f'{self.tagFigure}\\1{self.tagFigure0}', text)
+        text = re.sub('(\d+)', f'{self._tagFigure}\\1{self._tagFigure0}', text)
 
         #--- Assign "acronym" style.
 
-        text = re.sub('([A-ZÄ-Ü]{2,})', f'{self.tagAcronym}\\1{self.tagAcronym0}', text)
+        text = re.sub('([A-ZÄ-Ü]{2,})', f'{self._tagAcronym}\\1{self._tagAcronym0}', text)
 
         return text
 
-    def get_chapterMapping(self, chId, chapterNumber):
+    def _get_chapterMapping(self, chId, chapterNumber):
         """Return a mapping dictionary for a chapter section. 
         """
 
@@ -188,7 +188,7 @@ class XtgFile(FileExport):
 
             return ''
 
-        chapterMapping = super().get_chapterMapping(chId, chapterNumber)
+        chapterMapping = super()._get_chapterMapping(chId, chapterNumber)
 
         if chapterNumber:
             chapterMapping['ChNumberEnglish'] = number_to_english(
@@ -204,14 +204,14 @@ class XtgFile(FileExport):
 
         return chapterMapping
 
-    def get_chapters(self):
+    def _get_chapters(self):
         """Process the chapters and nested scenes.
-        Return a list of strings, or a message, depending on the per_chapter variable.
+        Return a list of strings, or a message, depending on the _perChapter variable.
         Extend the superclass method for the 'document per chapter' option.
         """
 
-        if not self.per_chapter:
-            return super().get_chapters()
+        if not self._perChapter:
+            return super()._get_chapters()
 
         # Create a directory for the output. Delete contents, if exist.
 
@@ -262,42 +262,42 @@ class XtgFile(FileExport):
             if self.chapters[chId].chType == 2:
                 # Chapter is "ToDo" type (implies "unused").
 
-                if self.todoChapterTemplate != '':
-                    template = Template(self.todoChapterTemplate)
+                if self._todoChapterTemplate != '':
+                    template = Template(self._todoChapterTemplate)
 
             elif self.chapters[chId].chType == 1:
                 # Chapter is "Notes" type (implies "unused").
 
-                if self.notesChapterTemplate != '':
-                    template = Template(self.notesChapterTemplate)
+                if self._notesChapterTemplate != '':
+                    template = Template(self._notesChapterTemplate)
 
             elif self.chapters[chId].isUnused:
                 # Chapter is "really" unused.
 
-                if self.unusedChapterTemplate != '':
-                    template = Template(self.unusedChapterTemplate)
+                if self._unusedChapterTemplate != '':
+                    template = Template(self._unusedChapterTemplate)
 
             elif self.chapters[chId].oldType == 1:
                 # Chapter is "Info" type (old file format).
 
-                if self.notesChapterTemplate != '':
-                    template = Template(self.notesChapterTemplate)
+                if self._notesChapterTemplate != '':
+                    template = Template(self._notesChapterTemplate)
 
             elif doNotExport:
 
-                if self.notExportedChapterTemplate != '':
-                    template = Template(self.notExportedChapterTemplate)
+                if self._notExportedChapterTemplate != '':
+                    template = Template(self._notExportedChapterTemplate)
 
-            elif self.chapters[chId].chLevel == 1 and self.partTemplate != '':
-                template = Template(self.partTemplate)
+            elif self.chapters[chId].chLevel == 1 and self._partTemplate != '':
+                template = Template(self._partTemplate)
 
             else:
-                template = Template(self.chapterTemplate)
+                template = Template(self._chapterTemplate)
                 chapterNumber += 1
                 dispNumber = chapterNumber
 
             if template is not None:
-                lines.append(template.safe_substitute(self.get_chapterMapping(chId, dispNumber)))
+                lines.append(template.safe_substitute(self.get_chapterMapping_get_chapterMapping))
 
             # Process scenes.
 
@@ -311,34 +311,34 @@ class XtgFile(FileExport):
 
             if self.chapters[chId].chType == 2:
 
-                if self.todoChapterEndTemplate != '':
-                    template = Template(self.todoChapterEndTemplate)
+                if self._todoChapterEndTemplate != '':
+                    template = Template(self._todoChapterEndTemplate)
 
             elif self.chapters[chId].chType == 1:
-
-                if self.notesChapterEndTemplate != '':
-                    template = Template(self.notesChapterEndTemplate)
+                
+                if self._notesChapterEndTemplate != '':
+                    template = Template(self._notesChapterEndTemplate)
 
             elif self.chapters[chId].isUnused:
 
-                if self.unusedChapterEndTemplate != '':
-                    template = Template(self.unusedChapterEndTemplate)
+                if self._unusedChapterEndTemplate != '':
+                    template = Template(self._unusedChapterEndTemplate)
 
             elif self.chapters[chId].oldType == 1:
 
-                if self.notesChapterEndTemplate != '':
-                    template = Template(self.notesChapterEndTemplate)
+                if self._notesChapterEndTemplate != '':
+                    template = Template(self._notesChapterEndTemplate)
 
             elif doNotExport:
 
-                if self.notExportedChapterEndTemplate != '':
-                    template = Template(self.notExportedChapterEndTemplate)
+                if self._notExportedChapterEndTemplate != '':
+                    template = Template(self._notExportedChapterEndTemplate)
 
-            elif self.chapterEndTemplate != '':
-                template = Template(self.chapterEndTemplate)
+            elif self._chapterEndTemplate != '':
+                template = Template(self._chapterEndTemplate)
 
             if template is not None:
-                lines.append(template.safe_substitute(self.get_chapterMapping(chId, dispNumber)))
+                lines.append(template.safe_substitute(self.get_chapterMapping_get_chapterMapping))
 
             if lines == []:
                 continue
@@ -356,19 +356,19 @@ class XtgFile(FileExport):
 
         return 'All chapters written.'
 
-    def get_text(self):
+    def _get_text(self):
         """Assemble the whole text applying the templates.
         Return a string to be written to the output file.
         Override the superclass.
         """
-        lines = self.get_fileHeader()
-        lines.extend(self.get_chapters())
+        lines = self._get_fileHeader()
+        lines.extend(self._get_chapters())
         text = ''.join(lines)
 
         # Fix the tags of indented paragraphs.
         # This is done here to include the scene openings.
 
-        text = re.sub('\n\@.+?:\> ', f'\n{self.tagIndentedParagraph}', text)
+        text = re.sub('\n\@.+?:\> ', f'\n{self._tagIndentedParagraph}', text)
         return text
 
     def write(self):
@@ -377,8 +377,8 @@ class XtgFile(FileExport):
         Extend the superclass method for the 'document per chapter'
         option.
         """
-        if self.per_chapter:
-            return self.get_chapters()
+        if self._perChapter:
+            return self._get_chapters()
 
         else:
             return super().write()
