@@ -20,7 +20,7 @@ class XtgFile(FileExport):
     DESCRIPTION = 'XPress tagged file'
     EXTENSION = '.XTG'
     SUFFIX = ''
-    XTG_OUT = 'XTG_Chapters'
+    _XTG_OUT = 'XTG_Chapters'
 
     def __init__(self, filePath, **kwargs):
         super().__init__(filePath)
@@ -220,7 +220,7 @@ class XtgFile(FileExport):
         if xtgDir == '':
             xtgDir = '.'
 
-        xtgDir = f'{xtgDir}/{self.XTG_OUT}'
+        xtgDir = f'{xtgDir}/{self._XTG_OUT}'
 
         if os.path.isdir(xtgDir):
             shutil.rmtree(xtgDir)
@@ -237,7 +237,7 @@ class XtgFile(FileExport):
 
             dispNumber = 0
 
-            if not self.chapterFilter.accept(self, chId):
+            if not self._chapterFilter.accept(self, chId):
                 continue
 
             # The order counts; be aware that "Todo" and "Notes" chapters are
@@ -297,11 +297,11 @@ class XtgFile(FileExport):
                 dispNumber = chapterNumber
 
             if template is not None:
-                lines.append(template.safe_substitute(self.get_chapterMapping_get_chapterMapping))
+                lines.append(template.safe_substitute(self._get_chapterMapping(chId, dispNumber)))
 
             # Process scenes.
 
-            sceneLines, sceneNumber, wordsTotal, lettersTotal = self.get_scenes(
+            sceneLines, sceneNumber, wordsTotal, lettersTotal = self._get_scenes(
                 chId, sceneNumber, wordsTotal, lettersTotal, doNotExport)
             lines.extend(sceneLines)
 
@@ -338,13 +338,13 @@ class XtgFile(FileExport):
                 template = Template(self._chapterEndTemplate)
 
             if template is not None:
-                lines.append(template.safe_substitute(self.get_chapterMapping_get_chapterMapping))
+                lines.append(template.safe_substitute(self._get_chapterMapping(chId, dispNumber)))
 
             if lines == []:
                 continue
 
-            text = f'{self.fileHeader}{"".join(lines)}'
-            text = self.postprocess(text)
+            text = f'{self._fileHeader}{"".join(lines)}'
+            #text = self.postprocess(text)
             xtgPath = f'{xtgDir}/{dispNumber:04}_{self.chapters[chId].title}{self.EXTENSION}'
 
             try:

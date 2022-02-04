@@ -10,9 +10,9 @@ See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/project
 
 ### v1.0.0 Public release
 
-- Change the character style closing tag.
-- Rework the error messaging system.
-- Refactor the code.
+- Process non-ASCII characters in the configuration file. 
+- Change the default character style closing tag.
+- Improve the overall code quality.
 
 Based on PyWriter v5.0.0
 
