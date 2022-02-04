@@ -49,29 +49,42 @@ class XtgFile(FileExport):
         self._spacePoints = kwargs['space_points']
         self._perChapter = kwargs['per_chapter']
 
-    def _convert_from_yw(self, text):
+    def _convert_from_yw(self, text, quick=False):
         """Convert yw7 markup to Markdown.
         """
-        if text is None:
-            return ''
-
         XTG_REPLACEMENTS = [
             # Escape XPress Tags code-specific characters.
-            ['@', '┌┐@>'],
-            ['<', '┌┐<>'],
-            ['\\', '┌┐\\>'],
-            ['┌┐', '<\\'],
-            # Replace yWriter tags with XPress tags.
-            ['[i]', self._tagItalic],
-            ['[/i]', self._tagItalic0],
-            ['[b]', self._tagBold],
-            ['[/b]', self._tagBold0],
-            ['  ', ' '],
-            # Format paragraphs.
-            ['\n\n', f'\r\r{self._tagFirstParagraph}'],
-            ['\n', f'\n{self._tagOtherParagraph}'],
-            ['\r', '\n'],
+            ('@', '┌┐@>'),
+            ('<', '┌┐<>'),
+            ('\\', '┌┐\\>'),
+            ('┌┐', '<\\'),
         ]
+        
+        if quick:
+            # Just clean up a one-liner without sophisticated formatting.
+            
+            try:
+    
+                for r in XTG_REPLACEMENTS:
+                    text = text.replace(r[0], r[1])
+                    
+                return text
+    
+            except AttributeError:
+                return ''
+                        
+        XTG_REPLACEMENTS.extend([
+            # Replace yWriter tags with XPress tags.
+            ('[i]', self._tagItalic),
+            ('[/i]', self._tagItalic0),
+            ('[b]', self._tagBold),
+            ('[/b]', self._tagBold0),
+            ('  ', ' '),
+            # Format paragraphs.
+            ('\n\n', f'\r\r{self._tagFirstParagraph}'),
+            ('\n', f'\n{self._tagOtherParagraph}'),
+            ('\r', '\n'),
+        ])
 
         try:
 
@@ -191,8 +204,7 @@ class XtgFile(FileExport):
         chapterMapping = super()._get_chapterMapping(chId, chapterNumber)
 
         if chapterNumber:
-            chapterMapping['ChNumberEnglish'] = number_to_english(
-                chapterNumber).capitalize()
+            chapterMapping['ChNumberEnglish'] = number_to_english(chapterNumber).capitalize()
             chapterMapping['ChNumberRoman'] = number_to_roman(chapterNumber)
 
         else:
