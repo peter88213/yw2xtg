@@ -10,6 +10,7 @@ See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/project
 
 ### v1.0.0 Public release
 
+- Fix a regression from v0.12.2 where paragraph indenting doesn't work when exporting to chapters.
 - Process non-ASCII characters in the configuration file. 
 - Change the default character style closing tag.
 - Improve the overall code quality.

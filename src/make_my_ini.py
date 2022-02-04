@@ -32,9 +32,9 @@ STYLES = dict(first_paragraph='@Textkörper:',
               bold='<@Stark betont>',
               bold0='<@$p>',
               acronym='<t4z9>',
-              acronym0='<tz$>',
+              acronym0='<tz$p>',
               figure='<f"Adobe Garamond Small Caps & Old">',
-              figure0='<f$>',
+              figure0='<f$p>',
               )
 OPTIONS = dict(
     adjust_digits='Yes',

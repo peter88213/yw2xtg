@@ -344,7 +344,11 @@ class XtgFile(FileExport):
                 continue
 
             text = f'{self._fileHeader}{"".join(lines)}'
-            #text = self.postprocess(text)
+
+            # Fix the tags of indented paragraphs.
+            # This is done here to include the scene openings.
+
+            text = re.sub('\n\@.+?:\> ', f'\n{self._tagIndentedParagraph}', text)
             xtgPath = f'{xtgDir}/{dispNumber:04}_{self.chapters[chId].title}{self.EXTENSION}'
 
             try:
