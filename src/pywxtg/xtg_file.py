@@ -65,8 +65,8 @@ class XtgFile(FileExport):
             
             try:
     
-                for r in XTG_REPLACEMENTS:
-                    text = text.replace(r[0], r[1])
+                for yw, xt in XTG_REPLACEMENTS:
+                    text = text.replace(yw, xt)
                     
                 return text
     
@@ -88,8 +88,8 @@ class XtgFile(FileExport):
 
         try:
 
-            for r in XTG_REPLACEMENTS:
-                text = text.replace(r[0], r[1])
+            for yw, xt in XTG_REPLACEMENTS:
+                text = text.replace(yw, xt)
 
         except AttributeError:
             return ''
