@@ -352,7 +352,7 @@ class XtgFile(FileExport):
             if template is not None:
                 lines.append(template.safe_substitute(self._get_chapterMapping(chId, dispNumber)))
 
-            if lines == []:
+            if not lines:
                 continue
 
             text = f'{self._fileHeader}{"".join(lines)}'
