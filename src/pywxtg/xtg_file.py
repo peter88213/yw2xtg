@@ -229,7 +229,7 @@ class XtgFile(FileExport):
 
         xtgDir = os.path.dirname(self.filePath)
 
-        if xtgDir == '':
+        if not xtgDir:
             xtgDir = '.'
 
         xtgDir = f'{xtgDir}/{self._XTG_OUT}'
@@ -274,33 +274,33 @@ class XtgFile(FileExport):
             if self.chapters[chId].chType == 2:
                 # Chapter is "ToDo" type (implies "unused").
 
-                if self._todoChapterTemplate != '':
+                if self._todoChapterTemplate:
                     template = Template(self._todoChapterTemplate)
 
             elif self.chapters[chId].chType == 1:
                 # Chapter is "Notes" type (implies "unused").
 
-                if self._notesChapterTemplate != '':
+                if self._notesChapterTemplate:
                     template = Template(self._notesChapterTemplate)
 
             elif self.chapters[chId].isUnused:
                 # Chapter is "really" unused.
 
-                if self._unusedChapterTemplate != '':
+                if self._unusedChapterTemplate:
                     template = Template(self._unusedChapterTemplate)
 
             elif self.chapters[chId].oldType == 1:
                 # Chapter is "Info" type (old file format).
 
-                if self._notesChapterTemplate != '':
+                if self._notesChapterTemplate:
                     template = Template(self._notesChapterTemplate)
 
             elif doNotExport:
 
-                if self._notExportedChapterTemplate != '':
+                if self._notExportedChapterTemplate:
                     template = Template(self._notExportedChapterTemplate)
 
-            elif self.chapters[chId].chLevel == 1 and self._partTemplate != '':
+            elif self.chapters[chId].chLevel == 1 and self._partTemplate:
                 template = Template(self._partTemplate)
 
             else:
@@ -323,30 +323,30 @@ class XtgFile(FileExport):
 
             if self.chapters[chId].chType == 2:
 
-                if self._todoChapterEndTemplate != '':
+                if self._todoChapterEndTemplate:
                     template = Template(self._todoChapterEndTemplate)
 
             elif self.chapters[chId].chType == 1:
                 
-                if self._notesChapterEndTemplate != '':
+                if self._notesChapterEndTemplate:
                     template = Template(self._notesChapterEndTemplate)
 
             elif self.chapters[chId].isUnused:
 
-                if self._unusedChapterEndTemplate != '':
+                if self._unusedChapterEndTemplate:
                     template = Template(self._unusedChapterEndTemplate)
 
             elif self.chapters[chId].oldType == 1:
 
-                if self._notesChapterEndTemplate != '':
+                if self._notesChapterEndTemplate:
                     template = Template(self._notesChapterEndTemplate)
 
             elif doNotExport:
 
-                if self._notExportedChapterEndTemplate != '':
+                if self._notExportedChapterEndTemplate:
                     template = Template(self._notExportedChapterEndTemplate)
 
-            elif self._chapterEndTemplate != '':
+            elif self._chapterEndTemplate:
                 template = Template(self._chapterEndTemplate)
 
             if template is not None:
