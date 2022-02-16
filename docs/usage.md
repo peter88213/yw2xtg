@@ -130,7 +130,7 @@ There are two options:
 - **$Title** - Project title
 - **$Desc** - Project description, html-formatted
 - **$AuthorName** - Author's name
-
+- **$AuthorBio** - Author's bio
 
 - **$FieldTitle1** - Rating names: field 1
 - **$FieldTitle2** - Rating names: field 2
