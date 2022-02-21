@@ -13,8 +13,8 @@ from pathlib import Path
 
 from pywriter.ui.ui_tk import UiTk
 from pywriter.ui.ui import Ui
-from pywxtg.xtg_config import XtgConfig
-from pywxtg.xtg_exporter import XtgExporter
+from yw2xtglib.xtg_config import XtgConfig
+from yw2xtglib.xtg_exporter import XtgExporter
 
 
 SUFFIX = ''

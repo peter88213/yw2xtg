@@ -10,7 +10,7 @@ Published under the MIT License (https://opensource.org/licenses/mit-license.php
 import sys
 import os
 
-from pywxtg.xtg_config import XtgConfig
+from yw2xtglib.xtg_config import XtgConfig
 from yw2xtg_ import APPNAME
 
 SCENE_DIVIDER = ''
