@@ -13,7 +13,7 @@ class XtgConfig(Configuration):
     """
 
     def __init__(self, settings={}, options={}, templates={}):
-        """Override the superclass constructor, redefining _sLabel.
+        """Overrides the superclass constructor, redefining _sLabel.
         """
         self.templates = None
         self._sLabel = 'STYLES'
@@ -21,33 +21,26 @@ class XtgConfig(Configuration):
         self.set(settings, options, templates)
 
     def set(self, settings=None, options=None, templates=None):
-        """Override the superclass method.
+        """Overrides the superclass method.
         """
-
         if settings is not None:
             self.settings = settings.copy()
-
         if options is not None:
             self.options = options.copy()
-
         if templates is not None:
             self.templates = templates.copy()
 
     def read(self, iniFile):
         """Read a configuration file.
         Settings and options that can not be read in, remain unchanged.
-        Extend the superclass.
+        Extends the superclass.
         """
         super().read(iniFile)
         iniPath = os.path.dirname(iniFile)
-
         for template in self.templates:
-
             try:
-
                 with open(f'{iniPath}/{template}.XTG', 'r', encoding='utf-8') as f:
                     self.templates[template] = f.read()
-
             except:
                 pass
 
@@ -56,8 +49,6 @@ class XtgConfig(Configuration):
         """
         super().write(iniFile)
         iniPath = os.path.dirname(iniFile)
-
         for template in self.templates:
-
             with open(f'{iniPath}/{template}.XTG', 'w', encoding='utf-8') as f:
                 f.write(self.templates[template])

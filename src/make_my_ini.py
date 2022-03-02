@@ -3,7 +3,7 @@
 
 Create config file and template files for German QX document.
 
-Copyright (c) 2021 Peter Triesberger
+Copyright (c) 2022 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -14,8 +14,6 @@ from yw2xtglib.xtg_config import XtgConfig
 from yw2xtg_ import APPNAME
 
 SCENE_DIVIDER = ''
-
-
 TEMPLATES = dict(file_header='<v11.10><e9>\n',
                  part_template='@Überschrift 1:${Title}\n',
                  chapter_template='@Überschrift 1:${Title}\n',
@@ -45,13 +43,10 @@ OPTIONS = dict(
 
 def run(iniFile):
     iniDir = os.path.dirname(iniFile)
-
     if not os.path.isdir(iniDir):
         os.makedirs(iniDir)
-
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
     configuration.write(iniFile)
-
     print(f'{iniFile} written.')
 
 

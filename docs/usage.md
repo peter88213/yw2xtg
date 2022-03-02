@@ -58,20 +58,64 @@ This is an exapmle configuration file containing the default values mentioned ab
 
 ```
 [STYLES]
-textbody = @First line indent:
+first_paragraph = @Text body:
+
+# XPress tag for paragraphs preceded by a heading or a blank line.
+
+indented_paragraph = @Text body indent:
+
+# XPress tag for indented paragraphs.
+
+other_paragraph = @First line indent:
+
+# XPress tag for regular paragraphs.
+
 italic = <@Emphasis>
-italic0 = <@$>
+
+# XPress tag opening italic sections. 
+
+italic0 = <@$p>
+
+# XPress tag closing italic sections.
+
 bold = <@Small caps>
-bold0 = <@$>
-acronym = 
+
+# XPress tag opening bold sections.
+
+bold0 = <@$p>
+
+# XPress tag closing bold sections.
+
+acronym =
+
+# XPress tag opening acronyms.
+ 
 acronym0 = 
-figure = 
+
+# XPress tag closing acronyms.
+
+figure =
+
+# XPress tag opening figure groups.
+
 figure0 = 
 
+# XPress tag closing figure groups.
+
 [OPTIONS]
-adjust_digits = yes
-space_points = yes
-per_chapter = no
+
+adjust_digits = Yes
+
+# If True, adjust digit-separating blanks.
+
+space_points = Yes
+
+# If True, space digit-separating points.
+
+per_chapter = No
+
+# If True, create one XTG file for each chapter.
+# If False, create one XTG file for the entire document.
 
 ```
 
