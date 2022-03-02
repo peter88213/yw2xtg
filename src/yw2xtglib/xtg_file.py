@@ -73,7 +73,6 @@ class XtgFile(FileExport):
         self._tagAcronym0 = kwargs['acronym0']
         self._tagFigure = kwargs['figure']
         self._tagFigure0 = kwargs['figure0']
-
         self._adjustDigits = kwargs['adjust_digits']
         self._spacePoints = kwargs['space_points']
         self._perChapter = kwargs['per_chapter']
