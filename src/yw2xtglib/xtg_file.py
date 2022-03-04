@@ -24,7 +24,7 @@ class XtgFile(FileExport):
     _XTG_OUT = 'XTG_Chapters'
 
     def __init__(self, filePath, **kwargs):
-        """Initialize filter strategy class instances.
+        """Initialize instance variables.
         
         Positional arguments:
             filePath -- str: path to the file represented by the Novel instance.

@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.0.1
+
+- Improve code and documentation quality.
+
+Based on PyWriter v5.0.2
+
 ### v1.0.0
 
 - Fix a regression from v0.12.2 where paragraph indenting doesn't work when exporting to chapters.
