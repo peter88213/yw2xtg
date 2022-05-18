@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.0.2
+
+- Improve code and documentation quality.
+
+Based on PyWriter v5.6.1
+
 ### v1.0.1
 
 - Improve code and documentation quality.

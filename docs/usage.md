@@ -169,12 +169,13 @@ There are two options:
 2. ${Placeholder}
 
 
-### "HTML header" placeholders
+### "Project template" placeholders
 
 - **$Title** - Project title
 - **$Desc** - Project description, html-formatted
 - **$AuthorName** - Author's name
-- **$AuthorBio** - Author's bio
+- **$AuthorBio** - Information about the author
+
 
 - **$FieldTitle1** - Rating names: field 1
 - **$FieldTitle2** - Rating names: field 2
@@ -185,8 +186,6 @@ There are two options:
 
 - **$ID** - Chapter ID,
 - **$ChapterNumber** - Chapter number (in sort order),
-- **$ChNumberEnglish** - Chapter number written out in English (capitalized),
-- **$ChNumberRoman** - Chapter number in Roman numbers (uppercase),
 
 - **$Title** - Chapter title
 - **$Desc** - Chapter description, html-formatted
@@ -221,22 +220,29 @@ There are two options:
 - **$Day** - Time scene begins: day
 - **$Hour** - Time scene begins: hour
 - **$Minute** - Time scene begins: minute
+- 
+- **$ScDate** - Combination of date and day
+- **$ScTime** - Combination of time and hour and minute
+
 - **$LastsDays** - Amount of time scene lasts: days
 - **$LastsHours** - Amount of time scene lasts: hours
 - **$LastsMinutes** - Amount of time scene lasts: minutes
+
+- **Duration** - Combination of days and hours and minutes
 
 - **$ReactionScene** - A(ction) or R(eaction)
 - **$Goal** - The scene protagonist's goal, html-formatted
 - **$Conflict** - The scene conflict, html-formatted
 - **$Outcome** - The scene outcome, html-formatted
 - **$Tags** - Comma-separated list of scene tags
+- **$Image** - Image filename
 
 - **$Characters** - Comma-separated list of characters assigned to the scene
 - **$Viewpoint** - Viewpoint character
 - **$Locations** - Comma-separated list of locations assigned to the scene
 - **$Items** - Comma-separated list of items assigned to the scene
 
-- **$Notes** - Scene notes, html-formatted
+- **$Notes** - Scene notes
 
 
 ## Installation path
