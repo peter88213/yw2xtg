@@ -104,49 +104,55 @@ class XtgFile(FileExport):
 
             except AttributeError:
                 return ''
-                        
-        XTG_REPLACEMENTS.extend([
-            # Replace yWriter tags with XPress tags.
-            ('[i]', self._tagItalic),
-            ('[/i]', self._tagItalic0),
-            ('[b]', self._tagBold),
-            ('[/b]', self._tagBold0),
-            ('  ', ' '),
-            # Format paragraphs.
-            ('\n\n', f'\r\r{self._tagFirstParagraph}'),
-            ('\n', f'\n{self._tagOtherParagraph}'),
-            ('\r', '\n'),
-        ])
-        try:
+
+        if text:
+            # Remove inline code.
+            YW_SPECIAL_CODES = ('HTM', 'TEX', 'RTF', 'epub', 'mobi', 'rtfimg', 'RTFBRK')
+            for specialCode in YW_SPECIAL_CODES:
+                text = re.sub(f'\<{specialCode} .+?\/{specialCode}\>', '', text)
+
+            # Apply xtg formatting.
+            XTG_REPLACEMENTS.extend([
+                # Replace yWriter tags with XPress tags.
+                ('[i]', self._tagItalic),
+                ('[/i]', self._tagItalic0),
+                ('[b]', self._tagBold),
+                ('[/b]', self._tagBold0),
+                ('  ', ' '),
+                # Format paragraphs.
+                ('\n\n', f'\r\r{self._tagFirstParagraph}'),
+                ('\n', f'\n{self._tagOtherParagraph}'),
+                ('\r', '\n'),
+            ])
             for yw, xt in XTG_REPLACEMENTS:
                 text = text.replace(yw, xt)
-        except AttributeError:
-            return ''
 
-        #--- Encode non-breaking spaces.
-        text = text.replace('\xa0', '<\\!p>')
+            #--- Encode non-breaking spaces.
+            text = text.replace('\xa0', '<\\!p>')
 
-        #--- Remove highlighting, alignment,
-        # strikethrough, and underline tags.
-        text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
+            #--- Remove highlighting, alignment,
+            # strikethrough, and underline tags.
+            text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
 
-        #--- Remove comments.
-        text = re.sub('\/\*.+?\*\/', '', text)
+            #--- Remove comments.
+            text = re.sub('\/\*.+?\*\/', '', text)
 
-        #--- Adjust digit-separating blanks.
-        if self._adjustDigits:
-            text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
+            #--- Adjust digit-separating blanks.
+            if self._adjustDigits:
+                text = re.sub('(\d) (\d)', '\\1<\\![>\\2', text)
 
-        #--- Space digit-separating points.
-        if self._spacePoints:
-            text = re.sub('(\d+)\.', '\\1.<\\![>', text)
-            text = text.replace('<\\![> ', ' ')
+            #--- Space digit-separating points.
+            if self._spacePoints:
+                text = re.sub('(\d+)\.', '\\1.<\\![>', text)
+                text = text.replace('<\\![> ', ' ')
 
-        #--- Assign "figure" style.
-        text = re.sub('(\d+)', f'{self._tagFigure}\\1{self._tagFigure0}', text)
+            #--- Assign "figure" style.
+            text = re.sub('(\d+)', f'{self._tagFigure}\\1{self._tagFigure0}', text)
 
-        #--- Assign "acronym" style.
-        text = re.sub('([A-ZÄ-Ü]{2,})', f'{self._tagAcronym}\\1{self._tagAcronym0}', text)
+            #--- Assign "acronym" style.
+            text = re.sub('([A-ZÄ-Ü]{2,})', f'{self._tagAcronym}\\1{self._tagAcronym0}', text)
+        else:
+            text = ''
         return text
 
     def _get_chapterMapping(self, chId, chapterNumber):
