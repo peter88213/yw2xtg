@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.0.4 Bugfix release
+
+- Fix and refactor inline code removal.
+
+Based on PyWriter v5.16.1
+
 ### v1.0.3 Consider inline code
 
 - Remove inline code when exporting.

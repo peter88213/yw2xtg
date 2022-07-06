@@ -106,10 +106,7 @@ class XtgFile(FileExport):
                 return ''
 
         if text:
-            # Remove inline code.
-            YW_SPECIAL_CODES = ('HTM', 'TEX', 'RTF', 'epub', 'mobi', 'rtfimg', 'RTFBRK')
-            for specialCode in YW_SPECIAL_CODES:
-                text = re.sub(f'\<{specialCode} .+?\/{specialCode}\>', '', text)
+            text = self._remove_inline_code(text)
 
             # Apply xtg formatting.
             XTG_REPLACEMENTS.extend([
