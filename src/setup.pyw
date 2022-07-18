@@ -8,6 +8,7 @@ For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import os
+import sys
 import stat
 from shutil import copyfile
 from pathlib import Path
@@ -126,20 +127,20 @@ def install(pywriterPath):
 
 
 if __name__ == '__main__':
+    scriptPath = os.path.abspath(sys.argv[0])
+    scriptDir = os.path.dirname(scriptPath)
+    os.chdir(scriptDir)
 
     # Open a tk window.
-
     root.geometry("800x600")
     root.title(f'Install {APPNAME}{VERSION}')
     header = Label(root, text='')
     header.pack(padx=5, pady=5)
 
     # Prepare the messaging area.
-
     processInfo.pack(padx=5, pady=5)
 
     # Run the installation.
-
     homePath = str(Path.home()).replace('\\', '/')
     pywriterPath = f'{homePath}/.pywriter/'
     try:
@@ -148,7 +149,6 @@ if __name__ == '__main__':
         output(str(ex))
 
     # Show options: open installation folders or quit.
-
     root.openButton = Button(text="Open installation folder", command=lambda: open_folder(f'{homePath}/.pywriter/{APPNAME}'))
     root.openButton.config(height=1, width=30)
     root.openButton.pack(padx=5, pady=5)
