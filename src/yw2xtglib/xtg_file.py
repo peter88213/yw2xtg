@@ -291,10 +291,6 @@ class XtgFile(FileExport):
                 # Chapter is "really" unused.
                 if self._unusedChapterTemplate:
                     template = Template(self._unusedChapterTemplate)
-            elif self.chapters[chId].oldType == 1:
-                # Chapter is "Info" type (old file format).
-                if self._notesChapterTemplate:
-                    template = Template(self._notesChapterTemplate)
             elif doNotExport:
                 if self._notExportedChapterTemplate:
                     template = Template(self._notExportedChapterTemplate)
@@ -323,9 +319,6 @@ class XtgFile(FileExport):
             elif self.chapters[chId].isUnused:
                 if self._unusedChapterEndTemplate:
                     template = Template(self._unusedChapterEndTemplate)
-            elif self.chapters[chId].oldType == 1:
-                if self._notesChapterEndTemplate:
-                    template = Template(self._notesChapterEndTemplate)
             elif doNotExport:
                 if self._notExportedChapterEndTemplate:
                     template = Template(self._notExportedChapterEndTemplate)
