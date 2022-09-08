@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.0.8
+
+- Set own window icon.
+
+Based on PyWriter v7.4.1
+
 ### v1.0.7 Optional release
 
 - Code refactoring and library update.

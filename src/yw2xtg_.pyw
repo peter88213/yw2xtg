@@ -12,9 +12,9 @@ import argparse
 from pathlib import Path
 from pywriter.ui.ui_tk import UiTk
 from pywriter.ui.ui import Ui
+from pywriter.ui.set_icon_tk import *
 from yw2xtglib.xtg_config import XtgConfig
 from yw2xtglib.xtg_exporter import XtgExporter
-
 
 SUFFIX = ''
 APPNAME = 'yw2xtg'
@@ -67,6 +67,8 @@ def run(sourcePath, silentMode=True, installDir='.'):
     kwargs.update(configuration.templates)
     converter = XtgExporter()
     converter.ui = ui
+    if not silentMode:
+        set_icon(converter.ui.root, icon='xLogo32')
     converter.run(sourcePath, **kwargs)
     ui.start()
 
