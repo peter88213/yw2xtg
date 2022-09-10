@@ -51,6 +51,7 @@ def run(sourcePath, silentMode=True, installDir='.'):
         ui = Ui('')
     else:
         ui = UiTk('Export XTG from yWriter @release')
+        set_icon(ui.root, icon='xLogo32')
 
     #--- Try to get persistent configuration data
     sourceDir = os.path.dirname(sourcePath)
@@ -67,8 +68,6 @@ def run(sourcePath, silentMode=True, installDir='.'):
     kwargs.update(configuration.templates)
     converter = XtgExporter()
     converter.ui = ui
-    if not silentMode:
-        set_icon(converter.ui.root, icon='xLogo32')
     converter.run(sourcePath, **kwargs)
     ui.start()
 
