@@ -3,7 +3,7 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Requirements
 
-- [Python 3.6+](https://www.python.org).
+- [Python](https://www.python.org/) 3.6 =< version <= 3.10.
 
 ## Download and install
 
