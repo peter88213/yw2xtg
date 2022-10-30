@@ -6,10 +6,15 @@ For more information, see the [project homepage](https://peter88213.github.io/yw
 
 *yw2xtg* is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
 
+*yw2xtg* depends on the [pywriter](https://github.com/peter88213/PyWriter) library which must be present in your file system. It is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
+
 ### Mandatory directory structure for building the application script
 
 ```
 .
+├── PyWriter/
+│   └── src/
+│       └── pywriter/
 └── yw2xtg/
     ├── src/
     ├── test/
@@ -24,7 +29,7 @@ For more information, see the [project homepage](https://peter88213.github.io/yw
 
 ### Development tools
 
-- [Python](https://python.org) version 3.9
+- [Python](https://python.org) version 3.10.8
 - [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and [EGit](https://www.eclipse.org/egit/)
 - [Apache Ant](https://ant.apache.org/) for building the application script
 

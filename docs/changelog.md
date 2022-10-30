@@ -8,6 +8,14 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.1.0
+
+- Library upgrade.
+- Convert language codes.
+- Error handling via exceptions instead of returned messages.
+
+Based on PyWriter v8.0.2
+
 ### v1.0.10
 
 - Update the PyWriter library for future Python versions.

@@ -8,7 +8,7 @@ import shutil
 import os
 import re
 from string import Template
-from pywriter.pywriter_globals import ERROR
+from pywriter.pywriter_globals import *
 from pywriter.file.file_export import FileExport
 
 
@@ -77,6 +77,16 @@ class XtgFile(FileExport):
         self._spacePoints = kwargs['space_points']
         self._perChapter = kwargs['per_chapter']
 
+        # Language codes
+        self._xpCode = {
+            'en-US':0,
+            'es-ES':8,
+            'en-GB':2,
+            'fr-FR':1,
+            'de-CH':69,
+            'de-DE':70,
+            }
+
     def _convert_from_yw(self, text, quick=False):
         """Return text, converted from yw7 markup to XTG format.
         
@@ -88,7 +98,7 @@ class XtgFile(FileExport):
         
         Overrides the superclass method.
         """
-        XTG_REPLACEMENTS = [
+        xtgReplacements = [
             # Escape XPress Tags code-specific characters.
             ('@', '┌┐@>'),
             ('<', '┌┐<>'),
@@ -98,7 +108,7 @@ class XtgFile(FileExport):
         if quick:
             # Just clean up a one-liner without sophisticated formatting.
             try:
-                for yw, xt in XTG_REPLACEMENTS:
+                for yw, xt in xtgReplacements:
                     text = text.replace(yw, xt)
                 return text
 
@@ -109,7 +119,7 @@ class XtgFile(FileExport):
             text = self._remove_inline_code(text)
 
             # Apply xtg formatting.
-            XTG_REPLACEMENTS.extend([
+            xtgReplacements.extend([
                 # Replace yWriter tags with XPress tags.
                 ('[i]', self._tagItalic),
                 ('[/i]', self._tagItalic0),
@@ -121,7 +131,16 @@ class XtgFile(FileExport):
                 ('\n', f'\n{self._tagOtherParagraph}'),
                 ('\r', '\n'),
             ])
-            for yw, xt in XTG_REPLACEMENTS:
+            for language in self.languages:
+                languageCode = self._xpCode.get(language, None)
+                if languageCode is None:
+                    xtgReplacements.append((f'[lang={language}]', ''))
+                    xtgReplacements.append((f'[/lang={language}]', ''))
+                else:
+                    xtgReplacements.append((f'[lang={language}]', f'<n{languageCode}>'))
+                    xtgReplacements.append((f'[/lang={language}]', '<@$p>'))
+
+            for yw, xt in xtgReplacements:
                 text = text.replace(yw, xt)
 
             #--- Encode non-breaking spaces.
@@ -339,9 +358,7 @@ class XtgFile(FileExport):
                 with open(xtgPath, 'w', encoding='utf-8') as f:
                     f.write(text)
             except:
-                return(f'{ERROR}Cannot write "{os.path.normpath(xtgPath)}".')
-
-        return 'All chapters written.'
+                raise Error(f'Cannot write "{os.path.normpath(xtgPath)}".')
 
     def _get_text(self):
         """Assemble the whole text applying the templates.
@@ -364,8 +381,8 @@ class XtgFile(FileExport):
         Return a message beginning with the ERROR constant in case of error.
         Extends the superclass method for the 'document per chapter' option.
         """
+        self.get_languages()
         if self._perChapter:
-            return self._get_chapters()
-
+            self._get_chapters()
         else:
-            return super().write()
+            super().write()
