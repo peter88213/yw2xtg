@@ -118,7 +118,11 @@ class XtgFile(FileExport):
         if text:
             text = self._remove_inline_code(text)
 
-            # Apply xtg formatting.
+            #--- Assign "figure" style.
+            # In order not to interfere with numeric language codes, this runs before the general replacements.
+            text = re.sub('(\d+)', f'{self._tagFigure}\\1{self._tagFigure0}', text)
+
+            #--- Apply xtg formatting.
             xtgReplacements.extend([
                 # Replace yWriter tags with XPress tags.
                 ('[i]', self._tagItalic),
@@ -131,6 +135,7 @@ class XtgFile(FileExport):
                 ('\n', f'\n{self._tagOtherParagraph}'),
                 ('\r', '\n'),
             ])
+            # Add the language tags, if defined.
             for language in self.languages:
                 languageCode = self._xpCode.get(language, None)
                 if languageCode is None:
@@ -161,9 +166,6 @@ class XtgFile(FileExport):
             if self._spacePoints:
                 text = re.sub('(\d+)\.', '\\1.<\\![>', text)
                 text = text.replace('<\\![> ', ' ')
-
-            #--- Assign "figure" style.
-            text = re.sub('(\d+)', f'{self._tagFigure}\\1{self._tagFigure0}', text)
 
             #--- Assign "acronym" style.
             text = re.sub('([A-ZÄ-Ü]{2,})', f'{self._tagAcronym}\\1{self._tagAcronym0}', text)
