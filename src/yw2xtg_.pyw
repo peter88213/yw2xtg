@@ -30,7 +30,6 @@ STYLES = dict(first_paragraph='@Text body:',
               acronym0='',
               figure='',
               figure0='',
-
               )
 TEMPLATES = dict(file_header='<v11.10><e9>\n',
                  part_template='@Heading 1:${Title}\n',
@@ -44,6 +43,7 @@ OPTIONS = dict(adjust_digits=True,
                space_points=True,
                per_chapter=False,
                )
+LOOKUP = {'language_codes':{}}
 
 
 def run(sourcePath, silentMode=True, installDir='.'):
@@ -59,13 +59,14 @@ def run(sourcePath, silentMode=True, installDir='.'):
         sourceDir = '.'
     iniFileName = f'{APPNAME}.ini'
     iniFiles = [f'{installDir}/{iniFileName}', f'{sourceDir}/{APPNAME}/{iniFileName}']
-    configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES)
+    configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES, LOOKUP)
     for iniFile in iniFiles:
         configuration.read(iniFile)
     kwargs = {'suffix': SUFFIX}
     kwargs.update(configuration.settings)
     kwargs.update(configuration.options)
     kwargs.update(configuration.templates)
+    kwargs.update(configuration.lookup)
     converter = XtgExporter()
     converter.ui = ui
     converter.run(sourcePath, **kwargs)

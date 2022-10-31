@@ -76,16 +76,7 @@ class XtgFile(FileExport):
         self._adjustDigits = kwargs['adjust_digits']
         self._spacePoints = kwargs['space_points']
         self._perChapter = kwargs['per_chapter']
-
-        # Language codes
-        self._xpCode = {
-            'en-US':0,
-            'es-ES':8,
-            'en-GB':2,
-            'fr-FR':1,
-            'de-CH':69,
-            'de-DE':70,
-            }
+        self._LanguageCodes = kwargs['language_codes']
 
     def _convert_from_yw(self, text, quick=False):
         """Return text, converted from yw7 markup to XTG format.
@@ -137,7 +128,7 @@ class XtgFile(FileExport):
             ])
             # Add the language tags, if defined.
             for language in self.languages:
-                languageCode = self._xpCode.get(language, None)
+                languageCode = self._LanguageCodes.get(language, None)
                 if languageCode is None:
                     xtgReplacements.append((f'[lang={language}]', ''))
                     xtgReplacements.append((f'[/lang={language}]', ''))
