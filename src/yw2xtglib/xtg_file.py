@@ -351,7 +351,7 @@ class XtgFile(FileExport):
                 with open(xtgPath, 'w', encoding='utf-8') as f:
                     f.write(text)
             except:
-                raise Error(f'Cannot write "{os.path.normpath(xtgPath)}".')
+                raise Error(f'Cannot write "{norm_path(xtgPath)}".')
 
     def _get_text(self):
         """Assemble the whole text applying the templates.
