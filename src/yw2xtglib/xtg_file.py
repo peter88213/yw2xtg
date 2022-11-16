@@ -127,7 +127,7 @@ class XtgFile(FileExport):
                 ('\r', '\n'),
             ])
             # Add the language tags, if defined.
-            for language in self.languages:
+            for language in self.novel.languages:
                 languageCode = self._LanguageCodes.get(language, None)
                 if languageCode is None:
                     xtgReplacements.append((f'[lang={language}]', ''))
@@ -247,7 +247,7 @@ class XtgFile(FileExport):
         else:
             chapterMapping['ChNumberEnglish'] = ''
             chapterMapping['ChNumberRoman'] = ''
-        if self.chapters[chId].suppressChapterTitle:
+        if self.novel.chapters[chId].suppressChapterTitle:
             chapterMapping['Title'] = ''
         return chapterMapping
 
@@ -272,7 +272,7 @@ class XtgFile(FileExport):
         sceneNumber = 0
         wordsTotal = 0
         lettersTotal = 0
-        for chId in self.srtChapters:
+        for chId in self.novel.srtChapters:
             lines = []
             dispNumber = 0
             if not self._chapterFilter.accept(self, chId):
@@ -285,28 +285,28 @@ class XtgFile(FileExport):
             notExportCount = 0
             doNotExport = False
             template = None
-            for scId in self.chapters[chId].srtScenes:
+            for scId in self.novel.chapters[chId].srtScenes:
                 sceneCount += 1
-                if self.scenes[scId].doNotExport:
+                if self.novel.scenes[scId].doNotExport:
                     notExportCount += 1
             if sceneCount > 0 and notExportCount == sceneCount:
                 doNotExport = True
-            if self.chapters[chId].chType == 2:
+            if self.novel.chapters[chId].chType == 2:
                 # Chapter is "ToDo" type (implies "unused").
                 if self._todoChapterTemplate:
                     template = Template(self._todoChapterTemplate)
-            elif self.chapters[chId].chType == 1:
+            elif self.novel.chapters[chId].chType == 1:
                 # Chapter is "Notes" type (implies "unused").
                 if self._notesChapterTemplate:
                     template = Template(self._notesChapterTemplate)
-            elif self.chapters[chId].chType == 3:
+            elif self.novel.chapters[chId].chType == 3:
                 # Chapter is "really" unused.
                 if self._unusedChapterTemplate:
                     template = Template(self._unusedChapterTemplate)
             elif doNotExport:
                 if self._notExportedChapterTemplate:
                     template = Template(self._notExportedChapterTemplate)
-            elif self.chapters[chId].chLevel == 1 and self._partTemplate:
+            elif self.novel.chapters[chId].chLevel == 1 and self._partTemplate:
                 template = Template(self._partTemplate)
             else:
                 template = Template(self._chapterTemplate)
@@ -322,13 +322,13 @@ class XtgFile(FileExport):
 
             # Process chapter ending.
             template = None
-            if self.chapters[chId].chType == 2:
+            if self.novel.chapters[chId].chType == 2:
                 if self._todoChapterEndTemplate:
                     template = Template(self._todoChapterEndTemplate)
-            elif self.chapters[chId].chType == 1:
+            elif self.novel.chapters[chId].chType == 1:
                 if self._notesChapterEndTemplate:
                     template = Template(self._notesChapterEndTemplate)
-            elif self.chapters[chId].chType == 3:
+            elif self.novel.chapters[chId].chType == 3:
                 if self._unusedChapterEndTemplate:
                     template = Template(self._unusedChapterEndTemplate)
             elif doNotExport:
@@ -346,7 +346,7 @@ class XtgFile(FileExport):
             # Fix the tags of indented paragraphs.
             # This is done here to include the scene openings.
             text = re.sub('\n\@.+?:\> ', f'\n{self._tagIndentedParagraph}', text)
-            xtgPath = f'{xtgDir}/{dispNumber:04}_{self.chapters[chId].title}{self.EXTENSION}'
+            xtgPath = f'{xtgDir}/{dispNumber:04}_{self.novel.chapters[chId].title}{self.EXTENSION}'
             try:
                 with open(xtgPath, 'w', encoding='utf-8') as f:
                     f.write(text)
@@ -374,7 +374,7 @@ class XtgFile(FileExport):
         Return a message beginning with the ERROR constant in case of error.
         Extends the superclass method for the 'document per chapter' option.
         """
-        self.get_languages()
+        self.novel.get_languages()
         if self._perChapter:
             self._get_chapters()
         else:
