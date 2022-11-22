@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.2.0
+
+- Code optimization and library update. 
+
+Based on PyWriter v9.0.4
+
 ### v1.1.2
 
 - Library upgrade.
