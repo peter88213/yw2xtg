@@ -3,7 +3,8 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Requirements
 
-- [Python](https://www.python.org/) from version 3.6 to 3.10. Beware: Version 3.11 is not recommended.
+- Windows.
+- [Python](https://www.python.org/) from version 3.6.
 
 ## Download and install
 

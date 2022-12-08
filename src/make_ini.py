@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Helper file for yw2xtg test.
 
 Create config file.

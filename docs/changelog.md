@@ -8,6 +8,12 @@
 
 See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
 
+### v1.2.1
+
+- Remove "shebang" lines to make the scripts run with Python 3.11 under Windows.
+
+Based on PyWriter v9.0.5
+
 ### v1.2.0
 
 - Code optimization and library update. 

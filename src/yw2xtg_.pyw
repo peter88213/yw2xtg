@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Export yWriter project to XPress tagged text.
 
 Version @release
