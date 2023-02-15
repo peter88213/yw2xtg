@@ -6,7 +6,7 @@
 
 ### Planned features
 
-See the [GitHub "features" project](https://github.com/peter88213/yw2xtg/projects/1).
+See the [GitHub "Features" project](https://github.com/users/peter88213/projects/4/views/1).
 
 ### v1.2.1
 
