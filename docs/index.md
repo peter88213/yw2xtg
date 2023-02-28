@@ -8,9 +8,9 @@ Optionally, one XTG file per chapter can be generated.
 
 ## Download and install
 
-[Download the latest release (version 1.2.1)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v1.2.1.zip)
+[Download the latest release (version 1.2.2)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v1.2.2.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v1.2.1.zip" into a new folder.
+- Unzip the downloaded zipfile "yw2xtg_v1.2.2.zip" into a new folder.
 - Move into this new folder and launch **setup.pyw**. This installs the script for the local user.
 - Create a shortcut on the desktop when asked.
 - Open "README.md" for usage instructions.

@@ -8,6 +8,12 @@
 
 See the [GitHub "Features" project](https://github.com/users/peter88213/projects/4/views/1).
 
+### v1.2.2
+
+- Reduce the memory use by discarding the docstrings on building.
+
+Based on PyWriter v12.1.2
+
 ### v1.2.1
 
 - Remove "shebang" lines to make the scripts run with Python 3.11 under Windows.
