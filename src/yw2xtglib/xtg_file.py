@@ -27,30 +27,30 @@ class XtgFile(FileExport):
         """Initialize instance variables.
         
         Positional arguments:
-            filePath -- str: path to the file represented by the Novel instance.
+            filePath: str -- path to the file represented by the Novel instance.
             
         Required keyword arguments:
-            file_header -- str: File header template.
-            part_template -- str: Part heading template.
-            chapter_template -- str: Chapter heading template.
-            first_scene_template -- str: Template for the first scene of the chapter.
-            scene_template -- str: Scene template.
-            appended_scene_template -- str: Template for scenes appended to the previous one.
-            scene_divider -- str: Scene divider.
-            first_paragraph -- str: XPress tag for paragraphs preceded by a heading or a blank line. 
-            indented_paragraph -- str: XPress tag for indented paragraphs.
-            other_paragraph -- str: XPress tag for regular paragraphs.
-            italic -- str: XPress tag opening italic sections. 
-            italic0 -- str: XPress tag closing italic sections. 
-            bold -- str: XPress tag opening bold sections. 
-            bold0 -- str: XPress tag closing bold sections.
-            acronym -- str: XPress tag opening acronyms.
-            acronym0 -- str: XPress tag closing acronyms.
-            figure -- str: XPress tag opening figure groups.
-            figure0 -- str: XPress tag closing figure groups.
-            adjust_digits -- bool: if True, adjust digit-separating blanks.
-            space_points -- bool: if True, space digit-separating points.
-            per_chapter -- bool: if True, create one XTG file for each chapter.
+            file_header: str -- File header template.
+            part_template: str -- Part heading template.
+            chapter_template: str -- Chapter heading template.
+            first_scene_template: str -- Template for the first scene of the chapter.
+            scene_template: str -- Scene template.
+            appended_scene_template: str -- Template for scenes appended to the previous one.
+            scene_divider: str -- Scene divider.
+            first_paragraph: str -- XPress tag for paragraphs preceded by a heading or a blank line. 
+            indented_paragraph: str -- XPress tag for indented paragraphs.
+            other_paragraph: str -- XPress tag for regular paragraphs.
+            italic: str -- XPress tag opening italic sections. 
+            italic0: str -- XPress tag closing italic sections. 
+            bold: str -- XPress tag opening bold sections. 
+            bold0: str -- XPress tag closing bold sections.
+            acronym: str -- XPress tag opening acronyms.
+            acronym0: str -- XPress tag closing acronyms.
+            figure: str -- XPress tag opening figure groups.
+            figure0: str -- XPress tag closing figure groups.
+            adjust_digits: bool -- if True, adjust digit-separating blanks.
+            space_points: bool -- if True, space digit-separating points.
+            per_chapter: bool -- if True, create one XTG file for each chapter.
 
         Extends the superclass constructor.
         """
@@ -85,7 +85,7 @@ class XtgFile(FileExport):
             text -- string to convert.
         
         Optional arguments:
-            quick -- bool: if True, apply a conversion mode for one-liners without formatting.
+            quick: bool -- if True, apply a conversion mode for one-liners without formatting.
         
         Overrides the superclass method.
         """
@@ -168,8 +168,8 @@ class XtgFile(FileExport):
         """Return a mapping dictionary for a chapter section. 
 
         Positional arguments:
-            chId -- str: chapter ID.
-            chapterNumber -- int: chapter number.
+            chId: str -- chapter ID.
+            chapterNumber: int -- chapter number.
 
         Extends the superclass method.
         """
