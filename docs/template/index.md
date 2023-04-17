@@ -10,16 +10,16 @@ Optionally, one XTG file per chapter can be generated.
 
 [Download the latest release (version 0.99.0)](https://raw.githubusercontent.com/peter88213/yw2xtg/main/dist/yw2xtg_v0.99.0.zip)
 
-- Unzip the downloaded zipfile "yw2xtg_v0.99.0.zip" into a new folder.
+- Extract the "yw2xtg_v0.99.0" folder from the downloaded zipfile "yw2xtg_v0.99.0.zip".
 - Move into this new folder and launch **setup.pyw**. This installs the script for the local user.
 - Create a shortcut on the desktop when asked.
-- Open "README.md" for usage instructions.
+- Open "README.md" for further instructions.
 
 ### Note for Linux users
 
 Please make sure that your Python3 installation has the *tkinter* module. On Ubuntu, for example, it is not available out of the box and must be installed via a separate package. 
 
-------------------------------------------------------------------
+---
 
 [Changelog](changelog)
 
