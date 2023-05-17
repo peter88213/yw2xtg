@@ -17,10 +17,6 @@ Optionally, one XTG file per chapter can be generated.
 - Create a shortcut on the desktop when asked.
 - Open "README.md" for further instructions.
 
-### Note for Linux users
-
-Please make sure that your Python3 installation has the *tkinter* module. On Ubuntu, for example, it is not available out of the box and must be installed via a separate package. 
-
 ---
 
 [Changelog](changelog)
