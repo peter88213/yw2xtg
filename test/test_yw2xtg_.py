@@ -1,4 +1,4 @@
-""" Python unit tests for the yw2xtg project.
+""" Regression test for the yw2xtg project.
 
 Test suite for yw2xtg.pyw.
 
