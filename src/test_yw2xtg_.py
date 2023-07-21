@@ -14,19 +14,19 @@ import yw2xtg_
 # The paths are relative to the "test" directory,
 # where this script is placed and executed
 
-TEST_PATH = os.getcwd() + '/../test'
-TEST_DATA_PATH = TEST_PATH + '/data/'
-TEST_EXEC_PATH = TEST_PATH + '/'
+TEST_PATH = f'{os.getcwd()}/../test'
+TEST_DATA_PATH = f'{TEST_PATH}/data/'
+TEST_EXEC_PATH = f'{TEST_PATH}/'
 TEMPLATES = 'yw2xtg/'
 
 # To be placed in TEST_DATA_PATH:
-REFERENCE_YW7 = TEST_DATA_PATH + 'normal.yw7'
-REFERENCE_XTG_TEMPLATES = TEST_DATA_PATH + 'templates.XTG'
-REFERENCE_XTG_DEFAULTS = TEST_DATA_PATH + 'defaults.XTG'
+REFERENCE_YW7 = f'{TEST_DATA_PATH}normal.yw7'
+REFERENCE_XTG_TEMPLATES = f'{TEST_DATA_PATH}templates.XTG'
+REFERENCE_XTG_DEFAULTS = f'{TEST_DATA_PATH}defaults.XTG'
 
 # Test data
-TEST_YW7 = TEST_EXEC_PATH + 'yw7 Sample Project.yw7'
-TEST_XTG = TEST_EXEC_PATH + 'yw7 Sample Project.XTG'
+TEST_YW7 = f'{TEST_EXEC_PATH}yw7 Sample Project.yw7'
+TEST_XTG = f'{TEST_EXEC_PATH}yw7 Sample Project.XTG'
 
 
 def read_file(inputFile):
@@ -50,8 +50,8 @@ def remove_all_testfiles():
     except:
         pass
 
-    for f in os.listdir(TEST_EXEC_PATH + TEMPLATES):
-        os.remove(TEST_EXEC_PATH + TEMPLATES + f)
+    for f in os.listdir(f'{TEST_EXEC_PATH}{TEMPLATES}'):
+        os.remove(f'{TEST_EXEC_PATH}{TEMPLATES}{f}')
 
 
 class NormalOperation(unittest.TestCase):
@@ -66,7 +66,7 @@ class NormalOperation(unittest.TestCase):
             pass
 
         try:
-            os.mkdir(TEST_EXEC_PATH + TEMPLATES)
+            os.mkdir(f'{TEST_EXEC_PATH}{TEMPLATES}')
 
         except:
             pass
@@ -76,9 +76,9 @@ class NormalOperation(unittest.TestCase):
 
     def test_templates(self):
 
-        for f in os.listdir(TEST_DATA_PATH + TEMPLATES):
-            copyfile(TEST_DATA_PATH + TEMPLATES + f,
-                     TEST_EXEC_PATH + TEMPLATES + f)
+        for f in os.listdir(f'{TEST_DATA_PATH}{TEMPLATES}'):
+            copyfile(f'{TEST_DATA_PATH}{TEMPLATES}{f}',
+                     f'{TEST_EXEC_PATH}{TEMPLATES}{f}')
 
         os.chdir(TEST_EXEC_PATH)
 
