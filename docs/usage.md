@@ -1,5 +1,6 @@
-[Project homepage](https://peter88213.github.io/yw2xtg)
+[Project homepage](https://peter88213.github.io/yw2xtg) > Instructions for use
 
+---
 
 The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 project and fills XTG templates.
 
@@ -27,6 +28,8 @@ The path of the yWriter project file.
 #### optional arguments:
 
 `--silent`  suppress error messages and the request to confirm the use of default values
+
+---
 
 ## General
 
