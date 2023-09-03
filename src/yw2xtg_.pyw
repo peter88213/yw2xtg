@@ -2,7 +2,7 @@
 
 Version @release
 Requires Python 3.6+
-Copyright (c) 2022 Peter Triesberger
+Copyright (c) 2023 Peter Triesberger
 For further information see https://github.com/peter88213/yw2xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
@@ -23,7 +23,7 @@ STYLES = dict(first_paragraph='@Text body:',
               other_paragraph='@First line indent:',
               italic='<@Emphasis>',
               italic0='<@$p>',
-              bold='<@Small caps>',
+              bold='<@Strong emphasis>',
               bold0='<@$p>',
               acronym='',
               acronym0='',

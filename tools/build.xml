@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="yw2xtg" basedir=".">
-	<property name="version" value="1.2.3" />
+	<property name="version" value="1.3.0" />
 	<property name="test-app" value="yw2xtg" />
 	
 	<property name="source-path" location="../src" />

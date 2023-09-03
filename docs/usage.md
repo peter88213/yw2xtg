@@ -81,7 +81,7 @@ italic0 = <@$p>
 
 # XPress tag closing italic sections.
 
-bold = <@Small caps>
+bold = <@Strong emphasis>
 
 # XPress tag opening bold sections.
 

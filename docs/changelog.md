@@ -8,6 +8,12 @@
 
 See the [GitHub "Features" project](https://github.com/users/peter88213/projects/4/views/1).
 
+### v1.3.0
+
+- Rename the XPress tag that replaces "bold": "@Small caps" --> "@Strong emphasis"
+
+Based on PyWriter v12.14.0
+
 ### v1.2.3
 
 - Library update.
