@@ -35,7 +35,8 @@ The path of the yWriter project file.
 
 ### About XTG
 
-The XTG file format uses the *XPress Tags* language, the knowledge of which is assumed. There is a comprehensive [online documentation](https://www.quark.com/documentation/quarkxpress/2019/english/A%20Guide%20to%20XPress%20Tags%202019/) for this. 
+The XTG file format uses the *XPress Tags* language, the knowledge of which is assumed. You can 
+download the manual *A Guide to XPress Tags* for your program version from the *Quark* web site.
 
 ### yWriter text markup
 
