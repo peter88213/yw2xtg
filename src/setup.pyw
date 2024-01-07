@@ -22,7 +22,7 @@ except ModuleNotFoundError:
 
 APPNAME = 'novx_xtg'
 VERSION = ' @release'
-APP = f'{APPNAME}.pyw'
+APP = f'{APPNAME}.py'
 INI_FILE = f'{APPNAME}.ini'
 INI_PATH = '/config/'
 SAMPLE_PATH = 'sample/novx_xtg/'
@@ -36,7 +36,7 @@ SHORTCUT_MESSAGE = '''
 Now you might want to create a shortcut on your desktop.  
 
 On Windows, open the installation folder, hold down the Alt key on your keyboard, 
-and then drag and drop $Appname.pyw to your desktop.
+and then drag and drop $Appname.py to your desktop.
 
 On Linux, create a launcher on your desktop. With xfce for instance, the launcher's command may look like this:
 python3 '$Apppath' %F
@@ -73,7 +73,7 @@ def open_folder(installDir):
 def install(novxlibPath):
     """Install the script."""
 
-    # Create a general Pnoveltree installation directory, if necessary.
+    # Create a general noveltree installation directory, if necessary.
     os.makedirs(novxlibPath, exist_ok=True)
     installDir = f'{novxlibPath}{APPNAME}'
     cnfDir = f'{installDir}{INI_PATH}'

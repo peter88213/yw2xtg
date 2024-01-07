@@ -2,7 +2,7 @@
 
 ---
 
-The novx_xtg Python script runs through all chapters and scenes of a noveltree 7 project and fills XTG templates.
+The novx_xtg Python script runs through all chapters and sections of a noveltree 7 project and fills XTG templates.
 
 ## Instructions for use
 
@@ -125,7 +125,7 @@ per_chapter = No
 
 #### Style tags
 
-- **textbody** - The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
+- **textbody** - The QX paragraph style applied to all paragraphs in a section, except the first. The first paragraph's style can be set in the section level templates.
 - **italic** - The opening tag to replace noveltree's *italic* formatting.
 - **italic0** - The closing tag to replace noveltree's *italic* formatting.
 - **bold** - The opening tag to replace noveltree's *bold* formatting.
@@ -155,12 +155,12 @@ You can define styles in *fileHeader.XTG*, but it is preferable to use the names
 - **chapterTemplate.XTG** - Chapter header; applied to all "used" and "normal" chapters unless a "part template" exists.
 
 
-### Scene level templates
+### Section level templates
 
-- **firstSceneTemplate.XTG** - Applied  to scenes at the beginning of the chapter.
-- **sceneTemplate.XTG** - Applied to "used" scenes within "normal" chapters.
-- **sceneDivider.XTG** - Scene divider placed between scenes.
-- **appendedSceneTemplate.XTG** - Applied to scenes to be appended to the previous scene.
+- **firstSectionTemplate.XTG** - Applied  to sections at the beginning of the chapter.
+- **sectionTemplate.XTG** - Applied to "used" sections within "normal" chapters.
+- **sectionDivider.XTG** - Section divider placed between sections.
+- **appendedSectionTemplate.XTG** - Applied to sections to be appended to the previous section.
 
 
 ## Placeholders
@@ -200,56 +200,56 @@ There are two options:
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2
 
-### "Scene template" placeholders
+### "Section template" placeholders
 
-- **$ID** - Scene ID,
-- **$SceneNumber** - Scene number (in sort order),
+- **$ID** - Section ID,
+- **$SectionNumber** - Section number (in sort order),
 
-- **$Title** - Scene title
-- **$Desc** - Scene description, html-formatted
+- **$Title** - Section title
+- **$Desc** - Section description, html-formatted
 
-- **$WordCount** - Scene word count
-- **$WordsTotal** - Accumulated word count including the current scene
-- **$LetterCount** - Scene letter count
-- **$LettersTotal** - Accumulated letter count including the current scene
+- **$WordCount** - Section word count
+- **$WordsTotal** - Accumulated word count including the current section
+- **$LetterCount** - Section letter count
+- **$LettersTotal** - Accumulated letter count including the current section
 
-- **$Status** - Scene status (Outline, Draft etc.)
-- **$SceneContent** - Scene content, html-formatted
+- **$Status** - Section status (Outline, Draft etc.)
+- **$SectionContent** - Section content, html-formatted
 
 - **$FieldTitle1** - Rating names: field 1
 - **$FieldTitle2** - Rating names: field 2
 - **$FieldTitle3** - Rating names: field 3
 - **$FieldTitle4** - Rating names: field 4
-- **$Field1** - Scene rating: field 1
-- **$Field2** - Scene rating: field 2
-- **$Field3** - Scene rating: field 3
-- **$Field4** - Scene rating: field 4
+- **$Field1** - Section rating: field 1
+- **$Field2** - Section rating: field 2
+- **$Field3** - Section rating: field 3
+- **$Field4** - Section rating: field 4
 
-- **$Date** - Specific scene date (yyyy-mm-dd)
-- **$Time** - Time scene begins: (hh:mm)
-- **$Day** - Day scene begins 
+- **$Date** - Specific section date (yyyy-mm-dd)
+- **$Time** - Time section begins: (hh:mm)
+- **$Day** - Day section begins 
 - 
 - **$ScDate** - Date or day
 
-- **$LastsDays** - Amount of time scene lasts: days
-- **$LastsHours** - Amount of time scene lasts: hours
-- **$LastsMinutes** - Amount of time scene lasts: minutes
+- **$LastsDays** - Amount of time section lasts: days
+- **$LastsHours** - Amount of time section lasts: hours
+- **$LastsMinutes** - Amount of time section lasts: minutes
 
 - **Duration** - Combination of days and hours and minutes
 
-- **$ReactionScene** - A(ction) or R(eaction)
-- **$Goal** - The scene protagonist's goal, html-formatted
-- **$Conflict** - The scene conflict, html-formatted
-- **$Outcome** - The scene outcome, html-formatted
-- **$Tags** - Comma-separated list of scene tags
+- **$ReactionSection** - A(ction) or R(eaction)
+- **$Goal** - The section protagonist's goal, html-formatted
+- **$Conflict** - The section conflict, html-formatted
+- **$Outcome** - The section outcome, html-formatted
+- **$Tags** - Comma-separated list of section tags
 - **$Image** - Image filename
 
-- **$Characters** - Comma-separated list of characters assigned to the scene
+- **$Characters** - Comma-separated list of characters assigned to the section
 - **$Viewpoint** - Viewpoint character
-- **$Locations** - Comma-separated list of locations assigned to the scene
-- **$Items** - Comma-separated list of items assigned to the scene
+- **$Locations** - Comma-separated list of locations assigned to the section
+- **$Items** - Comma-separated list of items assigned to the section
 
-- **$Notes** - Scene notes
+- **$Notes** - Section notes
 
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2

@@ -4,12 +4,13 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novx_xtg
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import shutil
-import os
 import re
+import shutil
 from string import Template
-from novxlib.novx_globals import *
+
 from novxlib.file.file_export import FileExport
+from novxlib.novx_globals import *
+from novxlib.yw.novx_p_parser import NovxPParser
 
 
 class XtgFile(FileExport):
@@ -33,10 +34,10 @@ class XtgFile(FileExport):
             file_header: str -- File header template.
             part_template: str -- Part heading template.
             chapter_template: str -- Chapter heading template.
-            first_scene_template: str -- Template for the first scene of the chapter.
-            scene_template: str -- Scene template.
-            appended_scene_template: str -- Template for scenes appended to the previous one.
-            scene_divider: str -- Scene divider.
+            first_section_template: str -- Template for the first section of the chapter.
+            section_template: str -- Section template.
+            appended_section_template: str -- Template for sections appended to the previous one.
+            section_divider: str -- Section divider.
             first_paragraph: str -- XPress tag for paragraphs preceded by a heading or a blank line. 
             indented_paragraph: str -- XPress tag for indented paragraphs.
             other_paragraph: str -- XPress tag for regular paragraphs.
@@ -58,10 +59,10 @@ class XtgFile(FileExport):
         self._fileHeader = kwargs['file_header']
         self._partTemplate = kwargs['part_template']
         self._chapterTemplate = kwargs['chapter_template']
-        self._firstSceneTemplate = kwargs['first_scene_template']
-        self._sceneTemplate = kwargs['scene_template']
-        self._appendedSceneTemplate = kwargs['appended_scene_template']
-        self._sceneDivider = kwargs['scene_divider']
+        self._firstSectionTemplate = kwargs['first_section_template']
+        self._sectionTemplate = kwargs['section_template']
+        self._appendedSectionTemplate = kwargs['appended_section_template']
+        self._sectionDivider = kwargs['section_divider']
         self._tagFirstParagraph = kwargs['first_paragraph']
         self._tagIndentedParagraph = kwargs['indented_paragraph']
         self._tagOtherParagraph = kwargs['other_paragraph']
@@ -79,7 +80,7 @@ class XtgFile(FileExport):
         self._LanguageCodes = kwargs['language_codes']
 
     def _convert_from_novx(self, text, append=False, xml=False, quick=False):
-        """Return text, converted from yw7 markup to XTG format.
+        """Return text, converted from novx markup to XTG format.
         
         Positional arguments:
             text -- string to convert.
@@ -107,6 +108,9 @@ class XtgFile(FileExport):
                 return ''
 
         if text:
+            #--- Convert to yw7 markup.
+            self._novxParser.feed(f'<Content>{text}</Content>')
+            text = ''.join(self._novxParser.textList).strip()
 
             #--- Assign "figure" style.
             # In order not to interfere with numeric language codes, this runs before the general replacements.
@@ -114,11 +118,11 @@ class XtgFile(FileExport):
 
             #--- Apply xtg formatting.
             xtgReplacements.extend([
-                # Replace noveltree tags with XPress tags.
-                ('<em>', self._tagItalic),
-                ('</em>', self._tagItalic0),
-                ('<strong>', self._tagBold),
-                ('</strong>', self._tagBold0),
+                # Replace yWriter tags with XPress tags.
+                ('[i]', self._tagItalic),
+                ('[/i]', self._tagItalic0),
+                ('[b]', self._tagBold),
+                ('[/b]', self._tagBold0),
                 ('  ', ' '),
                 # Format paragraphs.
                 ('\n\n', f'\r\r{self._tagFirstParagraph}'),
@@ -242,7 +246,7 @@ class XtgFile(FileExport):
         return chapterMapping
 
     def _get_chapters(self):
-        """Process the chapters and nested scenes.
+        """Process the chapters and nested sections.
         
         Return a list of strings, or a message, depending on the _perChapter variable.
         Extends the superclass method for the 'document per chapter' option.
@@ -259,7 +263,7 @@ class XtgFile(FileExport):
             shutil.rmtree(xtgDir)
         os.makedirs(xtgDir)
         chapterNumber = 0
-        sceneNumber = 0
+        sectionNumber = 0
         wordsTotal = 0
         lettersTotal = 0
         for chId in self.novel.tree.get_children(CH_ROOT):
@@ -270,32 +274,12 @@ class XtgFile(FileExport):
             # The order counts; be aware that "Todo" and "Notes" chapters are
             # always unused.
 
-            # Has the chapter only scenes not to be exported?
-            sceneCount = 0
-            notExportCount = 0
-            doNotExport = False
+            # Has the chapter only sections not to be exported?
             template = None
-            for scId in self.novel.tree.get_children(chId):
-                sceneCount += 1
-                if self.novel.scenes[scId].doNotExport:
-                    notExportCount += 1
-            if sceneCount > 0 and notExportCount == sceneCount:
-                doNotExport = True
-            if self.novel.chapters[chId].chType == 2:
-                # Chapter is "ToDo" type (implies "unused").
-                if self._todoChapterTemplate:
-                    template = Template(self._todoChapterTemplate)
-            elif self.novel.chapters[chId].chType == 1:
-                # Chapter is "Notes" type (implies "unused").
-                if self._notesChapterTemplate:
-                    template = Template(self._notesChapterTemplate)
-            elif self.novel.chapters[chId].chType == 3:
-                # Chapter is "really" unused.
+            if self.novel.chapters[chId].chType != 0:
+                # Chapter is unused.
                 if self._unusedChapterTemplate:
                     template = Template(self._unusedChapterTemplate)
-            elif doNotExport:
-                if self._notExportedChapterTemplate:
-                    template = Template(self._notExportedChapterTemplate)
             elif self.novel.chapters[chId].chLevel == 1 and self._partTemplate:
                 template = Template(self._partTemplate)
             else:
@@ -305,10 +289,13 @@ class XtgFile(FileExport):
             if template is not None:
                 lines.append(template.safe_substitute(self._get_chapterMapping(chId, dispNumber)))
 
-            # Process scenes.
-            sceneLines, sceneNumber, wordsTotal, lettersTotal = self._get_scenes(
-                chId, sceneNumber, wordsTotal, lettersTotal, doNotExport)
-            lines.extend(sceneLines)
+            # Process sections.
+            sectionLines, sectionNumber, wordsTotal, lettersTotal = self._get_sections(
+                chId,
+                sectionNumber,
+                wordsTotal
+                )
+            lines.extend(sectionLines)
 
             # Process chapter ending.
             template = None
@@ -334,7 +321,7 @@ class XtgFile(FileExport):
             text = f'{self._fileHeader}{"".join(lines)}'
 
             # Fix the tags of indented paragraphs.
-            # This is done here to include the scene openings.
+            # This is done here to include the section openings.
             text = re.sub('\n\@.+?:\> ', f'\n{self._tagIndentedParagraph}', text)
             xtgPath = f'{xtgDir}/{dispNumber:04}_{self.novel.chapters[chId].title}{self.EXTENSION}'
             try:
@@ -354,7 +341,7 @@ class XtgFile(FileExport):
         text = ''.join(lines)
 
         # Fix the tags of indented paragraphs.
-        # This is done here to include the scene openings.
+        # This is done here to include the section openings.
         text = re.sub('\n\@.+?:\> ', f'\n{self._tagIndentedParagraph}', text)
         return text
 
@@ -364,6 +351,7 @@ class XtgFile(FileExport):
         Return a message beginning with the ERROR constant in case of error.
         Extends the superclass method for the 'document per chapter' option.
         """
+        self._novxParser = NovxPParser()
         self.novel.get_languages()
         if self._perChapter:
             self._get_chapters()

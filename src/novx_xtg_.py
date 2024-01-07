@@ -7,11 +7,10 @@ For further information see https://github.com/peter88213/novx_xtg
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
-import argparse
 from pathlib import Path
 from novxlib.ui.ui_tk import UiTk
 from novxlib.ui.ui import Ui
-from novxlib.ui.set_icon_tk import *
+from novxlib.ui.set_icon_tk import set_icon
 from nvxtglib.xtg_config import XtgConfig
 from nvxtglib.xtg_exporter import XtgExporter
 
@@ -35,10 +34,10 @@ TEMPLATES = dict(
     file_header='<v11.10><e9>\n',
     part_template='@Heading 1:${Title}\n',
     chapter_template='@Heading 1:${Title}\n',
-    first_scene_template='@Text body:$SceneContent\n',
-    scene_template='@Text body:$SceneContent\n',
-    appended_scene_template='$SceneContent\n',
-    scene_divider=f'@Heading 3:{SCENE_DIVIDER}\n',
+    first_section_template='@Text body:$SectionContent\n',
+    section_template='@Text body:$SectionContent\n',
+    appended_section_template='$SectionContent\n',
+    section_divider=f'@Heading 3:{SCENE_DIVIDER}\n',
     )
 OPTIONS = dict(
     adjust_digits=True,
@@ -60,7 +59,7 @@ def main(sourcePath, silentMode=True, installDir='.'):
     if not sourceDir:
         sourceDir = '.'
     iniFileName = f'{APPNAME}.ini'
-    iniFiles = [f'{installDir}/{iniFileName}', f'{sourceDir}/{APPNAME}/{iniFileName}']
+    iniFiles = [f'{installDir}/config/{iniFileName}', f'{sourceDir}/{APPNAME}/{iniFileName}']
     configuration = XtgConfig(STYLES, OPTIONS, TEMPLATES, LOOKUP)
     for iniFile in iniFiles:
         configuration.read(iniFile)
