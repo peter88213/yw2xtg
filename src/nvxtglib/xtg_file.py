@@ -10,7 +10,7 @@ from string import Template
 
 from novxlib.file.file_export import FileExport
 from novxlib.novx_globals import *
-from novxlib.yw.novx_p_parser import NovxPParser
+from novxlib.yw.novx_to_yw7 import NovxToYw7
 
 
 class XtgFile(FileExport):
@@ -351,7 +351,7 @@ class XtgFile(FileExport):
         Return a message beginning with the ERROR constant in case of error.
         Extends the superclass method for the 'document per chapter' option.
         """
-        self._novxParser = NovxPParser()
+        self._novxParser = NovxToYw7()
         self.novel.get_languages()
         if self._perChapter:
             self._get_chapters()
