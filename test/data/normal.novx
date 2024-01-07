@@ -3,7 +3,7 @@
 <?xml-stylesheet href="novx.css" type="text/css"?>
 <novx version="1.0" xml:lang="de-DE">
   <PROJECT>
-    <Title>Hal Spacejock book one - Samplenoveltreer Project</Title>
+    <Title>Hal Spacejock book one - Sample yWriter Project</Title>
     <Author>Simon Haynes</Author>
     <Desc>
       <p>An incompetent, accident-prone pilot is given one last chance to save his ship. An ageing robot is trusted with a midnight landing in a deserted field. And a desperate businessman is prepared to sacrifice both of them to get what he wants...</p>
@@ -22,12 +22,12 @@
             <strong>IMPORTANT</strong>
           </p>
           <p />
-          <p>Uninstallingnoveltreer5 will uninstall (delete) this sample project.</p>
-          <p>Reinstallingnoveltreer5 will overwrite this sample project.</p>
+          <p>Uninstalling yWriter will uninstall (delete) this sample project.</p>
+          <p>Reinstalling yWriter will overwrite this sample project.</p>
           <p />
           <p>Therefore, rather than modifying this project with your own content, <strong>please create a new project for your own work</strong>. (<em>Project - Create Empty Project</em>, or <em>Project - New Project Wizard</em>)</p>
           <p />
-          <p>Any new projects created withnoveltreer5 will not be deleted, overwritten or modified when you uninstall or reinstall the software.</p>
+          <p>Any new projects created with yWriter5 will not be deleted, overwritten or modified when you uninstall or reinstall the software.</p>
         </Content>
       </SECTION>
     </CHAPTER>

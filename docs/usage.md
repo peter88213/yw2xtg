@@ -51,7 +51,7 @@ It is assumed that quotation marks and punctuation marks are already set correct
 - Place a subfolder named **novx_xtg** in the noveltree project folder. It contains the configuration file
 and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
 
-- If there is no configuration data in the project file, data stored in `c:\Users\<user name>.noveltreer\novx_xtg\config` is used prior to the script's default configuration data.
+- If there is no configuration data in the project file, data stored in `c:\Users\<user name>.noveltree\novx_xtg\config` is used prior to the script's default configuration data.
 
 - If a template file or a configuration entry is missing, *novx_xtg* uses the lower priority source as a fallback. 
 
@@ -258,4 +258,4 @@ There are two options:
 
 The setup script installs *novx_xtg.pyw* in the user profile. This is the installation path on Windows: 
 
-`c:\Users\<user name>.noveltreer\novx_xtg`
+`c:\Users\<user name>.noveltree\novx_xtg`

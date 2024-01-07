@@ -3,10 +3,10 @@
 In order to distribute a single script without dependencies, 
 this script "inlines" all modules imported from the novxlib package.
 
-The noveltree project (see see https://github.com/peter88213/noveltree)
+The novxlib library (see see https://github.com/peter88213/novxlib)
 must be located on the same directory level as the novx_xtg project. 
 
-Copyright (c) 2023 Peter Triesberger
+Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novx_xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
