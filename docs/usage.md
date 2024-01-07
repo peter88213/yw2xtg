@@ -1,29 +1,29 @@
-[Project homepage](https://peter88213.github.io/yw2xtg) > Instructions for use
+[Project homepage](https://peter88213.github.io/novx_xtg) > Instructions for use
 
 ---
 
-The yw2xtg Python script runs through all chapters and scenes of a yWriter 7 project and fills XTG templates.
+The novx_xtg Python script runs through all chapters and scenes of a noveltree 7 project and fills XTG templates.
 
 ## Instructions for use
 
 ### Intended usage
 
-The included installation script prompts you to create a shortcut on the desktop. You can launch the program by dragging a yWriter project file and dropping it on the shortcut icon. 
+The included installation script prompts you to create a shortcut on the desktop. You can launch the program by dragging a noveltree project file and dropping it on the shortcut icon. 
 
 ### Command line usage
 
 Alternatively, you can
 
-- launch the program on the command line passing the yWriter project file as an argument, or
+- launch the program on the command line passing the noveltree project file as an argument, or
 - launch the program via a batch file.
 
-usage: `yw2xtg.pyw [--silent] Sourcefile`
+usage: `novx_xtg.pyw [--silent] Sourcefile`
 
 #### positional arguments:
 
 `Sourcefile` 
 
-The path of the yWriter project file.
+The path of the noveltree project file.
 
 #### optional arguments:
 
@@ -38,22 +38,22 @@ The path of the yWriter project file.
 The XTG file format uses the *XPress Tags* language, the knowledge of which is assumed. You can 
 download the manual *A Guide to XPress Tags* for your program version from the *Quark* web site.
 
-### yWriter text markup
+### noveltree text markup
 
 Bold and italics are supported. Other highlighting such as underline and strikethrough are lost.
 
 ### Quotation marks and punctuation
 
-It is assumed that quotation marks and punctuation marks are already set correctly; this is best done in advance with a word processor, e.g. via yWriter's "proof read" function. 
+It is assumed that quotation marks and punctuation marks are already set correctly; this is best done in advance with a word processor, e.g. via noveltree's "proof read" function. 
 
 ## Configuration
 
-- Place a subfolder named **yw2xtg** in the yWriter project folder. It contains the configuration file
+- Place a subfolder named **novx_xtg** in the noveltree project folder. It contains the configuration file
 and all template files as listed below to be applied to this project. The best way is to copy the provided sample folder and customize the contained files with a text editor according to your needs. 
 
-- If there is no configuration data in the project file, data stored in `c:\Users\<user name>\.pywriter\yw2xtg\config` is used prior to the script's default configuration data.
+- If there is no configuration data in the project file, data stored in `c:\Users\<user name>.noveltreer\novx_xtg\config` is used prior to the script's default configuration data.
 
-- If a template file or a configuration entry is missing, *yw2xtg* uses the lower priority source as a fallback. 
+- If a template file or a configuration entry is missing, *novx_xtg* uses the lower priority source as a fallback. 
 
 
 ### Configuration file
@@ -126,10 +126,10 @@ per_chapter = No
 #### Style tags
 
 - **textbody** - The QX paragraph style applied to all paragraphs in a scene, except the first. The first paragraph's style can be set in the scene level templates.
-- **italic** - The opening tag to replace yWriter's *italic* formatting.
-- **italic0** - The closing tag to replace yWriter's *italic* formatting.
-- **bold** - The opening tag to replace yWriter's *bold* formatting.
-- **bold0** - The closing tag to replace yWriter's *bold* formatting.
+- **italic** - The opening tag to replace noveltree's *italic* formatting.
+- **italic0** - The closing tag to replace noveltree's *italic* formatting.
+- **bold** - The opening tag to replace noveltree's *bold* formatting.
+- **bold0** - The closing tag to replace noveltree's *bold* formatting.
 - **acronym** - The opening tag to format sequences of uppercase characters (e.g. set a slightly smaller font size).
 - **acronym0** - The closing tag to format sequences of uppercase characters.
 - **figure** - The opening tag to format figures (e.g. switch the font to get "osf" text figures).
@@ -256,6 +256,6 @@ There are two options:
 
 ## Installation path
 
-The setup script installs *yw2xtg.pyw* in the user profile. This is the installation path on Windows: 
+The setup script installs *novx_xtg.pyw* in the user profile. This is the installation path on Windows: 
 
-`c:\Users\<user name>\.pywriter\yw2xtg`
+`c:\Users\<user name>.noveltreer\novx_xtg`

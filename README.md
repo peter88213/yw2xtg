@@ -1,21 +1,21 @@
-# yw2xtg - XPress tagged text export from yWriter projects
+# novx_xtg - XPress tagged text export from noveltree projects
 
-For more information, see the [project homepage](https://peter88213.github.io/yw2xtg) with description and download instructions.
+For more information, see the [project homepage](https://peter88213.github.io/novx_xtg) with description and download instructions.
 
 ## Development
 
-*yw2xtg* is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
+*novx_xtg* is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
 
-*yw2xtg* depends on the [pywriter](https://github.com/peter88213/PyWriter) library which must be present in your file system. It is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
+*novx_xtg* depends on the [novxlib](https://github.com/peter88213/Pnoveltree) library which must be present in your file system. It is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
 
 ### Mandatory directory structure for building the application script
 
 ```
 .
-├── PyWriter/
+├── noveltree/
 │   └── src/
-│       └── pywriter/
-└── yw2xtg/
+│       └── novxlib/
+└── novx_xtg/
     ├── src/
     ├── test/
     └── tools/ 
@@ -24,11 +24,11 @@ For more information, see the [project homepage](https://peter88213.github.io/yw
 
 ### Conventions
 
-See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
+See https://github.com/peter88213/Pnoveltree/blob/main/docs/conventions.md
 
 ## Development tools
 
-- [Python](https://python.org) version 3.10.
+- [Python](https://python.org) version 3.11.
 - [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and *EGit*.
 - *Apache Ant* is used for building the application.
 
@@ -41,5 +41,6 @@ See https://github.com/peter88213/PyWriter/blob/main/docs/conventions.md
 
 ## License
 
-yw2xtg is distributed under the [MIT
-License](http://www.opensource.org/licenses/mit-license.php).
+This is Open Source software, and *novx_xtg* is licensed under GPLv3. See the
+[GNU General Public License website](https://www.gnu.org/licenses/gpl-3.0.en.html) for more
+details, or consult the [LICENSE](https://github.com/peter88213/novx_xtg/blob/main/LICENSE) file.

@@ -1,10 +1,10 @@
-"""Install the yw2xtg script. 
+"""Install the novx_xtg script. 
 
 Version @release
 
 Copyright (c) 2021 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
-Published under the MIT License (https://opensource.org/licenses/mit-license.php)
+For further information see https://github.com/peter88213/novx_xtg
+License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
 import sys
@@ -20,12 +20,12 @@ except ModuleNotFoundError:
     print('The tkinter module is missing. Please install the tk support package for your python3 version.')
     sys.exit(1)
 
-APPNAME = 'yw2xtg'
+APPNAME = 'novx_xtg'
 VERSION = ' @release'
 APP = f'{APPNAME}.pyw'
 INI_FILE = f'{APPNAME}.ini'
 INI_PATH = '/config/'
-SAMPLE_PATH = 'sample/yw2xtg/'
+SAMPLE_PATH = 'sample/novx_xtg/'
 SUCCESS_MESSAGE = '''
 
 $Appname is installed here:
@@ -70,12 +70,12 @@ def open_folder(installDir):
                 pass
 
 
-def install(pywriterPath):
+def install(novxlibPath):
     """Install the script."""
 
-    # Create a general PyWriter installation directory, if necessary.
-    os.makedirs(pywriterPath, exist_ok=True)
-    installDir = f'{pywriterPath}{APPNAME}'
+    # Create a general Pnoveltree installation directory, if necessary.
+    os.makedirs(novxlibPath, exist_ok=True)
+    installDir = f'{novxlibPath}{APPNAME}'
     cnfDir = f'{installDir}{INI_PATH}'
     if os.path.isfile(f'{installDir}/{APP}'):
         simpleUpdate = True
@@ -84,7 +84,7 @@ def install(pywriterPath):
     try:
         # Move an existing installation to the new place, if necessary.
         oldHome = os.getenv('APPDATA').replace('\\', '/')
-        oldInstDir = f'{oldHome}/pyWriter/{APPNAME}'
+        oldInstDir = f'{oldHome}/pnoveltree/{APPNAME}'
         os.replace(oldInstDir, installDir)
         output(f'Moving "{oldInstDir}" to "{installDir}"')
     except:
@@ -148,14 +148,14 @@ if __name__ == '__main__':
 
     # Run the installation.
     homePath = str(Path.home()).replace('\\', '/')
-    pywriterPath = f'{homePath}/.pywriter/'
+    novxlibPath = f'{homePath}/.noveltree/'
     try:
-        install(pywriterPath)
+        install(novxlibPath)
     except Exception as ex:
         output(str(ex))
 
     # Show options: open installation folders or quit.
-    root.openButton = Button(text="Open installation folder", command=lambda: open_folder(f'{homePath}/.pywriter/{APPNAME}'))
+    root.openButton = Button(text="Open installation folder", command=lambda: open_folder(f'{homePath}/.noveltree/{APPNAME}'))
     root.openButton.config(height=1, width=30)
     root.openButton.pack(padx=5, pady=5)
     root.quitButton = Button(text="Quit", command=quit)

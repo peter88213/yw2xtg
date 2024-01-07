@@ -1,18 +1,18 @@
-"""Helper file for yw2xtg test.
+"""Helper file for novx_xtg test.
 
 Create config file.
 
 Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
+For further information see https://github.com/peter88213/novx_xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import sys
 import os
-from yw2xtglib.xtg_config import XtgConfig
-from yw2xtg_ import STYLES
-from yw2xtg_ import OPTIONS
-from yw2xtg_ import TEMPLATES
-from yw2xtg_ import APPNAME
+from nvxtglib.xtg_config import XtgConfig
+from novx_xtg_ import STYLES
+from novx_xtg_ import OPTIONS
+from novx_xtg_ import TEMPLATES
+from novx_xtg_ import APPNAME
 
 
 def run(iniFile):
@@ -28,5 +28,5 @@ if __name__ == '__main__':
     try:
         iniFile = sys.argv[1]
     except:
-        iniFile = f'./yw2xtg/{APPNAME}.ini'
+        iniFile = f'./novx_xtg/{APPNAME}.ini'
     run(iniFile)

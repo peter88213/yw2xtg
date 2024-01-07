@@ -2,7 +2,7 @@
 <YWRITER7>
 	<PROJECT>
 		<Ver>7</Ver>
-		<Title><![CDATA[Hal Spacejock book one - Sample yWriter Project]]></Title>
+		<Title><![CDATA[Hal Spacejock book one - Samplenoveltreer Project]]></Title>
 		<AuthorName><![CDATA[Simon Haynes]]></AuthorName>
 		<Bio><![CDATA[Simon Haynes is the author of four Hal Spacejock novels, a number of articles on writing and publishing, and several short stories, one of which collected an Aurealis Award in 2001. He divides his time between writing fiction and computer software, with the occasional round of golf thrown in for a laugh.
 
@@ -1575,12 +1575,12 @@ Clunk's batteries are failing, and he can't hang on much longer.]]></Desc>
 		</Items>
 		<SceneContent><![CDATA[[b]IMPORTANT[/b]
 
-Uninstalling yWriter5 will uninstall (delete) this sample project.
-Reinstalling yWriter5 will overwrite this sample project.
+Uninstallingnoveltreer5 will uninstall (delete) this sample project.
+Reinstallingnoveltreer5 will overwrite this sample project.
 
 Therefore, rather than modifying this project with your own content, [b]please create a new project for your own work[/b]. ([i]Project - Create Empty Project[/i], or [i]Project - New Project Wizard[/i])
 
-Any new projects created with yWriter5 will not be deleted, overwritten or modified when you uninstall or reinstall the software.]]></SceneContent>
+Any new projects created withnoveltreer5 will not be deleted, overwritten or modified when you uninstall or reinstall the software.]]></SceneContent>
 	</SCENE>
 
 	</SCENES>

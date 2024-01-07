@@ -3,7 +3,7 @@
 	<name>yw2xtg</name>
 	<comment></comment>
 	<projects>
-		<project>PyWriter</project>
+		<project>novxlib-Alpha</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

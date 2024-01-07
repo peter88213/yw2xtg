@@ -1,16 +1,16 @@
 """Helper script for creating a lookup table containing QXP language codes.
 
 The table is a JSON file.
-File location is the yw2xtg configuration directory in the user's home directory.
+File location is the novx_xtg configuration directory in the user's home directory.
 
 Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
+For further information see https://github.com/peter88213/novx_xtg
 Published under the MIT License (https://opensource.org/licenses/mit-license.php)
 """
 import json
 from pathlib import Path
 
-APPNAME = 'yw2xtg'
+APPNAME = 'novx_xtg'
 
 languageCodes = {
             'en-US':0,
@@ -33,7 +33,7 @@ def main(installDir='.'):
 if __name__ == '__main__':
     try:
         homeDir = str(Path.home()).replace('\\', '/')
-        installDir = f'{homeDir}/.pywriter/{APPNAME}/config'
+        installDir = f'{homeDir}/.noveltree/{APPNAME}/config'
     except:
         installDir = '.'
 main(installDir)

@@ -1,13 +1,13 @@
-"""Regression test for the yw2xtg project.
+"""Regression test for the novx_xtg project.
 
-Copyright (c) 2023 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
-Published under the MIT License (https://opensource.org/licenses/mit-license.php)
+Copyright (c) 2024 Peter Triesberger
+For further information see https://github.com/peter88213/novx_xtg
+License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from shutil import copyfile
 import os
 import unittest
-import yw2xtg_
+import novx_xtg_
 
 # Test environment
 
@@ -16,16 +16,16 @@ import yw2xtg_
 
 TEST_PATH = f'{os.getcwd()}/../test'
 TEST_DATA_PATH = f'{TEST_PATH}/data/'
-TEST_EXEC_PATH = f'{TEST_PATH}/'
-TEMPLATES = 'yw2xtg/'
+TEST_EXEC_PATH = f'{TEST_PATH}/temp/'
+TEMPLATES = 'novx_xtg/'
 
 # To be placed in TEST_DATA_PATH:
-REFERENCE_YW7 = f'{TEST_DATA_PATH}normal.yw7'
+REFERENCE_NOVX = f'{TEST_DATA_PATH}normal.novx'
 REFERENCE_XTG_TEMPLATES = f'{TEST_DATA_PATH}templates.XTG'
 REFERENCE_XTG_DEFAULTS = f'{TEST_DATA_PATH}defaults.XTG'
 
 # Test data
-TEST_YW7 = f'{TEST_EXEC_PATH}yw7 Sample Project.yw7'
+TEST_NOVX = f'{TEST_EXEC_PATH}yw7 Sample Project.novx'
 TEST_XTG = f'{TEST_EXEC_PATH}yw7 Sample Project.XTG'
 
 
@@ -42,7 +42,7 @@ def read_file(inputFile):
 def remove_all_testfiles():
 
     try:
-        os.remove(TEST_YW7)
+        os.remove(TEST_NOVX)
     except:
         pass
     try:
@@ -72,7 +72,7 @@ class NormalOperation(unittest.TestCase):
             pass
 
         remove_all_testfiles()
-        copyfile(REFERENCE_YW7, TEST_YW7)
+        copyfile(REFERENCE_NOVX, TEST_NOVX)
 
     def test_templates(self):
 
@@ -82,7 +82,7 @@ class NormalOperation(unittest.TestCase):
 
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg_.run(TEST_YW7, silentMode=True)
+        novx_xtg_.main(TEST_NOVX, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_TEMPLATES))
@@ -90,7 +90,7 @@ class NormalOperation(unittest.TestCase):
     def test_defaults(self):
         os.chdir(TEST_EXEC_PATH)
 
-        yw2xtg_.run(TEST_YW7, silentMode=True)
+        novx_xtg_.main(TEST_NOVX, silentMode=True)
 
         self.assertEqual(read_file(TEST_XTG),
                          read_file(REFERENCE_XTG_DEFAULTS))

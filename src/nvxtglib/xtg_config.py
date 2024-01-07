@@ -1,12 +1,12 @@
 """Provide a configuration class for reading and writing INI files.
 
-Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
-Published under the MIT License (https://opensource.org/licenses/mit-license.php)
+Copyright (c) 2024 Peter Triesberger
+For further information see https://github.com/peter88213/novx_xtg
+License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
 import json
-from pywriter.config.configuration import Configuration
+from novxlib.config.configuration import Configuration
 
 
 class XtgConfig(Configuration):

@@ -1,15 +1,15 @@
 """Provide a class for XPress tagged file processing. 
 
-Copyright (c) 2022 Peter Triesberger
-For further information see https://github.com/peter88213/yw2xtg
-Published under the MIT License (https://opensource.org/licenses/mit-license.php)
+Copyright (c) 2024 Peter Triesberger
+For further information see https://github.com/peter88213/novx_xtg
+License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import shutil
 import os
 import re
 from string import Template
-from pywriter.pywriter_globals import *
-from pywriter.file.file_export import FileExport
+from novxlib.novx_globals import *
+from novxlib.file.file_export import FileExport
 
 
 class XtgFile(FileExport):
@@ -78,7 +78,7 @@ class XtgFile(FileExport):
         self._perChapter = kwargs['per_chapter']
         self._LanguageCodes = kwargs['language_codes']
 
-    def _convert_from_yw(self, text, quick=False):
+    def _convert_from_novx(self, text, append=False, xml=False, quick=False):
         """Return text, converted from yw7 markup to XTG format.
         
         Positional arguments:
@@ -107,7 +107,6 @@ class XtgFile(FileExport):
                 return ''
 
         if text:
-            text = self._remove_inline_code(text)
 
             #--- Assign "figure" style.
             # In order not to interfere with numeric language codes, this runs before the general replacements.
@@ -115,11 +114,11 @@ class XtgFile(FileExport):
 
             #--- Apply xtg formatting.
             xtgReplacements.extend([
-                # Replace yWriter tags with XPress tags.
-                ('[i]', self._tagItalic),
-                ('[/i]', self._tagItalic0),
-                ('[b]', self._tagBold),
-                ('[/b]', self._tagBold0),
+                # Replace noveltree tags with XPress tags.
+                ('<em>', self._tagItalic),
+                ('</em>', self._tagItalic0),
+                ('<strong>', self._tagBold),
+                ('</strong>', self._tagBold0),
                 ('  ', ' '),
                 # Format paragraphs.
                 ('\n\n', f'\r\r{self._tagFirstParagraph}'),
@@ -141,13 +140,6 @@ class XtgFile(FileExport):
 
             #--- Encode non-breaking spaces.
             text = text.replace('\xa0', '<\\!p>')
-
-            #--- Remove highlighting, alignment,
-            # strikethrough, and underline tags.
-            text = re.sub('\[\/*[h|c|r|s|u]\d*\]', '', text)
-
-            #--- Remove comments.
-            text = re.sub('\/\*.+?\*\/', '', text)
 
             #--- Adjust digit-separating blanks.
             if self._adjustDigits:
@@ -247,8 +239,6 @@ class XtgFile(FileExport):
         else:
             chapterMapping['ChNumberEnglish'] = ''
             chapterMapping['ChNumberRoman'] = ''
-        if self.novel.chapters[chId].suppressChapterTitle:
-            chapterMapping['Title'] = ''
         return chapterMapping
 
     def _get_chapters(self):
@@ -272,7 +262,7 @@ class XtgFile(FileExport):
         sceneNumber = 0
         wordsTotal = 0
         lettersTotal = 0
-        for chId in self.novel.srtChapters:
+        for chId in self.novel.tree.get_children(CH_ROOT):
             lines = []
             dispNumber = 0
             if not self._chapterFilter.accept(self, chId):
@@ -285,7 +275,7 @@ class XtgFile(FileExport):
             notExportCount = 0
             doNotExport = False
             template = None
-            for scId in self.novel.chapters[chId].srtScenes:
+            for scId in self.novel.tree.get_children(chId):
                 sceneCount += 1
                 if self.novel.scenes[scId].doNotExport:
                     notExportCount += 1
